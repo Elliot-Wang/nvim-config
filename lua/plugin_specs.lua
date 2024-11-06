@@ -402,7 +402,7 @@ local plugin_specs = {
     ft = { "markdown" },
   },
 
-  { "chrisbra/unicode.vim", event = "VeryLazy" },
+  -- { "chrisbra/unicode.vim", event = "VeryLazy" },
 
   -- Additional powerful text object for vim, this plugin should be studied
   -- carefully to use its full power
@@ -471,18 +471,6 @@ local plugin_specs = {
       local cmd_str = string.format(":call firenvim#install(0, '%s')", prologue)
       vim.cmd(cmd_str)
     end,
-  },
-  -- Debugger plugin
-  {
-    "sakhnik/nvim-gdb",
-    enabled = function()
-      if vim.g.is_win or vim.g.is_linux then
-        return true
-      end
-      return false
-    end,
-    build = { "bash install.sh" },
-    lazy = true,
   },
 
   -- Session management plugin

@@ -81,6 +81,9 @@ nnoremap <silent> gf :<C-U>Leaderf file --popup<CR>
 " Grep project files in popup window
 nnoremap <silent> <C-f> :<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>
 
+" Search line in current buffer
+nnoremap <silent> gl :<C-U>Leaderf line --popup<CR>
+
 " Search tags in current buffer
 nnoremap <silent> gm :<C-U>Leaderf bufTag --popup<CR>
 
@@ -126,7 +129,7 @@ nnoremap <silent> <Space>t :<C-U>Vista!!<CR>
 let g:mundo_verbose_graph = 0
 let g:mundo_width = 80
 
-nnoremap <silent> <Space>u :MundoToggle<CR>
+nnoremap <silent> gu :MundoToggle<CR>
 
 """"""""""""""""""""""""""""better-escape.vim settings"""""""""""""""""""""""""
 let g:better_escape_interval = 200
@@ -334,9 +337,6 @@ if exists('g:started_by_firenvim') && g:started_by_firenvim
     autocmd BufEnter stackoverflow.com_*.txt set filetype=markdown
   augroup END
 endif
-
-""""""""""""""""""""""""""""""nvim-gdb settings""""""""""""""""""""""""""""""
-nnoremap <leader>dp :<C-U>GdbStartPDB python -m pdb %<CR>
 
 """"""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
 call timer_start(250, { -> s:wilder_init() })
