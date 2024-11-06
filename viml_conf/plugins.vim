@@ -76,40 +76,37 @@ let g:Lf_ShortcutB = ''
 let g:Lf_WorkingDirectoryMode = 'a'
 
 " Search files in popup window
-nnoremap <silent> <leader>ff :<C-U>Leaderf file --popup<CR>
+nnoremap <silent> gf :<C-U>Leaderf file --popup<CR>
 
 " Grep project files in popup window
-nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>
-
-" Search vim help files
-nnoremap <silent> <leader>fh :<C-U>Leaderf help --popup<CR>
+nnoremap <silent> <C-f> :<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>
 
 " Search tags in current buffer
-nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag --popup<CR>
+nnoremap <silent> gm :<C-U>Leaderf bufTag --popup<CR>
 
 " Switch buffers
-nnoremap <silent> <leader>fb :<C-U>Leaderf buffer --popup<CR>
+nnoremap <silent> gt :<C-U>Leaderf buffer --popup<CR>
 
 " Search recent files
-nnoremap <silent> <leader>fr :<C-U>Leaderf mru --popup --absolute-path<CR>
+nnoremap <silent> go :<C-U>Leaderf mru --popup --absolute-path<CR>
 
 let g:Lf_PopupColorscheme = 'gruvbox_material'
 
 " Change keybinding in LeaderF prompt mode, use ctrl-n and ctrl-p to navigate
 " items.
-let g:Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
+" let g:Lf_CommandMap = {'<C-J>': ['<C-N>'], '<C-K>': ['<C-P>']}
 
 " do not preview results, it will add the file to buffer list
 let g:Lf_PreviewResult = {
-      \ 'File': 0,
-      \ 'Buffer': 0,
-      \ 'Mru': 0,
-      \ 'Tag': 0,
+      \ 'File': 1,
+      \ 'Buffer': 1,
+      \ 'Mru': 1,
+      \ 'Tag': 1,
       \ 'BufTag': 1,
       \ 'Function': 1,
-      \ 'Line': 0,
+      \ 'Line': 1,
       \ 'Colorscheme': 0,
-      \ 'Rg': 0,
+      \ 'Rg': 1,
       \ 'Gtags': 0
       \}
 
@@ -204,10 +201,12 @@ if g:is_mac
 endif
 
 """"""""""""""""""""""""unicode.vim settings""""""""""""""""""""""""""""""
-nmap ga <Plug>(UnicodeGA)
+" nmap ga <Plug>(UnicodeGA)
 
 """"""""""""""""""""""""""""vim-sandwich settings"""""""""""""""""""""""""""""
 " Map s to nop since s in used by vim-sandwich. Use cl instead of s.
+nmap S <Nop>
+omap S <Nop>
 nmap s <Nop>
 omap s <Nop>
 
