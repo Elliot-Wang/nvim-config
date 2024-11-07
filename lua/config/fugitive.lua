@@ -1,15 +1,25 @@
 local keymap = vim.keymap
 
+-- status
 keymap.set("n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git: show status" })
-keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git: add file" })
+-- add files
+keymap.set("n", "<leader>ga", "<cmd>Gwrite<cr>", { desc = "Git: add file" })
+-- commit
 keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git: commit changes" })
-keymap.set("n", "<leader>gpl", "<cmd>Git pull<cr>", { desc = "Git: pull changes" })
-keymap.set("n", "<leader>gpu", "<cmd>15 split|term git push<cr>", { desc = "Git: push changes" })
-keymap.set("v", "<leader>gb", ":Git blame<cr>", { desc = "Git: blame selected line" })
+-- pull
+keymap.set("n", "<leader>gl", "<cmd>Git pull<cr>", { desc = "Git: pull changes" })
+-- push
+keymap.set("n", "<leader>gp", "<cmd>15 split|term git push<cr>", { desc = "Git: push changes" })
+-- fetch
+keymap.set("n", "<leader>gf", ":Git fetch ", { desc = "Git: prune branches" })
+
+-- blame
+keymap.set("n", "<leader>gbl", ":Git blame<cr>", { desc = "Git: blame current file" })
 
 -- convert git to Git in command line mode
 vim.fn["utils#Cabbrev"]("git", "Git")
 
+-- switch branch or create one
 keymap.set("n", "<leader>gbn", function()
   vim.ui.input({ prompt = "Enter a new branch name" }, function(user_input)
     if user_input == nil or user_input == "" then
@@ -23,5 +33,5 @@ end, {
   desc = "Git: create new branch",
 })
 
-keymap.set("n", "<leader>gf", ":Git fetch ", { desc = "Git: prune branches" })
+-- delete branch
 keymap.set("n", "<leader>gbd", ":Git branch -D ", { desc = "Git: delete branch" })
