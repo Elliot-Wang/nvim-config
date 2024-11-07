@@ -1,8 +1,14 @@
 # todo list
 - [x] fuzzy finder and preview
-    - LeaderF first, telescope as alternatives.
+    - LeaderF first, telescope, fzf.lua as alternatives.
 - [ ] remove useless plugin
-    - hop.nvim like sneaker, comment it, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
+    - hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
+    - vlime/vlime, for LISP
+    - nvim-zh/better-escape.vim
+    - Neur1n/neuims - input method switcher, long time(4y) not updated.
+    - chrisbra/unicode.vim
+    - glacambre/firenvim - condition barely meet, even it is fun
+    - copilot - I dont have money!
 - [ ] remove useless feature
 - [x] introduce my config
     - from `.vimrc`, safe and sound!
@@ -29,7 +35,8 @@
   - "rockyzhang24/arctic.nvim"
   - "rebelot/kanagawa.nvim"
 - [ ] fix bugs
-    - tags error
+    - liuchengxu/vista.vim - tags error
+    - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
 - [ ] improve writing experience
 
 ## practice neovim
@@ -37,6 +44,8 @@
 - gt -> other
 - save/quit/
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
+- lsp config
+- code action - kosayoda/nvim-lightbulb
 
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"

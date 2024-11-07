@@ -29,6 +29,7 @@ require("custom-autocmd")
 require("mappings")
 -- all the plugins installed and their configurations
 vim.cmd("source ".. vim.fs.joinpath(config_dir, "viml_conf/plugins.vim"))
+vim.cmd("source ".. vim.fs.joinpath(config_dir, "viml_conf/plugin/leaderf.vim"))
 -- old custom vim config
 vim.cmd("source ".. vim.fs.joinpath(config_dir, "viml_conf/custom.vim"))
 -- colorscheme settings

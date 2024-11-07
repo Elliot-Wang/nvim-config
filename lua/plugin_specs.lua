@@ -67,22 +67,6 @@ local plugin_specs = {
 
   -- { "machakann/vim-swap", event = "VeryLazy" },
 
-  -- IDE for Lisp
-  -- 'kovisoft/slimv'
-  {
-    "vlime/vlime",
-    enabled = function()
-      if utils.executable("sbcl") then
-        return true
-      end
-      return false
-    end,
-    config = function(plugin)
-      vim.opt.rtp:append(plugin.dir .. "/vim")
-    end,
-    ft = { "lisp" },
-  },
-
   -- Super fast buffer jump
   -- {
   --   "smoka7/hop.nvim",
@@ -120,7 +104,11 @@ local plugin_specs = {
     cmd = "Telescope",
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
+      "nvim-lua/plenary.nvim",
     },
+    config = function ()
+      require("config.telescope")
+    end,
   },
   {
     "ibhagwan/fzf-lua",
@@ -261,9 +249,12 @@ local plugin_specs = {
   },
 
   -- Snippet engine and snippet template
-  { "SirVer/ultisnips", dependencies = {
-    "honza/vim-snippets",
-  }, event = "InsertEnter" },
+  { "SirVer/ultisnips", 
+    dependencies = {
+      "honza/vim-snippets",
+    },
+    event = "InsertEnter",
+  },
 
   -- Automatic insertion and deletion of a pair of characters
   {
@@ -302,23 +293,10 @@ local plugin_specs = {
   -- Repeat vim motions
   { "tpope/vim-repeat", event = "VeryLazy" },
 
-  { "nvim-zh/better-escape.vim", event = { "InsertEnter" } },
-
   {
     "lyokha/vim-xkbswitch",
     enabled = function()
       if vim.g.is_mac and utils.executable("xkbswitch") then
-        return true
-      end
-      return false
-    end,
-    event = { "InsertEnter" },
-  },
-
-  {
-    "Neur1n/neuims",
-    enabled = function()
-      if vim.g.is_win then
         return true
       end
       return false
@@ -402,8 +380,6 @@ local plugin_specs = {
     ft = { "markdown" },
   },
 
-  -- { "chrisbra/unicode.vim", event = "VeryLazy" },
-
   -- Additional powerful text object for vim, this plugin should be studied
   -- carefully to use its full power
   { "wellle/targets.vim", event = "VeryLazy" },
@@ -447,31 +423,6 @@ local plugin_specs = {
   -- Asynchronous command execution
   { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
   { "cespare/vim-toml", ft = { "toml" }, branch = "main" },
-
-  -- Edit text area in browser using nvim
-  {
-    "glacambre/firenvim",
-    enabled = function()
-      local result = vim.g.is_win or vim.g.is_mac
-      return result
-    end,
-    -- it seems that we can only call the firenvim function directly.
-    -- Using vim.fn or vim.cmd to call this function will fail.
-    build = function()
-      local firenvim_path = plugin_dir .. "/firenvim"
-      vim.opt.runtimepath:append(firenvim_path)
-      vim.cmd("runtime! firenvim.vim")
-
-      -- macOS will reset the PATH when firenvim starts a nvim process, causing the PATH variable to change unexpectedly.
-      -- Here we are trying to get the correct PATH and use it for firenvim.
-      -- See also https://github.com/glacambre/firenvim/blob/master/TROUBLESHOOTING.md#make-sure-firenvims-path-is-the-same-as-neovims
-      local path_env = vim.env.PATH
-      local prologue = string.format('export PATH="%s"', path_env)
-      -- local prologue = "echo"
-      local cmd_str = string.format(":call firenvim#install(0, '%s')", prologue)
-      vim.cmd(cmd_str)
-    end,
-  },
 
   -- Session management plugin
   { "tpope/vim-obsession", cmd = "Obsession" },
@@ -527,26 +478,6 @@ local plugin_specs = {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {},
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
-    -- See Commands section for default commands if you want to lazy load on them
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    config = function()
-      require("copilot").setup {}
-    end,
   },
   {
     "smjonas/live-command.nvim",
