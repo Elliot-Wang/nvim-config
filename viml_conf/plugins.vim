@@ -31,9 +31,6 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 " https://jdhao.github.io/2019/04/17/neovim_snippet_s1/ for details.
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
 
-"""""""""""""""""""""""""" vlime settings """"""""""""""""""""""""""""""""
-command! -nargs=0 StartVlime call jobstart(printf("sbcl --load %s/vlime/lisp/start-vlime.lisp", g:package_home))
-
 """"""""""""""""""""""""""" vista settings """"""""""""""""""""""""""""""""""
 let g:vista#renderer#icons = {
       \ 'member': '',
@@ -51,9 +48,6 @@ let g:mundo_verbose_graph = 0
 let g:mundo_width = 80
 
 nnoremap <silent> gu :MundoToggle<CR>
-
-""""""""""""""""""""""""""""better-escape.vim settings"""""""""""""""""""""""""
-let g:better_escape_interval = 200
 
 """"""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
 let g:XkbSwitchEnabled = 1
@@ -123,9 +117,6 @@ if g:is_mac
     autocmd FileType markdown nmap <buffer> <c-p> <Plug>(grammarous-move-to-previous-error)
   augroup END
 endif
-
-""""""""""""""""""""""""unicode.vim settings""""""""""""""""""""""""""""""
-" nmap ga <Plug>(UnicodeGA)
 
 """"""""""""""""""""""""""""vim-sandwich settings"""""""""""""""""""""""""""""
 " Map s to nop since s in used by vim-sandwich. Use cl instead of s.
@@ -217,46 +208,6 @@ let g:asyncrun_open = 6
 if g:is_win
   " Command output encoding for Windows
   let g:asyncrun_encs = 'gbk'
-endif
-
-""""""""""""""""""""""""""""""firenvim settings""""""""""""""""""""""""""""""
-if exists('g:started_by_firenvim') && g:started_by_firenvim
-  if g:is_mac
-    set guifont=Iosevka\ Nerd\ Font:h18
-  else
-    set guifont=Consolas
-  endif
-
-  " general config for firenvim
-  let g:firenvim_config = {
-      \ 'globalSettings': {
-          \ 'alt': 'all',
-      \  },
-      \ 'localSettings': {
-          \ '.*': {
-              \ 'cmdline': 'neovim',
-              \ 'priority': 0,
-              \ 'selector': 'textarea',
-              \ 'takeover': 'never',
-          \ },
-      \ }
-  \ }
-
-  function s:setup_firenvim() abort
-    set signcolumn=no
-    set noruler
-    set noshowcmd
-    set laststatus=0
-    set showtabline=0
-  endfunction
-
-  augroup firenvim
-    autocmd!
-    autocmd BufEnter * call s:setup_firenvim()
-    autocmd BufEnter sqlzoo*.txt set filetype=sql
-    autocmd BufEnter github.com_*.txt set filetype=markdown
-    autocmd BufEnter stackoverflow.com_*.txt set filetype=markdown
-  augroup END
 endif
 
 """"""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
