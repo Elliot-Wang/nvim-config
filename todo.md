@@ -4,7 +4,8 @@
 - [ ] remove useless plugin
     - hop.nvim like sneaker, comment it, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
 - [ ] remove useless feature
-- [ ] introduce my config
+- [x] introduce my config
+    - from `.vimrc`, safe and sound!
 - [ ] organize snippets
 - [x] colorschema, because of lazy load. colorschema implement not work for not loaded colorschema.
   - "navarasu/onedark.nvim"
