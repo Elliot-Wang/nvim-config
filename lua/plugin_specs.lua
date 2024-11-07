@@ -65,7 +65,7 @@ local plugin_specs = {
   -- Python-related text object
   { "jeetsukumaran/vim-pythonsense", ft = { "python" } },
 
-  { "machakann/vim-swap", event = "VeryLazy" },
+  -- { "machakann/vim-swap", event = "VeryLazy" },
 
   -- IDE for Lisp
   -- 'kovisoft/slimv'
@@ -84,13 +84,13 @@ local plugin_specs = {
   },
 
   -- Super fast buffer jump
-  {
-    "smoka7/hop.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("config.nvim_hop")
-    end,
-  },
+  -- {
+  --   "smoka7/hop.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("config.nvim_hop")
+  --   end,
+  -- },
 
   -- Show match number and index for searching
   {
