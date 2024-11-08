@@ -3,6 +3,7 @@ local keymap = vim.keymap
 local dashboard = require("dashboard")
 
 local conf = {}
+
 conf.header = {
   "                                                       ",
   "                                                       ",
@@ -19,30 +20,31 @@ conf.header = {
   "                                                       ",
 }
 
+-- for doom type
 conf.center = {
   {
     icon = "󰈞  ",
     desc = "Find  File                              ",
     action = "Leaderf file --popup",
-    key = "<Leader> f f",
+    key = "gf",
   },
   {
     icon = "󰈢  ",
     desc = "Recently opened files                   ",
     action = "Leaderf mru --popup",
-    key = "<Leader> f r",
+    key = "go",
   },
   {
     icon = "󰈬  ",
     desc = "Project grep                            ",
     action = "Leaderf rg --popup",
-    key = "<Leader> f g",
+    key = "<C-f>",
   },
   {
     icon = "  ",
     desc = "Open Nvim config                        ",
     action = "tabnew $MYVIMRC | tcd %:p:h",
-    key = "<Leader> e v",
+    key = " ",
   },
   {
     icon = "  ",
@@ -59,8 +61,33 @@ conf.center = {
   },
 }
 
+-- for hyper type
+conf.shortcut = {
+  { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+  {
+    icon = ' ',
+    icon_hl = '@variable',
+    desc = 'Files',
+    group = 'Label',
+    action = 'Telescope find_files',
+    key = 'f',
+  },
+  {
+    desc = ' Config',
+    group = 'DiagnosticHint',
+    action = 'tabnew $MYVIMRC | tcd %:p:h',
+    key = 'c',
+  },
+  {
+    desc = '󰈢 Recently',
+    group = 'Number',
+    action = 'Telescope oldfiles',
+    key = 'o',
+  },
+}
+
 dashboard.setup({
-  theme = 'doom',
+  theme = 'hyper',
   shortcut_type = 'number',
   config = conf
 })
