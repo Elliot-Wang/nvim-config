@@ -70,6 +70,15 @@ cmp.setup.filetype("tex", {
   },
 })
 
+cmp.setup.filetype("beancount", {
+  sources = {
+    { name = "omni" },
+    { name = "ultisnips" }, -- For ultisnips user.
+    { name = "buffer", keyword_length = 2 }, -- for buffer word completion
+    { name = "path" }, -- for path completion
+  },
+})
+
 --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
 vim.cmd([[
   highlight! link CmpItemMenu Comment

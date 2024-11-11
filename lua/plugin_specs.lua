@@ -497,6 +497,8 @@ local plugin_specs = {
       require("nvim-lightbulb").setup { autocmd = { enabled = true } }
     end,
   },
+  -- beancount highlighting
+  "nathangrigg/vim-beancount",
 }
 
 require("lazy").setup {
