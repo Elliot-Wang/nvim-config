@@ -4,12 +4,6 @@ local uv = vim.uv
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap.set({ "n", "x" }, ";", ":")
 
--- Turn the word under cursor to upper case
-keymap.set("i", "<c-u>", "<Esc>viwUea")
-
--- Turn the current word into title case
-keymap.set("i", "<c-t>", "<Esc>b~lea")
-
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
 keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "paste below current line" })
 keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })

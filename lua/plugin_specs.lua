@@ -351,7 +351,7 @@ local plugin_specs = {
   { "preservim/vim-markdown", ft = { "markdown" } },
 
   -- Faster footnote generation
-  { "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } },
+  -- { "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } },
 
   -- Vim tabular plugin for manipulate tabular, required by markdown plugins
   { "godlygeek/tabular", cmd = { "Tabularize" } },
@@ -498,7 +498,7 @@ local plugin_specs = {
     end,
   },
   -- beancount highlighting
-  "nathangrigg/vim-beancount",
+  { "nathangrigg/vim-beancount", ft = { "beancount" } },
 }
 
 require("lazy").setup {
