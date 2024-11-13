@@ -11,6 +11,7 @@ call utils#Cabbrev('pi', 'Lazy install')
 call utils#Cabbrev('pud', 'Lazy update')
 call utils#Cabbrev('pc', 'Lazy clean')
 call utils#Cabbrev('ps', 'Lazy sync')
+call utils#Cabbrev('map', 'Telescope keymaps')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      configurations for vim script plugin                  "
@@ -41,13 +42,13 @@ let g:vista_echo_cursor = 0
 " Stay in current window when vista window is opened
 let g:vista_stay_on_open = 0
 
-nnoremap <silent> <Space>t :<C-U>Vista!!<CR>
+nnoremap <silent> tm :<C-U>Vista!!<CR>
 
 """"""""""""""""""""""""vim-mundo settings"""""""""""""""""""""""
 let g:mundo_verbose_graph = 0
 let g:mundo_width = 80
 
-nnoremap <silent> gu :MundoToggle<CR>
+nnoremap <silent> tu :MundoToggle<CR>
 
 """"""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
 let g:XkbSwitchEnabled = 1

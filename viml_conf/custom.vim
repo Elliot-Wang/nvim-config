@@ -7,8 +7,7 @@ nnoremap tL :+tabnext<CR>	    " 到右边的选项卡
 " Buffers
 noremap th :bp!<CR>
 noremap tl :bn!<CR>
-noremap td :bd<CR>
-noremap tD :bd!<CR>
+noremap td :bp <bar> bd #<CR>
 
 " Split Windows
 nnoremap s <nop>
@@ -24,7 +23,7 @@ nnoremap sc <C-W>c                              " 关闭当前分屏
 
 " Save and exit
 nnoremap S :w<CR>
-nnoremap Q :bd<CR>
+nnoremap Q :bp <bar> bd #<CR>
 
 nnoremap ZS :xa!<CR>
 nnoremap ZQ :qa!<CR>
@@ -32,7 +31,5 @@ nnoremap ZQ :qa!<CR>
 nnoremap ZZ :x<CR>
 
 " Move
-noremap H ^
-noremap L $
 noremap J 15jzz
 noremap K 15kzz
