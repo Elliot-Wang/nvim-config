@@ -37,7 +37,8 @@ colorscheme onedark
 - "dracula/vim"
 
 ## ft config
-
+### markdown
+indent = 2
 
 ## text object
 [你應該擴充的 text object](https://amikai.github.io/2020/09/22/vim-text-object/)
@@ -50,3 +51,43 @@ colorscheme onedark
   - michaeljsmith/vim-indent-object
 - custom
   - I want a text closed by *space*, write myself
+
+## LSP
+```lua
+-- auto-completion engine
+{
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
+    -- event = 'InsertEnter',
+    event = "VeryLazy",
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "onsails/lspkind-nvim",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-omni",
+        "quangnguyen30192/cmp-nvim-ultisnips",
+    },
+    config = function()
+        require("config.nvim-cmp")
+    end,
+},
+{
+    "neovim/nvim-lspconfig",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+        require("config.lsp")
+    end,
+},
+
+-- Extensible UI for Neovim notifications and LSP progress messages.
+{
+    "j-hui/fidget.nvim",
+    event = "VeryLazy",
+    tag = "legacy",
+    config = function()
+        require("config.fidget-nvim")
+    end,
+},
+```
+
