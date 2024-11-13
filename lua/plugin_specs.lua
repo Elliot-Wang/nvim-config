@@ -135,6 +135,7 @@ local plugin_specs = {
   { "catppuccin/nvim", name = "catppuccin", lazy = true },
   { "olimorris/onedarkpro.nvim", lazy = true },
   { "marko-cerovac/material.nvim", lazy = true },
+  { "dracula/vim", name = "dracula", lazy = true },
   {
     "rockyzhang24/arctic.nvim",
     dependencies = { "rktjmp/lush.nvim" },
@@ -384,8 +385,7 @@ local plugin_specs = {
   -- carefully to use its full power
   { "wellle/targets.vim", event = "VeryLazy" },
 
-  -- Plugin to manipulate character pairs quickly
-  { "machakann/vim-sandwich", event = "VeryLazy" },
+  "tpope/vim-surround",
 
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VeryLazy" },
@@ -466,6 +466,41 @@ local plugin_specs = {
     end,
   },
 
+  {
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "gy",
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cw",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory" ,
+      },
+      -- {
+      --   -- NOTE: this requires a version of yazi that includes
+      --   -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
+      --   '<c-up>',
+      --   "<cmd>Yazi toggle<cr>",
+      --   desc = "Resume the last yazi session",
+      -- },
+    },
+    ---@type YaziConfig
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false,
+      keymaps = {
+        show_help = '<f1>',
+      },
+    },
+  },
+
+  -- Extensible UI for Neovim notifications and LSP progress messages.
   {
     "j-hui/fidget.nvim",
     event = "VeryLazy",

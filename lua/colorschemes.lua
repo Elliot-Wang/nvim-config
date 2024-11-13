@@ -10,6 +10,9 @@ M.colorscheme_conf = {
   onedark = function()
     vim.cmd([[colorscheme onedark]])
   end,
+  dracula = function()
+    vim.cmd([[colorscheme dracula]])
+  end,
   edge = function()
     vim.g.edge_enable_italic = 1
     vim.g.edge_better_performance = 1
