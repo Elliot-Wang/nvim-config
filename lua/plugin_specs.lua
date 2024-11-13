@@ -381,10 +381,6 @@ local plugin_specs = {
     ft = { "markdown" },
   },
 
-  -- Additional powerful text object for vim, this plugin should be studied
-  -- carefully to use its full power
-  { "wellle/targets.vim", event = "VeryLazy" },
-
   "tpope/vim-surround",
 
   -- Add indent object for vim (useful for languages like Python)
