@@ -141,7 +141,6 @@ plugins
         require("config.fugitive")
     end,
 },
-
 -- Better git log display
 { "rbong/vim-flog", cmd = { "Flog" } },
 { "akinsho/git-conflict.nvim", version = "*", config = true },
@@ -152,7 +151,6 @@ plugins
         require("config.git-linker")
     end,
 },
-
 -- Show git change (change, delete, add) signs in vim sign column
 {
     "lewis6991/gitsigns.nvim",
@@ -160,7 +158,6 @@ plugins
         require("config.gitsigns")
     end,
 },
-
 {
     "sindrets/diffview.nvim",
 },

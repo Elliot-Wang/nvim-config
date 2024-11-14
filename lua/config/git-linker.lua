@@ -21,13 +21,15 @@ gitlinker.setup {
 
 keymap.set({ "n", "v" }, "<leader>gk", function()
   local mode = string.lower(vim.fn.mode())
-  gitlinker.get_buf_range_url(mode)
+  gitlinker.get_buf_range_url(mode, {
+    action_callback = gitlinker.actions.open_in_browser
+  })
 end, {
   silent = true,
   desc = "Git: get permlink",
 })
 
-keymap.set("n", "<leader>gbr", function()
+keymap.set("n", "<leader>grp", function()
   gitlinker.get_repo_url({
     action_callback = gitlinker.actions.open_in_browser
   })
