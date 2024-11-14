@@ -29,7 +29,6 @@ local custom_attach = function(client, bufnr)
   end
 
   map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-  map("n", "<C-]>", vim.lsp.buf.definition)
   map("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
   map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
   map("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
@@ -39,11 +38,12 @@ local custom_attach = function(client, bufnr)
   -- this puts diagnostics from current buffer to quickfix
   map("n", "<space>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
   map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-  -- map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
-  -- map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
-  -- map("n", "<space>wl", function()
-  --   vim.print(vim.lsp.buf.list_workspace_folders())
-  -- end, { desc = "list workspace folder" })
+
+  map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
+  map("n", "<space>wd", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
+  map("n", "<space>wl", function()
+    vim.print(vim.lsp.buf.list_workspace_folders())
+  end, { desc = "list workspace folder" })
 
   -- Set some key bindings conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then

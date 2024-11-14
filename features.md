@@ -217,4 +217,21 @@ indent = 2
     end,
 },
 ```
+### lsp hotkeys
+- navigate
+  - `gd`: go to definition
+  - `gr`: go to references
+  - `[d`, `]d`: navigate diagnostic
+- code
+  - `<space>+rn`: rename variable
+  - `<space>+ca`: code action
+  - `<space>+fm`: code format
+- workspace
+  - `<space>+wl`: list workspace folders
+  - `<space>+wa`: add workspace folder
+  - `<space>+wd`: delete workspace folder
+- quickfix
+  - `<space>+qw`: put diagnostics from opened files to quickfix
+  - `<space>+qb`: put diagnostics from current files to quickfix
+- show document?
 
