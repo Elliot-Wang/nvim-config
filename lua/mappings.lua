@@ -90,7 +90,8 @@ keymap.set("n", "/", [[/\v]])
 keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "change cwd" })
 
 -- Use Esc to quit builtin terminal
-keymap.set("t", "<Esc>", [[<c-\><c-n>]])
+-- conflict with lazygit windows
+-- keymap.set("t", "<Esc>", [[<c-\><c-n>]])
 
 -- Toggle spell checking
 keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })

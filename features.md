@@ -8,6 +8,7 @@
 - resume
 
 ## surround
+Visual mode, select and press `S`.
 
 ## snippets
 
@@ -78,6 +79,8 @@ colorscheme onedark
 ## git
 
 ### external tool - lazygit
+`<C-c>` to quit it
+
 ```lua
 {
     "kdheepak/lazygit.nvim",
@@ -102,24 +105,32 @@ colorscheme onedark
 ```
 
 
-### plugin group
+### git plugin group
 
 plugins
 - fugitive, git common cmd
-    - leader+gs: git show status
-    - leader+ga: git add file
-    - leader+gc: git commit
-    - leader+gl: git pull
-    - leader+gp: git push
-    - leader+gbl: git blame
-    - leader+gbn: git checkout or craete new branch
-    - leader+gbd: git delete branch
+    - `leader+gs` git show status
+    - `leader+ga` git add file
+    - `leader+gc` git commit
+    - `leader+gl` git pull
+    - `leader+gp` git push
+    - `leader+gbl` git blame
+    - `leader+gbn` git checkout or craete new branch
+    - `leader+gbd` git delete branch
+    - `:Git` fugitive-summary, there are a bunch of keys.
 - vim-flog, display log, one feature, it's optional
-    - :Flog
+    - `:Flog`
 - git-conflict, for resolving conflict, effective at some condition
 - git-linker, browser repo
+    - `leader+gk` Git permlink for commited line.
+    - `leader+grp` Git open repo link in browser
 - gitsigns, show sign on side column. navigate between hunk
+    - `[c`, `]c` navigate between hunks
+    - `leader+hp` preview hunk, use `[c`, `]c` to switch between hunks
+    - `leader+hb` blame line, dont known how to scroll, and only last commit?
 - diffview, powerful diff tools
+- todo
+    - discard staged
 
 ```lua
 -- Git command inside vim
