@@ -235,3 +235,10 @@ indent = 2
   - `<space>+qb`: put diagnostics from current files to quickfix
 - show document?
 
+### lsp languages
+- ~~java~~, idea is much better than any lsp, forget it!
+- python
+- bash
+- json
+- javascript/typescript
+- go

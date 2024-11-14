@@ -22,7 +22,7 @@
 - code action - kosayoda/nvim-lightbulb
 - hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
 - organize snippets
-- surround, 
+- surround
 - IDE compiler and run
 
 ## beatufier
