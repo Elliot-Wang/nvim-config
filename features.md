@@ -36,6 +36,77 @@ colorscheme onedark
 - "rebelot/kanagawa.nvim"
 - "dracula/vim"
 
+## git
+
+### external tool - lazygit
+```lua
+{
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+}
+```
+
+
+### plugin group
+
+plugins
+- fugitive, git common cmd
+- vim-flog, display log, one feature, it's optional
+- git-conflict, for resolving conflict, effective at some condition
+- git-linker, browser repo
+- gitsigns, show sign on side column. navigate between hunk
+- diffview, powerful diff tools
+
+```lua
+-- Git command inside vim
+{
+    "tpope/vim-fugitive",
+    event = "User InGitRepo",
+    config = function()
+        require("config.fugitive")
+    end,
+},
+
+-- Better git log display
+{ "rbong/vim-flog", cmd = { "Flog" } },
+{ "akinsho/git-conflict.nvim", version = "*", config = true },
+{
+    "ruifm/gitlinker.nvim",
+    event = "User InGitRepo",
+    config = function()
+        require("config.git-linker")
+    end,
+},
+
+-- Show git change (change, delete, add) signs in vim sign column
+{
+    "lewis6991/gitsigns.nvim",
+    config = function()
+        require("config.gitsigns")
+    end,
+},
+
+{
+    "sindrets/diffview.nvim",
+},
+```
+
 ## ft config
 ### markdown
 indent = 2
