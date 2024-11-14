@@ -16,9 +16,6 @@ keymap.set("n", "<leader>gf", ":Git fetch ", { desc = "Git: prune branches" })
 -- blame
 keymap.set("n", "<leader>gbl", ":Git blame<cr>", { desc = "Git: blame current file" })
 
--- convert git to Git in command line mode
-vim.fn["utils#Cabbrev"]("git", "Git")
-
 -- switch branch or create one
 keymap.set("n", "<leader>gbn", function()
   vim.ui.input({ prompt = "Enter a new branch name" }, function(user_input)

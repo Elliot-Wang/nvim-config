@@ -129,6 +129,10 @@ keymap.set("n", "<Right>", "<C-W>l")
 keymap.set("n", "<Up>", "<C-W>k")
 keymap.set("n", "<Down>", "<C-W>j")
 
+-- cmdline abbrev
+-- vim.fn["utils#Cabbrev"]("git", "Git")
+-- vim.fn["utils#Cabbrev"]("snip", "call UltiSnips#RefreshSnippets()")
+
 -- Break inserted text into smaller undo units when we insert some punctuation chars.
 local undo_ch = { ",", ".", "!", "?", ";", ":" }
 for _, ch in ipairs(undo_ch) do
