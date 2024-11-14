@@ -40,13 +40,13 @@ let g:Lf_ShortcutB = ''
 let g:Lf_WorkingDirectoryMode = 'a'
 
 " Search files in popup window
-nnoremap <silent> go :<C-U>Leaderf file --popup<CR>
+nnoremap <silent> gf :<C-U>Leaderf file --popup<CR>
 
 " Grep project files in popup window
-nnoremap <silent> <C-f> :<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>
+nnoremap <silent> <Leader>se :<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>
 
 " Search line in current buffer
-nnoremap <silent> gl :<C-U>Leaderf line --popup<CR>
+nnoremap <silent> <C-f> :<C-U>Leaderf line --popup<CR>
 
 " Search tags in current buffer
 nnoremap <silent> gm :<C-U>Leaderf bufTag --popup<CR>
@@ -55,7 +55,7 @@ nnoremap <silent> gm :<C-U>Leaderf bufTag --popup<CR>
 nnoremap <silent> gt :<C-U>Leaderf buffer --popup<CR>
 
 " Search recent files
-nnoremap <silent> gf :<C-U>Leaderf mru --popup --absolute-path<CR>
+nnoremap <silent> go :<C-U>Leaderf mru --popup --absolute-path<CR>
 
 let g:Lf_PopupColorscheme = 'gruvbox_material'
 
