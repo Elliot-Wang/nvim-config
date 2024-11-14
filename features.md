@@ -3,12 +3,51 @@
 ## LeaderF
 
 ## yazi
-- open at file
+- `gy` open at file
 - open at cwd
 - resume
 
 ## surround
 
+## snippets
+
+### ultisnips
+> The options is a word of characters, each turning a specific option for this
+> snippet on. The options currently supported are >
+>    !   Overwrite - This snippet will overwrite all previously defined
+>        snippets with this tab trigger. Default is to let the user choose at
+>        expansion which snippet to expand. This option is useful to overwrite
+>        bundled tab stops with user defined ones.
+>    b   Beginning of line - This snippet will only be expanded if you are at
+>        the beginning of a line (that is if there are only whitespaces in front
+>        of the cursor). Default is to expand snippets at every position, even
+>        in the middle of a line. Most of my snippets have this option set, it
+>        keeps UltiSnips out of the way.
+>    i   Inword expansion - Normally, triggers need whitespace before them to be
+>        expanded. With this option, triggers are also expanded in the middle of
+>        a word.
+>    w   Word boundary - Normally, triggers need whitespace before them to be
+>        expanded. With this option, the trigger will be expanded at a "word"
+>        boundary as well, where word characters are letters, digits, and the
+>        underscore character ('_').  This enables expansion of a trigger that
+>        adjoins punctuation (for example) without expanding suffixes of larger
+>        words.
+>    r   Regular expression - This uses a python regular expression for the
+>        match. The regular expression MUST be surrounded like a multi-word
+>        trigger (see above) even if it doesn't have any spaces. The resulting
+>        match is also passed to any python code blocks in your snippet
+>        definition as the local variable "match".
+>    t   Don't expand tabs - By default, UltiSnips tries to expand leading tabs
+>        in a snippet to match the results of automatic indentation. If this
+>        option is set, UltiSnips will not try to do this expansion, and will
+>        leave the tabs alone. This can be useful for snippets dealing with
+>        tab delimited formats, etc.
+
+- reload date snippets `call UltiSnips#RefreshSnippets()`
+- `g:UltiSnipsExpandTrigger` <C-j>
+- `g:UltiSnipsListSnippets` <C-tab>
+- `g:UltiSnipsJumpForwardTrigger` <C-j>
+- `g:UltiSnipsJumpBackwardTrigger` <C-k>
 
 ## colorscheme
 
@@ -67,7 +106,16 @@ colorscheme onedark
 
 plugins
 - fugitive, git common cmd
+    - leader+gs: git show status
+    - leader+ga: git add file
+    - leader+gc: git commit
+    - leader+gl: git pull
+    - leader+gp: git push
+    - leader+gbl: git blame
+    - leader+gbn: git checkout or craete new branch
+    - leader+gbd: git delete branch
 - vim-flog, display log, one feature, it's optional
+    - :Flog
 - git-conflict, for resolving conflict, effective at some condition
 - git-linker, browser repo
 - gitsigns, show sign on side column. navigate between hunk

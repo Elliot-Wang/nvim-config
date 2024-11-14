@@ -19,7 +19,8 @@ call utils#Cabbrev('map', 'Telescope keymaps')
 
 """""""""""""""""""""""""UltiSnips settings"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use YouCompleteMe
-let g:UltiSnipsExpandTrigger='<c-j>'
+" TODO experiental
+" let g:UltiSnipsExpandTrigger='<c-j>'
 
 " Do not look for SnipMate snippets
 let g:UltiSnipsEnableSnipMate = 0
