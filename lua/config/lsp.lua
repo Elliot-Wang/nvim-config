@@ -140,7 +140,8 @@ if utils.executable('pyright') then
   local merged_capability = vim.tbl_deep_extend("force", capabilities, new_capability)
 
   lspconfig.pyright.setup {
-    cmd = { "delance-langserver", "--stdio" },
+    cmd = { "pyright-langserver", "--stdio" },
+    filetypes = { "python" },
     on_attach = custom_attach,
     -- capabilities = merged_capability,
     capabilities = capabilities,
