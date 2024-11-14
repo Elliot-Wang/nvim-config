@@ -4,3 +4,5 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 call AdjustWindowHeight(5, 15)
+
+nnoremap <buffer> Q :bdelete<CR>
