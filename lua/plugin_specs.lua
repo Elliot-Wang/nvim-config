@@ -197,6 +197,15 @@ local function helperPlugs()
       end,
     },
 
+    -- fold sign is clickable
+    {
+      "luukvbaal/statuscol.nvim",
+      opts = {},
+      config = function()
+        require("config.nvim-statuscol")
+      end,
+    },
+
     -- Modern matchit implementation
     { "andymass/vim-matchup", event = "BufRead" },
 
@@ -529,14 +538,6 @@ local function uiPlugs()
       event = { "BufEnter" },
       config = function()
         require("config.bufferline")
-      end,
-    },
-
-    {
-      "luukvbaal/statuscol.nvim",
-      opts = {},
-      config = function()
-        require("config.nvim-statuscol")
       end,
     },
 
