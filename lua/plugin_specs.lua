@@ -15,290 +15,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- check if firenvim is active
-local firenvim_not_active = function()
-  return not vim.g.started_by_firenvim
-end
-
-local plugin_specs = {
-  -- { "machakann/vim-swap", event = "VeryLazy" },
-
-  -- Super fast buffer jump
-  -- {
-  --   "smoka7/hop.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("config.nvim_hop")
-  --   end,
-  -- },
-
-  { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
-
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    cond = firenvim_not_active,
-    config = function()
-      require("config.lualine")
-    end,
-  },
-
-  {
-    "akinsho/bufferline.nvim",
-    event = { "BufEnter" },
-    cond = firenvim_not_active,
-    config = function()
-      require("config.bufferline")
-    end,
-  },
-
-  -- fancy start screen
-  {
-    "nvimdev/dashboard-nvim",
-    cond = firenvim_not_active,
-    config = function()
-      require("config.dashboard-nvim")
-    end,
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
-    main = "ibl",
-    config = function()
-      require("config.indent-blankline")
-    end,
-  },
-  {
-    "luukvbaal/statuscol.nvim",
-    opts = {},
-    config = function()
-      require("config.nvim-statuscol")
-    end,
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    event = "VeryLazy",
-    opts = {},
-    init = function()
-      vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-    end,
-    config = function()
-      require("config.nvim_ufo")
-    end,
-  },
-  -- Highlight URLs inside vim
-  { "itchyny/vim-highlighturl", event = "VeryLazy" },
-
-  -- notification plugin
-  {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    config = function()
-      require("config.nvim-notify")
-    end,
-  },
-
-  -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
-  -- not be possible since we maybe in a server which disables GUI.
-  {
-    "chrishrb/gx.nvim",
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
-    cmd = { "Browse" },
-    init = function()
-      vim.g.netrw_nogx = 1 -- disable netrw gx
-    end,
-    enabled = function()
-      if vim.g.is_win or vim.g.is_mac then
-        return true
-      else
-        return false
-      end
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = true, -- default settings
-    submodules = false, -- not needed, submodules are required only for tests
-  },
-
-  -- Only install these plugins if ctags are installed on the system
-  -- show file tags in vim window
-  {
-    "liuchengxu/vista.vim",
-    enabled = function()
-      if utils.executable("ctags") then
-        return true
-      else
-        return false
-      end
-    end,
-    cmd = "Vista",
-  },
-
-  -- Automatic insertion and deletion of a pair of characters
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
-
-  -- Comment plugin
-  { "tpope/vim-commentary", event = "VeryLazy" },
-
-  -- Multiple cursor plugin like Sublime Text?
-  -- 'mg979/vim-visual-multi'
-
-  -- Autosave files on certain events
-  { "907th/vim-auto-save", event = "InsertEnter" },
-
-  -- Show undo history visually
-  { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
-
-  -- better UI for some nvim actions
-  { "stevearc/dressing.nvim" },
-
-  -- Manage your yank history
-  {
-    "gbprod/yanky.nvim",
-    config = function()
-      require("config.yanky")
-    end,
-    event = "VeryLazy",
-  },
-
-  -- Handy unix command inside Vim (Rename, Move etc.)
-  { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
-
-  -- Repeat vim motions
-  { "tpope/vim-repeat", event = "VeryLazy" },
-
-  -- Auto format tools
-  { "sbdchd/neoformat", cmd = { "Neoformat" } },
-
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-    config = function()
-      require("config.bqf")
-    end,
-  },
-
-  -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-  { "godlygeek/tabular", cmd = { "Tabularize" } },
-
-  "tpope/vim-surround",
-
-  -- Since tmux is only available on Linux and Mac, we only enable these plugins
-  -- for Linux and Mac
-  -- .tmux.conf syntax highlighting and setting check
-  {
-    "tmux-plugins/vim-tmux",
-    enabled = function()
-      if utils.executable("tmux") then
-        return true
-      end
-      return false
-    end,
-    ft = { "tmux" },
-  },
-
-  -- Modern matchit implementation
-  { "andymass/vim-matchup", event = "BufRead" },
-  { "tpope/vim-scriptease", cmd = { "Scriptnames", "Messages", "Verbose" } },
-
-  -- Asynchronous command execution
-  { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
-
-  -- Session management plugin
-  { "tpope/vim-obsession", cmd = "Obsession" },
-
-  {
-    "ojroques/vim-oscyank",
-    enabled = function()
-      if vim.g.is_linux then
-        return true
-      end
-      return false
-    end,
-    cmd = { "OSCYank", "OSCYankReg" },
-  },
-
-  -- showing keybindings
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("config.which-key")
-    end,
-  },
-
-  -- file explorer
-  {
-    "nvim-tree/nvim-tree.lua",
-    event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("config.nvim-tree")
-    end,
-  },
-
-  {
-    "mikavilpas/yazi.nvim",
-    event = "VeryLazy",
-    keys = {
-      -- 👇 in this section, choose your own keymappings!
-      {
-        "gy",
-        "<cmd>Yazi<cr>",
-        desc = "Open yazi at the current file",
-      },
-      {
-        -- Open in the current working directory
-        "<leader>cw",
-        "<cmd>Yazi cwd<cr>",
-        desc = "Open the file manager in nvim's working directory" ,
-      },
-      -- {
-      --   -- NOTE: this requires a version of yazi that includes
-      --   -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-      --   '<c-up>',
-      --   "<cmd>Yazi toggle<cr>",
-      --   desc = "Resume the last yazi session",
-      -- },
-    },
-    ---@type YaziConfig
-    opts = {
-      -- if you want to open yazi instead of netrw, see below for more info
-      open_for_directories = false,
-      keymaps = {
-        show_help = '<f1>',
-      },
-    },
-  },
-
-  -- Extensible UI for Neovim notifications and LSP progress messages.
-  {
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    tag = "legacy",
-    config = function()
-      require("config.fidget-nvim")
-    end,
-  },
-  {
-    "smjonas/live-command.nvim",
-    -- live-command supports semantic versioning via Git tags
-    -- tag = "2.*",
-    cmd = "Preview",
-    config = function()
-      require("config.live-command")
-    end,
-    event = "VeryLazy",
-  },
-}
+local plugin_specs = {}
 
 local function addPlugins(plugs)
   for k,v in pairs(plugs) do
@@ -432,6 +149,185 @@ local function textObjectPlugs()
   })
 end
 
+local function linkPlugs()
+  addPlugins({
+    -- Highlight URLs inside vim
+    { "itchyny/vim-highlighturl", event = "VeryLazy" },
+
+    -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
+    -- not be possible since we maybe in a server which disables GUI.
+    {
+      "chrishrb/gx.nvim",
+      keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+      cmd = { "Browse" },
+      init = function()
+        vim.g.netrw_nogx = 1 -- disable netrw gx
+      end,
+      enabled = function()
+        if vim.g.is_win or vim.g.is_mac then
+          return true
+        else
+          return false
+        end
+      end,
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = true, -- default settings
+      submodules = false, -- not needed, submodules are required only for tests
+    },
+
+  })
+end
+
+local function helperPlugs()
+  addPlugins({
+    -- fold
+    {
+      "kevinhwang91/nvim-ufo",
+      dependencies = "kevinhwang91/promise-async",
+      event = "VeryLazy",
+      opts = {},
+      init = function()
+        vim.o.foldcolumn = "1" -- '0' is not bad
+        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+        vim.o.foldlevelstart = 99
+        vim.o.foldenable = true
+      end,
+      config = function()
+        require("config.nvim_ufo")
+      end,
+    },
+
+    -- Modern matchit implementation
+    { "andymass/vim-matchup", event = "BufRead" },
+
+    -- Autosave files on certain events
+    { "907th/vim-auto-save", event = "InsertEnter" },
+
+    -- Manage your yank history
+    {
+      "gbprod/yanky.nvim",
+      config = function()
+        require("config.yanky")
+      end,
+      event = "VeryLazy",
+    },
+
+    -- Session management plugin
+    { "tpope/vim-obsession", cmd = "Obsession" },
+
+    -- yank history manager
+    {
+      "ojroques/vim-oscyank",
+      enabled = function()
+        if vim.g.is_linux then
+          return true
+        end
+        return false
+      end,
+      cmd = { "OSCYank", "OSCYankReg" },
+    },
+
+    -- showing keybindings
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("config.which-key")
+      end,
+    },
+
+    -- Super fast buffer jump
+    -- {
+    --   "smoka7/hop.nvim",
+    --   event = "VeryLazy",
+    --   config = function()
+    --     require("config.nvim_hop")
+    --   end,
+    -- },
+
+    -- show global result while edit command
+    {
+      "smjonas/live-command.nvim",
+      -- live-command supports semantic versioning via Git tags
+      -- tag = "2.*",
+      cmd = "Preview",
+      config = function()
+        require("config.live-command")
+      end,
+      event = "VeryLazy",
+    },
+
+    -- Asynchronous command execution
+    { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
+
+  })
+end
+
+local function stringManipulatePlugs()
+  addPlugins({
+  -- Comment plugin
+  { "tpope/vim-commentary", event = "VeryLazy" },
+
+  -- Multiple cursor plugin like Sublime Text?
+  -- 'mg979/vim-visual-multi'
+
+  -- Repeat vim motions
+  { "tpope/vim-repeat", event = "VeryLazy" },
+
+  -- Vim tabular plugin for manipulate tabular, required by markdown plugins
+  { "godlygeek/tabular", cmd = { "Tabularize" } },
+
+  "tpope/vim-surround",
+
+  -- Automatic insertion and deletion of a pair of characters
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+  },
+
+  })
+end
+
+local function functionWindowPlugs()
+  addPlugins({
+  -- fancy start screen
+  {
+    "nvimdev/dashboard-nvim",
+    config = function()
+      require("config.dashboard-nvim")
+    end,
+  },
+
+  -- Only install these plugins if ctags are installed on the system
+  -- show file tags in vim window
+  {
+    "liuchengxu/vista.vim",
+    enabled = function()
+      if utils.executable("ctags") then
+        return true
+      else
+        return false
+      end
+    end,
+    cmd = "Vista",
+  },
+
+  -- Show undo history visually
+  { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
+
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    config = function()
+      require("config.bqf")
+    end,
+  },
+
+  })
+end
+
+
 local function snippetPlugs()
   addPlugins({
     -- Snippet engine and snippet template
@@ -474,6 +370,7 @@ end
 
 local function lspPlugs()
   addPlugins({
+    -- lsp config
     {
       "neovim/nvim-lspconfig",
       event = { "BufRead", "BufNewFile" },
@@ -481,11 +378,10 @@ local function lspPlugs()
         require("config.lsp")
       end,
     },
-    {
-      "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
-      opts = {},
-    },
+
+    -- Auto format tools
+    { "sbdchd/neoformat", cmd = { "Neoformat" } },
+
     {
       -- show hint for code actions, the user can also implement code actions themselves,
       -- see discussion here: https://github.com/neovim/neovim/issues/14869
@@ -493,6 +389,13 @@ local function lspPlugs()
       config = function()
         require("nvim-lightbulb").setup { autocmd = { enabled = true } }
       end,
+    },
+
+    -- lsp servers --
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {},
     },
   })
 end
@@ -551,6 +454,13 @@ local function ungroupPlugs()
 
     -- show and trim trailing whitespaces
     { "jdhao/whitespace.nvim", event = "VeryLazy" },
+
+    -- Handy unix command inside Vim (Rename, Move etc.)
+    { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
+
+    -- a Vim plugin for making Vim plugins
+    { "tpope/vim-scriptease", cmd = { "Scriptnames", "Messages", "Verbose" } },
+
   })
 end
 
@@ -601,6 +511,119 @@ local function searchPlugs()
   })
 end
 
+local function uiPlugs()
+  addPlugins({
+    { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+
+    {
+      "nvim-lualine/lualine.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("config.lualine")
+      end,
+    },
+
+    {
+      "akinsho/bufferline.nvim",
+      event = { "BufEnter" },
+      config = function()
+        require("config.bufferline")
+      end,
+    },
+
+    {
+      "luukvbaal/statuscol.nvim",
+      opts = {},
+      config = function()
+        require("config.nvim-statuscol")
+      end,
+    },
+
+    -- Extensible UI for Neovim notifications and LSP progress messages.
+    {
+      "j-hui/fidget.nvim",
+      event = "VeryLazy",
+      tag = "legacy",
+      config = function()
+        require("config.fidget-nvim")
+      end,
+    },
+
+    -- notification plugin
+    {
+      "rcarriga/nvim-notify",
+      event = "VeryLazy",
+      config = function()
+        require("config.nvim-notify")
+      end,
+    },
+
+    -- better UI for some nvim actions
+    { "stevearc/dressing.nvim" },
+
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "VeryLazy",
+      main = "ibl",
+      config = function()
+        require("config.indent-blankline")
+      end,
+    },
+
+  })
+end
+
+local function fileBrowserPlugs()
+  addPlugins({
+    -- file explorer
+    {
+      "nvim-tree/nvim-tree.lua",
+      event = "VeryLazy",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        require("config.nvim-tree")
+      end,
+    },
+
+    -- yazi <C-c> to close
+    {
+      "mikavilpas/yazi.nvim",
+      event = "VeryLazy",
+      keys = {
+        {
+          -- NOTE: this requires a version of yazi that includes
+          -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
+          "gy",
+          "<cmd>Yazi toggle<cr>",
+          desc = "Open yazi at the current file",
+        },
+        {
+          -- Open in the current working directory
+          "<leader>cw",
+          "<cmd>Yazi cwd<cr>",
+          desc = "Open the file manager in nvim's working directory" ,
+        },
+      },
+      opts = {
+        -- if you want to open yazi instead of netrw, see below for more info
+        open_for_directories = false,
+        keymaps = {
+          show_help = '<f1>',
+          open_file_in_vertical_split = '<c-v>',
+          open_file_in_horizontal_split = '<c-x>',
+          open_file_in_tab = '<c-t>',
+          grep_in_directory = '<c-s>',
+          replace_in_directory = '<c-g>',
+          cycle_open_buffers = '<tab>',
+          copy_relative_path_to_selected_files = '<c-y>',
+          send_to_quickfix_list = '<c-q>',
+          change_working_directory = "<c-\\>",
+        },
+      },
+    },
+  })
+end
+
 local function tmplatePlugs()
   addPlugins({
   })
@@ -611,11 +634,17 @@ syntaxPlugs()
 colorschemePlugs()
 gitPlugs()
 textObjectPlugs()
+linkPlugs()
+helperPlugs()
+stringManipulatePlugs()
 snippetPlugs()
+functionWindowPlugs()
 completionPlugs()
 lspPlugs()
 markdownPlugs()
 searchPlugs()
+uiPlugs()
+fileBrowserPlugs()
 ungroupPlugs()
 
 require("lazy").setup {
