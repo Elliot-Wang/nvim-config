@@ -236,7 +236,11 @@ indent = 2
 - show document?
 
 ### lsp languages
+[nvim-lspconfig 配置文档](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md)
+
 - ~~java~~, idea is much better than any lsp, forget it!
+- lua
+- vim
 - python
 - bash
 - json

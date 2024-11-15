@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "python", "cpp", "lua", "vim", "json", "toml", "markdown", "java"},
+  ensure_installed = { "python", "lua", "vim", "json", "markdown", "java"},
   ignore_install = {}, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension

@@ -28,6 +28,7 @@
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"
 - IMPROVE IT: highlight line is hard to recognized
+  - **yazi**, highlight color is to closed to background
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
 
 
