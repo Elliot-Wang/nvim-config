@@ -215,7 +215,7 @@ local function helperPlugs()
     -- Session management plugin
     { "tpope/vim-obsession", cmd = "Obsession" },
 
-    -- yank history manager
+    -- yank history manager for linux
     {
       "ojroques/vim-oscyank",
       enabled = function()
@@ -265,26 +265,26 @@ end
 
 local function stringManipulatePlugs()
   addPlugins({
-  -- Comment plugin
-  { "tpope/vim-commentary", event = "VeryLazy" },
+    -- Comment plugin
+    { "tpope/vim-commentary", event = "VeryLazy" },
 
-  -- Multiple cursor plugin like Sublime Text?
-  -- 'mg979/vim-visual-multi'
+    -- Multiple cursor plugin like Sublime Text?
+    -- 'mg979/vim-visual-multi'
 
-  -- Repeat vim motions
-  { "tpope/vim-repeat", event = "VeryLazy" },
+    -- Repeat vim motions
+    { "tpope/vim-repeat", event = "VeryLazy" },
 
-  -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-  { "godlygeek/tabular", cmd = { "Tabularize" } },
+    -- Vim tabular plugin for manipulate tabular, required by markdown plugins
+    { "godlygeek/tabular", cmd = { "Tabularize" } },
 
-  "tpope/vim-surround",
+    "tpope/vim-surround",
 
-  -- Automatic insertion and deletion of a pair of characters
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
+    -- Automatic insertion and deletion of a pair of characters
+    {
+      "windwp/nvim-autopairs",
+      event = "InsertEnter",
+      config = true,
+    },
 
   })
 end
@@ -380,6 +380,7 @@ local function lspPlugs()
     },
 
     -- Auto format tools
+    -- supports https://github.com/sbdchd/neoformat?tab=readme-ov-file#supported-filetypes
     { "sbdchd/neoformat", cmd = { "Neoformat" } },
 
     {
@@ -629,7 +630,7 @@ local function tmplatePlugs()
   })
 end
 
--- apply plugins
+-- apply plugins --
 syntaxPlugs()
 colorschemePlugs()
 gitPlugs()
