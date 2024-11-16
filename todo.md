@@ -15,6 +15,7 @@
 - [x] fix bugs
     - liuchengxu/vista.vim - tags error
     - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
+    - leaderF jump by `rg` is not correct.
 
 ## practice neovim
 - gc -> leader+C
@@ -24,11 +25,15 @@
 - organize snippets
 - surround
 - IDE compiler and run
+- [ ] obsidian repo
+- [ ] tags (like this `#vim`) search for markdown files
+- [ ] move *qf* windows to new window or even float window.
 
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"
 - IMPROVE IT: highlight line is hard to recognized
   - **yazi**, highlight color is to closed to background
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
-
+- [x] vista colorschema
+  - rainbow for every level; use `Toch` at markdown instead.
 

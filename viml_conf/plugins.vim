@@ -43,7 +43,7 @@ let g:vista_echo_cursor = 0
 " Stay in current window when vista window is opened
 let g:vista_stay_on_open = 0
 
-nnoremap <silent> tm :<C-U>Vista!!<CR>
+nnoremap <silent> tm :<C-U>Vista show<CR>
 
 """"""""""""""""""""""""vim-mundo settings"""""""""""""""""""""""
 let g:mundo_verbose_graph = 0
@@ -86,6 +86,12 @@ let g:vim_markdown_json_frontmatter = 1  " for JSON format
 
 " Let the TOC window autofit so that it doesn't take too much space
 let g:vim_markdown_toc_autofit = 1
+
+" disable gx
+map <Plug> <Plug>Markdown_OpenUrlUnderCursor
+
+" disable ge
+map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
 """""""""""""""""""""""""markdown-preview settings"""""""""""""""""""
 " Only setting this for suitable platforms

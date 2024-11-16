@@ -75,7 +75,7 @@ conf.shortcut = {
   {
     desc = ' Config',
     group = 'DiagnosticHint',
-    action = 'tabnew $MYVIMRC | tcd %:p:h',
+    action = 'tabnew ~/.config/nvim/lua/plugin_specs.lua | tcd %:p:h',
     key = 'c',
   },
   {

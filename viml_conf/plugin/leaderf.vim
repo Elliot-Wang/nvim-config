@@ -52,7 +52,7 @@ nnoremap <silent> <C-f> :<C-U>Leaderf line --popup<CR>
 nnoremap <silent> gm :<C-U>Leaderf bufTag --popup<CR>
 
 " Switch buffers
-nnoremap <silent> gt :<C-U>Leaderf buffer --popup<CR>
+nnoremap <silent> ge :<C-U>Leaderf buffer --popup<CR>
 
 " Search recent files
 nnoremap <silent> go :<C-U>Leaderf mru --popup --absolute-path<CR>

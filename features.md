@@ -1,8 +1,14 @@
 # features
 
 ## LeaderF
+- gf `:<C-U>Leaderf file --popup<CR>`
+- <Leader>se `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>`
+- <C-f> `:<C-U>Leaderf line --popup<CR>`
+- gm `:<C-U>Leaderf bufTag --popup<CR>`
+- ge `:<C-U>Leaderf buffer --popup<CR>`
+- go `:<C-U>Leaderf mru --popup --absolute-path<CR>`
 
-## yazi
+## file browser - yazi
 - `gy` open at file
 - open at cwd
 - resume
@@ -164,6 +170,7 @@ plugins
 ```
 
 ## ft config
+
 ### markdown
 indent = 2
 
@@ -231,8 +238,7 @@ indent = 2
   - `<space>+wa`: add workspace folder
   - `<space>+wd`: delete workspace folder
 - quickfix
-  - `<space>+qw`: put diagnostics from opened files to quickfix
-  - `<space>+qb`: put diagnostics from current files to quickfix
+  - `<space>+qf`: put diagnostics from current files to quickfix
 - show document?
 
 ### lsp languages

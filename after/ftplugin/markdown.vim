@@ -15,6 +15,9 @@ xnoremap <buffer><silent> ac :<C-U>call text_obj#MdCodeBlock('a')<CR>
 onoremap <buffer><silent> ic :<C-U>call text_obj#MdCodeBlock('i')<CR>
 onoremap <buffer><silent> ac :<C-U>call text_obj#MdCodeBlock('a')<CR>
 
+" open toc instead of vista tag
+nnoremap <buffer><silent> tm :Toc<CR>
+
 " Use - to turn several lines to an unordered list.
 " Ref: https://vi.stackexchange.com/q/5495/15292 and https://stackoverflow.com/q/42438795/6064933.
 nnoremap <buffer><silent> - :set operatorfunc=AddListSymbol<CR>g@
