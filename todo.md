@@ -19,14 +19,20 @@
 
 ## practice neovim
 - gc -> leader+C, **leave it alone**
-- lsp config
-  - [?] show document, Why it not work when *cursor hold*.
-  - [ ] show function info, check into *magazine.nvim*
-    inline hint.
-  - [ ] research *fidget*
+- lsp config [nvim-cmp](https://github.com/iguanacucumber/magazine.nvim)
+  - inline hint, enable it!
+    *pyright* not support it, *coc-pyright* is the only option.
+  - show document, Why it not work when *cursor hold*.
+    *coc-pyright* is better!
+  - [ ] research **fidget**: *Fidget is an unintrusive window in the corner of your editor that manages its own lifetime.*
 - code action `<leader>+ca` - kosayoda/nvim-lightbulb
+  - code action list ***providers*** is various!
 - hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
-- [ ] organize snippets
+- organize snippets
+  - [ ] ultisnips
+    - trigger key
+    - expand condition
+- update nvim config at once
 - surround, still use `surround.vim`
 - IDE compiler and run
   - `F9` compile it and run
@@ -44,6 +50,7 @@
 - IMPROVE IT: highlight line is hard to recognized
   - **yazi**, highlight color is to closed to background
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
+- minimap [wfxr/minimap.vim: 📡 Blazing fast minimap / scrollbar for vim, powered by code-minimap written in Rust.](https://github.com/wfxr/minimap.vim?tab=readme-ov-file)
 - [x] vista colorschema
   - rainbow for every level; use `Toch` at markdown instead.
 

@@ -38,6 +38,8 @@ local custom_attach = function(client, bufnr)
   -- this puts diagnostics from current buffer to quickfix
   map("n", "<space>qf", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
   map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+  -- document
+  map("n", "<C-q>", vim.lsp.buf.signature_help, { desc = "Displays signature information about the symbol" })
 
   -- workspace
   map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
@@ -47,14 +49,13 @@ local custom_attach = function(client, bufnr)
   end, { desc = "list workspace folder" })
 
   -- Set some key bindings conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
-    map({"n", "x"}, "<space>fm", vim.lsp.buf.format, { desc = "format code" })
-  end
+  map({"n", "x"}, "<space>fm", vim.lsp.buf.format, { desc = "format code" })
 
   -- Uncomment code below to enable inlay hint from language server, some LSP server supports inlay hint,
   -- but disable this feature by default, so you may need to enable inlay hint in the LSP server config.
-  -- vim.lsp.inlay_hint.enable(true, {buffer=bufnr})
+  vim.lsp.inlay_hint.enable(true, {buffer=bufnr})
 
+  -- display diagnostic at cursor position
   api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
@@ -81,7 +82,7 @@ local custom_attach = function(client, bufnr)
     end,
   })
 
-  -- The blow command will highlight the current variable and its usages in the buffer.
+  -- The below command will highlight the current variable and its usages in the buffer.
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       hi! link LspReferenceRead Visual
@@ -185,6 +186,7 @@ if utils.executable("ruff") then
       -- the settings can be found here: https://docs.astral.sh/ruff/editors/settings/
       settings = {
         organizeImports = true,
+        showSyntaxErrors = true,
       }
     }
   })
@@ -289,12 +291,12 @@ diagnostic.config {
   severity_sort = true,
 }
 
--- lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
---   underline = false,
---   virtual_text = false,
---   signs = true,
---   update_in_insert = false,
--- })
+lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+  underline = false,
+  virtual_text = false,
+  signs = true,
+  update_in_insert = false,
+})
 
 -- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
 lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
