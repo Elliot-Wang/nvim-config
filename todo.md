@@ -15,19 +15,28 @@
 - [x] fix bugs
     - liuchengxu/vista.vim - tags error
     - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
-    - leaderF jump by `rg` is not correct.
+    - [ ] leaderF jump by `rg` is not correct.
 
 ## practice neovim
-- gc -> leader+C
+- gc -> leader+C, **leave it alone**
 - lsp config
-- code action - kosayoda/nvim-lightbulb
+  - [?] show document, Why it not work when *cursor hold*.
+  - [ ] show function info, check into *magazine.nvim*
+    inline hint.
+  - [ ] research *fidget*
+- code action `<leader>+ca` - kosayoda/nvim-lightbulb
 - hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
-- organize snippets
-- surround
+- [ ] organize snippets
+- surround, still use `surround.vim`
 - IDE compiler and run
+  - `F9` compile it and run
+  - [ ] debuger?
 - [ ] obsidian repo
+  - coc-marksman, with *coc lsp*, it could preview doc(`[[doc-name]]`)
 - [ ] tags (like this `#vim`) search for markdown files
-- [ ] move *qf* windows to new window or even float window.
+- [?] move *qf* windows to new window or even float window.
+  - if only I want to read it and keep it for a while,
+    otherwise I will close it immediately.
 
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"

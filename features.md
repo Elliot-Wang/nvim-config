@@ -240,6 +240,7 @@ indent = 2
 - quickfix
   - `<space>+qf`: put diagnostics from current files to quickfix
 - show document?
+- show function info?
 
 ### lsp languages
 [nvim-lspconfig 配置文档](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md)

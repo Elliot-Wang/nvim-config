@@ -39,6 +39,7 @@ local custom_attach = function(client, bufnr)
   map("n", "<space>qf", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
   map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
 
+  -- workspace
   map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
   map("n", "<space>wd", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
   map("n", "<space>wl", function()
