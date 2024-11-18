@@ -180,6 +180,18 @@ end
 
 local function helperPlugs()
   addPlugins({
+    -- minimap
+    {
+      "wfxr/minimap.vim",
+      enabled = function()
+        if utils.executable("code-minimap") then
+          return true
+        else
+          return false
+        end
+      end,
+    },
+
     -- fold
     {
       "kevinhwang91/nvim-ufo",
