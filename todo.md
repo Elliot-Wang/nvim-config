@@ -37,6 +37,7 @@
 - [?] move *qf* windows to new window or even float window.
   - if only I want to read it and keep it for a while,
     otherwise I will close it immediately.
+- [x] input method switcher
 
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"

@@ -269,6 +269,27 @@ local function helperPlugs()
     -- Asynchronous command execution
     { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
 
+    {
+      "keaising/im-select.nvim",
+      config = function()
+        require("im_select").setup({
+          -- IM will be set to `default_im_select` in `normal` mode
+          default_im_select  = "com.apple.keylayout.ABC",
+
+          -- Restore the default input method state when the following events are triggered
+          set_default_events = { "VimEnter", "FocusGained", "InsertLeave", "CmdlineLeave" },
+
+          -- Restore the previous used input method state when the following events
+          -- are triggered, if you don't want to restore previous used im in Insert mode,
+          -- just let it empty
+          set_previous_events = { "InsertEnter" },
+
+          -- Async run `default_command` to switch IM or not
+          async_switch_im = true,
+        })
+      end,
+    },
+
   })
 end
 
@@ -295,6 +316,7 @@ local function stringManipulatePlugs()
       config = true,
     },
 
+    "terryma/vim-multiple-cursors",
   })
 end
 
@@ -584,6 +606,20 @@ local function fileBrowserPlugs()
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
         require("config.nvim-tree")
+      end,
+      attach = function (bufnr)
+        local api = require "nvim-tree.api"
+
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+        vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
       end,
     },
 

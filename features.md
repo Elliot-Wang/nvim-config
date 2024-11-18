@@ -1,5 +1,7 @@
 # features
 
+- input method switch: 'im-select'
+
 ## LeaderF
 - gf `:<C-U>Leaderf file --popup<CR>`
 - <Leader>se `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>`
