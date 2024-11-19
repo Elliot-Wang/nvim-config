@@ -18,6 +18,13 @@
 ## surround
 Visual mode, select and press `S`.
 
+## sidebar
+- nvim-tree
+- vista
+- vim-mundo
+- nvim-bqf
+- minimap
+
 ## snippets
 
 ### ultisnips
@@ -53,7 +60,7 @@ Visual mode, select and press `S`.
 >        tab delimited formats, etc.
 
 - reload date snippets `call UltiSnips#RefreshSnippets()`
-- `g:UltiSnipsExpandTrigger` <C-j>
+- `g:UltiSnipsExpandTrigger` <Tab>
 - `g:UltiSnipsListSnippets` <C-tab>
 - `g:UltiSnipsJumpForwardTrigger` <C-j>
 - `g:UltiSnipsJumpBackwardTrigger` <C-k>
@@ -241,7 +248,7 @@ indent = 2
   - `<space>+wd`: delete workspace folder
 - quickfix
   - `<space>+qf`: put diagnostics from current files to quickfix
-- show document?
+- `<c-q>` show document, **symbol help**
 - show function info?
 
 ### lsp languages
@@ -250,7 +257,7 @@ indent = 2
 - ~~java~~, idea is much better than any lsp, forget it!
 - lua
 - vim
-- python
+- python, pyright
 - bash
 - json
 - javascript/typescript

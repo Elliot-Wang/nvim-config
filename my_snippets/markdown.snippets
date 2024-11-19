@@ -11,24 +11,12 @@ def gen_header(snip):
 	snip.expand_anon(line_content)
 endglobal
 
-snippet "(k1|kbd)" "HTML kbd tag" rw
-<kbd>${1:KEY}</kbd>$0
-endsnippet
-
-snippet k2 "Two key strokes shortcut"
-<kbd>${1:KEY}</kbd> + <kbd>${2:KEY}</kbd>
-endsnippet
-
-snippet k3 "Three key strokes shortcut"
-<kbd>${1:KEY}</kbd> + <kbd>${2:KEY}</kbd> + <kbd>${3:KEY}</kbd>
-endsnippet
-
 snippet meta "Markdown front matter (YAML format)" b
 ---
 title: "$1"
 date: `!p from datetime import datetime
 if not snip.c:
-	snip.rv=datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S%z")`
+	snip.rv=datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S")`
 tags: [$2]
 categories: [$3]
 ---
@@ -44,10 +32,6 @@ snippet img "Aligned image using HTML tag"
 <img src="${1:URL}" width="${2:800}">
 </p>
 $0
-endsnippet
-
-snippet font "HTML font tag"
-<font color="${1:blue}">${2:TEXT}</font>
 endsnippet
 
 snippet link "Markdown links"
@@ -167,15 +151,25 @@ snippet td "too long do not read" bw
 tl;dr: $1
 endsnippet
 
-snippet bl "波浪线" wi
-~
+snippet \bl "波浪线" iA
+~~
 endsnippet
 
-snippet qt "inline quote" wi
-\`${VISUAL}\`$0
+snippet \qt "inline quote" iA
+\`\`$0
 endsnippet
 
-snippet mt "inline math" wi
-\$${VISUAL}\$$0
+snippet \mt "行内公式" iA
+\$\$$0
 endsnippet
 
+snippet "be(gin)?( (\S+))?" "begin{} / end{}" br
+\begin{${1:`!p
+snip.rv = match.group(3) if match.group(2) is not None else "something"`}}
+		${2:${VISUAL}}
+\end{$1}$0
+endsnippet
+
+snippet "- " "Indent line" r
+	- $0
+endsnippet

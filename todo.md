@@ -32,9 +32,10 @@
   - code action list ***providers*** is various!
 - hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
 - organize snippets
-  - [ ] ultisnips
-    - trigger key
-    - expand condition
+  - [ ] ultisnips **problem**
+    - trigger key, simple text or regexp
+    - expand condition, trigger key or auto trigger
+    - conflict with vim-cmp, if vim-cmp missing ultisnips, **it will go wrong**!
 - update nvim config at once
 - surround, still use `surround.vim`
 - IDE compiler and run

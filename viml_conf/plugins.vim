@@ -12,6 +12,7 @@ call utils#Cabbrev('pud', 'Lazy update')
 call utils#Cabbrev('pc', 'Lazy clean')
 call utils#Cabbrev('ps', 'Lazy sync')
 call utils#Cabbrev('map', 'Telescope keymaps')
+call utils#Cabbrev('snip', 'call UltiSnips#RefreshSnippets()')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      configurations for vim script plugin                  "
@@ -21,6 +22,8 @@ call utils#Cabbrev('map', 'Telescope keymaps')
 " Trigger configuration. Do not use <tab> if you use YouCompleteMe
 " TODO experiental
 " let g:UltiSnipsExpandTrigger='<c-j>'
+
+let g:UltiSnipsAutoTrigger = 1
 
 " Do not look for SnipMate snippets
 let g:UltiSnipsEnableSnipMate = 0
