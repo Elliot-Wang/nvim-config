@@ -180,15 +180,11 @@ end
 
 local function helperPlugs()
   addPlugins({
-    -- minimap
+    -- fancy start screen
     {
-      "wfxr/minimap.vim",
-      enabled = function()
-        if utils.executable("code-minimap") then
-          return true
-        else
-          return false
-        end
+      "nvimdev/dashboard-nvim",
+      config = function()
+        require("config.dashboard-nvim")
       end,
     },
 
@@ -332,40 +328,68 @@ local function stringManipulatePlugs()
   })
 end
 
-local function functionWindowPlugs()
+local function sidebarPlugs()
   addPlugins({
-  -- fancy start screen
-  {
-    "nvimdev/dashboard-nvim",
-    config = function()
-      require("config.dashboard-nvim")
-    end,
-  },
+    -- file explorer
+    {
+      "nvim-tree/nvim-tree.lua",
+      event = "VeryLazy",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        require("config.nvim-tree")
+      end,
+      attach = function (bufnr)
+        local api = require "nvim-tree.api"
 
-  -- Only install these plugins if ctags are installed on the system
-  -- show file tags in vim window
-  {
-    "liuchengxu/vista.vim",
-    enabled = function()
-      if utils.executable("ctags") then
-        return true
-      else
-        return false
-      end
-    end,
-    cmd = "Vista",
-  },
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
 
-  -- Show undo history visually
-  { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
 
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-    config = function()
-      require("config.bqf")
-    end,
-  },
+        -- custom mappings
+        -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+        vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+      end,
+    },
+
+    -- Only install these plugins if ctags are installed on the system
+    -- show file tags in vim window
+    {
+      "liuchengxu/vista.vim",
+      enabled = function()
+        if utils.executable("ctags") then
+          return true
+        else
+          return false
+        end
+      end,
+      cmd = "Vista",
+    },
+
+    -- Show undo history visually
+    { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
+
+    {
+      "kevinhwang91/nvim-bqf",
+      ft = "qf",
+      config = function()
+        require("config.bqf")
+      end,
+    },
+
+    -- minimap
+    {
+      "wfxr/minimap.vim",
+      enabled = function()
+        if utils.executable("code-minimap") then
+          return true
+        else
+          return false
+        end
+      end,
+    },
 
   })
 end
@@ -620,30 +644,6 @@ end
 
 local function fileBrowserPlugs()
   addPlugins({
-    -- file explorer
-    {
-      "nvim-tree/nvim-tree.lua",
-      event = "VeryLazy",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      config = function()
-        require("config.nvim-tree")
-      end,
-      attach = function (bufnr)
-        local api = require "nvim-tree.api"
-
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings
-        -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-        vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-      end,
-    },
-
     -- yazi <C-c> to close
     {
       "mikavilpas/yazi.nvim",
@@ -697,7 +697,7 @@ linkPlugs()
 helperPlugs()
 stringManipulatePlugs()
 snippetPlugs()
-functionWindowPlugs()
+sidebarPlugs()
 completionPlugs()
 lspPlugs()
 markdownPlugs()
