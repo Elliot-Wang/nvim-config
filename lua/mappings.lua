@@ -68,7 +68,7 @@ keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
   desc = "open init.lua",
 })
 
-keymap.set("n", "<leader>sv", function()
+keymap.set("n", "<leader>rc", function()
   vim.cmd([[
       update $MYVIMRC
       source $MYVIMRC

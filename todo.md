@@ -37,6 +37,7 @@
     - expand condition, trigger key or auto trigger
     - conflict with vim-cmp, if vim-cmp missing ultisnips, **it will go wrong**!
 - update nvim config at once
+  - `<leader>+rc` reload
 - surround, still use `surround.vim`
 - IDE compiler and run
   - `F9` compile it and run
