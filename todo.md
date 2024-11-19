@@ -16,6 +16,9 @@
     - liuchengxu/vista.vim - tags error
     - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
     - [ ] leaderF jump by `rg` is not correct.
+    - [ ] python lsp is not perfect
+      [用 vim/nvim 写 Python 用什么插件？ - V2EX](https://www.v2ex.com/t/998262)
+      [vim/nvim 中是否有能匹敌 pylance 的 Python LSP - V2EX](https://www.v2ex.com/t/916463)
 
 ## practice neovim
 - gc -> leader+C, **leave it alone**
@@ -50,6 +53,11 @@
 - IMPROVE IT: highlight line is hard to recognized
   - **yazi**, highlight color is to closed to background
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
+  - enable tabpages
+  - enable sidebar seperate
+  - enable picking tab use a char
+  - hover event
+  - custom area, pin tab, groups, lsp indicator, etc.
 - minimap [wfxr/minimap.vim: 📡 Blazing fast minimap / scrollbar for vim, powered by code-minimap written in Rust.](https://github.com/wfxr/minimap.vim?tab=readme-ov-file)
 - [x] vista colorschema
   - rainbow for every level; use `Toch` at markdown instead.

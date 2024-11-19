@@ -1,13 +1,8 @@
 " Tabs of Windows
 nnoremap tn :tabe<CR>          	" 打开新选项卡
-nnoremap tc :tabclose<CR>       " 关闭选项卡
-nnoremap tH :-tabnext<CR>	    " 到左边的选项卡
-nnoremap tL :+tabnext<CR>	    " 到右边的选项卡
-
-" Buffers
-noremap th :bp!<CR>
-noremap tl :bn!<CR>
-noremap td :bp <bar> bd #<CR>
+nnoremap td :tabclose<CR>       " 关闭选项卡
+nnoremap th :-tabnext<CR>	    " 到左边的选项卡
+nnoremap tl :+tabnext<CR>	    " 到右边的选项卡
 
 " Split Windows
 nnoremap s <nop>
@@ -23,12 +18,13 @@ nnoremap sc <C-W>c                              " 关闭当前分屏
 
 " Save and exit
 nnoremap S :w<CR>
-nnoremap Q :bp <bar> bd #<CR>
-
 nnoremap ZS :xa!<CR>
-nnoremap ZQ :qa!<CR>
 " vim default
 nnoremap ZZ :x<CR>
+
+" quit
+nnoremap Q :bp <bar> bd #<CR>
+nnoremap ZQ :qa!<CR>
 
 " Move
 noremap J 15jzz
