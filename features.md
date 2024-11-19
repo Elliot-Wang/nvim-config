@@ -195,6 +195,61 @@ indent = 2
 - custom
   - I want a text closed by *space*, write myself
 
+## completion
+
+*completion condition*
+
+```lua
+sources = {
+  { name = "nvim_lsp" }, -- For nvim-lsp
+  { name = "ultisnips" }, -- For ultisnips user.
+  { name = "path" }, -- for path completion
+  { name = "buffer", keyword_length = 2 }, -- for buffer word completion
+},
+completion = {
+  keyword_length = 2,
+  completeopt = "menu,noselect",
+},
+```
+
+### ultisnips complete function
+```lua
+expand = function(args)
+  -- For `ultisnips` user.
+  vim.fn["UltiSnips#Anon"](args.body)
+end,
+```
+
+### completion hotkeys
+
+```lua
+["<C-n>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    fallback()
+  end
+end,
+["<C-p>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  else
+    fallback()
+  end
+end,
+["<Tab>"] = function(fallback)
+  cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+end,
+["<S-Tab>"] = function(fallback)
+  cmp_ultisnips_mappings.jump_backwards(fallback)
+end,
+["<CR>"] = cmp.mapping.confirm { select = true },
+["<C-e>"] = cmp.mapping.abort(),
+["<Esc>"] = cmp.mapping.close(),
+["<C-d>"] = cmp.mapping.scroll_docs(-4),
+["<C-f>"] = cmp.mapping.scroll_docs(4),
+```
+
 ## LSP
 ```lua
 -- auto-completion engine
@@ -233,6 +288,7 @@ indent = 2
     end,
 },
 ```
+
 ### lsp hotkeys
 - navigate
   - `gd`: go to definition

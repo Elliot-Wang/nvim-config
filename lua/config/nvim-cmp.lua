@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 cmp.setup {
   snippet = {
@@ -10,19 +11,25 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ["<Tab>"] = function(fallback)
+    ["<C-n>"] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       else
         fallback()
       end
     end,
-    ["<S-Tab>"] = function(fallback)
+    ["<C-p>"] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
         fallback()
       end
+    end,
+    ["<Tab>"] = function(fallback)
+      cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+    end,
+    ["<S-Tab>"] = function(fallback)
+      cmp_ultisnips_mappings.jump_backwards(fallback)
     end,
     ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<C-e>"] = cmp.mapping.abort(),
@@ -50,7 +57,7 @@ cmp.setup {
         nvim_lsp = "[LSP]",
         ultisnips = "[US]",
         path = "[Path]",
-        buffer = "[Buffer]",
+        buffer = "[Buf]",
         emoji = "[Emoji]",
         omni = "[Omni]",
       },
