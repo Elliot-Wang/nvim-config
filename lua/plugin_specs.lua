@@ -422,6 +422,15 @@ local function lspPlugs()
       end,
     },
 
+    -- coc
+    -- {
+    --   "neoclide/coc.nvim",
+    --   branch = "release",
+    --   config = function()
+    --     require("config.coc")
+    --   end,
+    -- },
+
     -- Auto format tools
     -- supports https://github.com/sbdchd/neoformat?tab=readme-ov-file#supported-filetypes
     { "sbdchd/neoformat", cmd = { "Neoformat" } },
