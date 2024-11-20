@@ -68,6 +68,12 @@ cmp.setup {
   },
 }
 
+-- insert `(` after select function or method item
+cmp.event:on(
+  'confirm_done',
+  require('nvim-autopairs.completion.cmp').on_confirm_done()
+)
+
 cmp.setup.filetype("tex", {
   sources = {
     { name = "omni" },
