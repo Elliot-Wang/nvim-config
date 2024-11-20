@@ -30,7 +30,7 @@
   - [ ] research **fidget**: *Fidget is an unintrusive window in the corner of your editor that manages its own lifetime.*
 - code action `<leader>+ca` - kosayoda/nvim-lightbulb
   - code action list ***providers*** is various!
-- hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
+- [ ] hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
 - organize snippets
   - [ ] ultisnips **problem**
     - trigger key, simple text or regexp
@@ -40,8 +40,8 @@
   - `<leader>+rc` reload
 - surround, still use `surround.vim`
 - IDE compiler and run
-  - `F9` compile it and run
-  - [ ] debuger?
+  - `F9` compile it and run, *AsyncRun*
+  - [ ] debuger, [mfussenegger/nvim-dap: Debug Adapter Protocol client implementation for Neovim](https://github.com/mfussenegger/nvim-dap)
 - [ ] obsidian repo
   - coc-marksman, with *coc lsp*, it could preview doc(`[[doc-name]]`)
 - [ ] tags (like this `#vim`) search for markdown files
