@@ -410,6 +410,7 @@ local function snippetPlugs()
         "honza/vim-snippets",
       },
       event = "InsertEnter",
+      ft = "snippets",
     },
   })
 end
