@@ -37,14 +37,14 @@ keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
 -- Use <c-space> to trigger completion
 keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
 
--- Use `[g` and `]g` to navigate diagnostics
+-- Use `[d` and `]d` to navigate diagnostics
 -- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
-keyset("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
+keyset("n", "[d", "<Plug>(coc-diagnostic-prev)", {silent = true})
+keyset("n", "]d", "<Plug>(coc-diagnostic-next)", {silent = true})
 
 -- GoTo code navigation
 keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
+-- keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
 keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
 keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
 
@@ -60,7 +60,7 @@ function _G.show_docs()
         vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
     end
 end
-keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+keyset("n", "<C-q>", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 
 -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
@@ -77,8 +77,8 @@ keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
 
 
 -- Formatting selected code
-keyset("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
-keyset("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
+keyset("x", "<leader>fm", "<Plug>(coc-format-selected)", {silent = true})
+keyset("n", "<leader>fm", "<Plug>(coc-format-selected)", {silent = true})
 
 
 -- Setup formatexpr specified filetype(s)
@@ -100,8 +100,8 @@ vim.api.nvim_create_autocmd("User", {
 -- Apply codeAction to the selected region
 -- Example: `<leader>aap` for current paragraph
 local opts = {silent = true, nowait = true}
-keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+keyset("x", "<leader>ca", "<Plug>(coc-codeaction-selected)", opts)
+keyset("n", "<leader>ca", "<Plug>(coc-codeaction-selected)", opts)
 
 -- Remap keys for apply code actions at the cursor position.
 keyset("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
@@ -111,7 +111,7 @@ keyset("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
 keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
 
 -- Remap keys for apply refactor code actions.
-keyset("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
+keyset("n", "<leader>rf", "<Plug>(coc-codeaction-refactor)", { silent = true })
 keyset("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
 keyset("n", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
 
