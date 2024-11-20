@@ -411,6 +411,17 @@ local function snippetPlugs()
       },
       event = "InsertEnter",
       ft = "snippets",
+      config = function ()
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          pattern = "*.snippets",
+          group = vim.api.nvim_create_augroup("ultisnips", { clear = true }),
+          desc = "autoresize windows on resizing operation",
+          callback = function ()
+            vim.cmd("CmpUltisnipsReloadSnippets")
+            vim.notify("Ultisnips reloaded.", vim.log.levels.INFO, { title = "nvim-config" })
+          end
+        })
+      end
     },
   })
 end
