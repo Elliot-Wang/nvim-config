@@ -145,6 +145,7 @@ require("lualine").setup {
     disabled_filetypes = {
       statusline = {
         'qf',
+        'minimap',
       },
     },
     always_divide_middle = true,
