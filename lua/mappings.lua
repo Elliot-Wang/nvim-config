@@ -49,6 +49,14 @@ keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 keymap.set("n", "^", "g^")
 keymap.set("n", "0", "g0")
 
+-- Tabs of Windows
+keymap.set("n", "tn", "<cmd>tabe<CR>", { desc = "打开新选项卡" })
+keymap.set("n", "td", "<cmd>tabclose<CR>", { desc = "关闭选项卡" })
+keymap.set("n", "th", "<cmd>bprevious<CR>", { desc = "上一个页面" })
+keymap.set("n", "tl", "<cmd>bnext<CR>", { desc = "下一个页面" })
+keymap.set("n", "tH", "<cmd>-tabnext<CR>", { desc = "到左边的选项卡" })
+keymap.set("n", "tL", "<cmd>+tabnext<CR>", { desc = "到右边的选项卡" })
+
 -- Do not include white space characters when using $ in visual mode,
 -- see https://vi.stackexchange.com/q/12607/15292
 keymap.set("x", "$", "g_")
@@ -125,10 +133,19 @@ keymap.set("x", "<A-j>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "
 keymap.set("x", "p", '"_c<Esc>p')
 
 -- Switch windows
-keymap.set("n", "<left>", "<c-w>h")
-keymap.set("n", "<Right>", "<C-W>l")
-keymap.set("n", "<Up>", "<C-W>k")
-keymap.set("n", "<Down>", "<C-W>j")
+keymap.set("n", "sH", "<C-W>h", {desc = "切换到左分屏"})
+keymap.set("n", "sL", "<C-W>l", {desc = "切换到右分屏"})
+keymap.set("n", "sK", "<C-W>k", {desc = "切换到上分屏"})
+keymap.set("n", "sJ", "<C-W>j", {desc = "切换到下分屏"})
+
+-- Split Windows
+keymap.set("n", "sk", ":set splitbelow<CR>:split<CR>", {desc = "下分屏"})
+keymap.set("n", "sj", ":set nosplitbelow<CR>:split<CR>", {desc = "上分屏"})
+keymap.set("n", "sl", ":set nosplitright<CR>:vsplit<CR>", {desc = "右分屏"})
+keymap.set("n", "sh", ":set splitright<CR>:vsplit<CR>", {desc = "左分屏"})
+
+keymap.set("n", "ss", "<C-w><C-w>", {desc = "切换分屏"})
+keymap.set("n", "sc", "<C-w>c", {desc = "关闭当前分屏"})
 
 -- cmdline abbrev
 -- vim.fn["utils#Cabbrev"]("git", "Git")
