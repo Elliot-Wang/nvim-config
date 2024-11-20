@@ -142,7 +142,11 @@ require("lualine").setup {
     theme = "auto",
     section_separators = "",
     component_separators = "",
-    disabled_filetypes = {},
+    disabled_filetypes = {
+      statusline = {
+        'qf',
+      },
+    },
     always_divide_middle = true,
   },
   sections = {
