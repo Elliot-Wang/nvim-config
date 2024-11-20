@@ -279,6 +279,13 @@ local function helperPlugs()
 
     {
       "keaising/im-select.nvim",
+      enabled = function()
+        if utils.executable('im-select') then
+          return true
+        else
+          return false
+        end
+      end,
       config = function()
         require("im_select").setup({
           -- IM will be set to `default_im_select` in `normal` mode
