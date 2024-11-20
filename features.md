@@ -21,6 +21,8 @@ Visual mode, select and press `S`.
 ## sidebar
 - nvim-tree
 - vista
+  - preview
+  - [options](https://github.com/liuchengxu/vista.vim?tab=readme-ov-file#options)
 - vim-mundo
 - nvim-bqf
 - minimap
@@ -67,7 +69,7 @@ Visual mode, select and press `S`.
 >        leave the tabs alone. This can be useful for snippets dealing with
 >        tab delimited formats, etc.
 
-- reload date snippets `call UltiSnips#RefreshSnippets()`
+- reload date snippets `call UltiSnips#RefreshSnippets()`, or abbre `snip`
 - `g:UltiSnipsExpandTrigger` <Tab>
 - `g:UltiSnipsListSnippets` <C-tab>
 - `g:UltiSnipsJumpForwardTrigger` <C-j>
@@ -102,7 +104,6 @@ colorscheme onedark
 ## git
 
 ### external tool - lazygit
-`<C-c>` to quit it
 
 ```lua
 {
@@ -220,15 +221,13 @@ completion = {
 },
 ```
 
-### ultisnips complete function
-```lua
-expand = function(args)
-  -- For `ultisnips` user.
-  vim.fn["UltiSnips#Anon"](args.body)
-end,
-```
-
 ### completion hotkeys
+- `<C-n>/<C-p>` select next and previous
+- `CR` confirm, not auto select
+- `<C-d>\<C-f>` scroll doc
+- snippet
+  - `<Tab>` trigger or jump forwards
+  - `<S-Tab>` jump backwards
 
 ```lua
 ["<C-n>"] = function(fallback)
@@ -252,6 +251,7 @@ end,
   cmp_ultisnips_mappings.jump_backwards(fallback)
 end,
 ["<CR>"] = cmp.mapping.confirm { select = true },
+
 ["<C-e>"] = cmp.mapping.abort(),
 ["<Esc>"] = cmp.mapping.close(),
 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
