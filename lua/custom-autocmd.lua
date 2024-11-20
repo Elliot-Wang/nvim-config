@@ -22,7 +22,7 @@ api.nvim_create_autocmd({ "TextYankPost" }, {
   pattern = "*",
   group = yank_group,
   callback = function()
-    vim.highlight.on_yank { higroup = "YankColor", timeout = 300 }
+    vim.highlight.on_yank { higroup = "YankColor", timeout = 600 }
   end,
 })
 
@@ -81,7 +81,10 @@ api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
 api.nvim_create_autocmd("VimResized", {
   group = api.nvim_create_augroup("win_autoresize", { clear = true }),
   desc = "autoresize windows on resizing operation",
-  command = "wincmd =",
+  callback = function ()
+    vim.cmd("wincmd =")
+    vim.notify("Autoresize windows!", vim.log.levels.INFO, { title = "nvim-config" })
+  end
 })
 
 local function open_nvim_tree(data)
