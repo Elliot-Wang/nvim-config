@@ -102,7 +102,7 @@ nvim_tree.setup {
   },
 }
 
-keymap.set("n", "tt", "<cmd>NvimTreeFocus<cr>", {
+keymap.set("n", "tt", "<cmd>NvimTreeFindFile<cr>", {
   silent = true,
   desc = "toggle nvim-tree",
 })
