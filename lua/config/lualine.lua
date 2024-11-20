@@ -119,7 +119,7 @@ local virtual_env = function()
 end
 
 local get_active_lsp = function()
-  local msg = "No Active Lsp"
+  local msg = ""
   local buf_ft = vim.api.nvim_get_option_value("filetype", {})
   local clients = vim.lsp.get_clients { bufnr = 0 }
   if next(clients) == nil then
@@ -163,8 +163,13 @@ require("lualine").setup {
     lualine_c = {
       {
         "filename",
+        file_status = true,      -- Displays file status (readonly status, modified status)
+        newfile_status = false,  -- Display new file status (new file means no write after created)
         symbols = {
-          readonly = "[🔒]",
+          modified = '[+]',      -- Text to show when the file is modified.
+          readonly = '[RO]',     -- Text to show when the file is non-modifiable or readonly.
+          unnamed = '[No Name]', -- Text to show for unnamed buffers.
+          newfile = '[New]',     -- Text to show for newly created file before first write
         },
       },
       {
@@ -204,14 +209,6 @@ require("lualine").setup {
       "filetype",
     },
     lualine_z = {
-      {
-        trailing_space,
-        color = "WarningMsg",
-      },
-      {
-        mixed_indent,
-        color = "WarningMsg",
-      },
       "progress"
     },
   },
