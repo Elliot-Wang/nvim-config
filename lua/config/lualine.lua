@@ -192,15 +192,15 @@ require("lualine").setup {
       },
     },
     lualine_y = {
-      "encoding",
       {
         "fileformat",
         symbols = {
-          unix = "unix",
-          dos = "win",
-          mac = "mac",
+          unix = "LF",
+          dos = "CRLF",
+          mac = "CR",
         },
       },
+      "encoding",
       "filetype",
     },
     lualine_z = {

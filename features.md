@@ -25,6 +25,14 @@ Visual mode, select and press `S`.
 - nvim-bqf
 - minimap
 
+## status line
+- a: mode
+- b: branch, virtual_env
+- c: filename(readonly symbol), diff, ime_status, spell
+- x: lsp client, diagnostics
+- y: encoding, file_type, file_type
+- z: trailing_space, mixed_indent, progress 
+
 ## snippets
 
 ### ultisnips
