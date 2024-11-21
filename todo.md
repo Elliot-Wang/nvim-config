@@ -49,6 +49,7 @@
   - if only I want to read it and keep it for a while,
     otherwise I will close it immediately.
 - [x] input method switcher
+- [ ] yazi plugin colorschema is bad, highlight is not effect
 
 ## beatufier
 - colorful indent line "lukas-reineke/indent-blankline.nvim"
