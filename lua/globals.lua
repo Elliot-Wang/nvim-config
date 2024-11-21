@@ -22,7 +22,7 @@ vim.g.did_install_default_menus = 1  -- do not load menu
 
 if utils.executable('python3') then
   if vim.env.python3_host_prog then
-    vim.g.python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3'
+    vim.g.python3_host_prog = vim.env.python3_host_prog
   else
     if vim.g.is_win then
       vim.g.python3_host_prog = fn.substitute(fn.exepath("python3"), ".exe$", '', 'g')
