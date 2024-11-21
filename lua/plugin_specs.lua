@@ -42,6 +42,27 @@ local function syntaxPlugs()
       end,
       ft = { "tex" },
     },
+    {
+      "romgrk/nvim-treesitter-context",
+      config = function()
+        require("treesitter-context").setup{
+          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+          throttle = true, -- Throttles plugin updates (may improve performance)
+          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+          patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+            -- For all filetypes
+            -- Note that setting an entry here replaces all other patterns for this entry.
+            -- By setting the 'default' entry below, you can control which nodes you want to
+            -- appear in the context window.
+            default = {
+              'class',
+              'function',
+              'method',
+            },
+          },
+        }
+      end
+    },
     -- common
     {
       "nvim-treesitter/nvim-treesitter",
@@ -215,7 +236,13 @@ local function helperPlugs()
     },
 
     -- Modern matchit implementation
-    { "andymass/vim-matchup", event = "BufRead" },
+    {
+      "andymass/vim-matchup",
+      event = "CursorMoved",
+      config = function()
+        vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      end,
+    },
 
     -- Autosave files on certain events
     { "907th/vim-auto-save", event = "InsertEnter" },
@@ -395,6 +422,11 @@ local function sidebarPlugs()
         else
           return false
         end
+      end,
+      config = function ()
+        vim.cmd ("let g:minimap_width = 10")
+        vim.cmd ("let g:minimap_auto_start = 1")
+        vim.cmd ("let g:minimap_auto_start_win_enter = 1")
       end,
     },
 
