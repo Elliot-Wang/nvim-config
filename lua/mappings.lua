@@ -133,18 +133,19 @@ keymap.set("x", "<A-j>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "
 keymap.set("x", "p", '"_c<Esc>p')
 
 -- Switch windows
-keymap.set("n", "sH", "<C-W>h", {desc = "切换到左分屏"})
-keymap.set("n", "sL", "<C-W>l", {desc = "切换到右分屏"})
-keymap.set("n", "sK", "<C-W>k", {desc = "切换到上分屏"})
-keymap.set("n", "sJ", "<C-W>j", {desc = "切换到下分屏"})
-
--- Split Windows
-keymap.set("n", "sk", ":set splitbelow<CR>:split<CR>", {desc = "下分屏"})
-keymap.set("n", "sj", ":set nosplitbelow<CR>:split<CR>", {desc = "上分屏"})
-keymap.set("n", "sl", ":set nosplitright<CR>:vsplit<CR>", {desc = "右分屏"})
-keymap.set("n", "sh", ":set splitright<CR>:vsplit<CR>", {desc = "左分屏"})
+keymap.set("n", "sh", "<C-W>h", {desc = "切换到左分屏"})
+keymap.set("n", "sl", "<C-W>l", {desc = "切换到右分屏"})
+keymap.set("n", "sk", "<C-W>k", {desc = "切换到上分屏"})
+keymap.set("n", "sj", "<C-W>j", {desc = "切换到下分屏"})
 
 keymap.set("n", "ss", "<C-w><C-w>", {desc = "切换分屏"})
+
+-- Split Windows
+keymap.set("n", "sK", ":set splitbelow<CR>:split<CR>", {desc = "下分屏"})
+keymap.set("n", "sJ", ":set nosplitbelow<CR>:split<CR>", {desc = "上分屏"})
+keymap.set("n", "sL", ":set nosplitright<CR>:vsplit<CR>", {desc = "右分屏"})
+keymap.set("n", "sH", ":set splitright<CR>:vsplit<CR>", {desc = "左分屏"})
+
 keymap.set("n", "sc", "<C-w>c", {desc = "关闭当前分屏"})
 
 -- cmdline abbrev
