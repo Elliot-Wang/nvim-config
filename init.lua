@@ -19,6 +19,8 @@ utils.is_compatible_version(expected_version)
 local config_dir = vim.fn.stdpath("config")
 ---@cast config_dir string
 
+-- load config
+require("load")
 -- some global settings
 require("globals")
 -- setting options in nvim

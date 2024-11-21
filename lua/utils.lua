@@ -1,5 +1,6 @@
 local fn = vim.fn
 local version = vim.version
+local uv = vim.loop
 
 local M = {}
 
@@ -78,5 +79,32 @@ function M.is_compatible_version(expected_version)
 
   return true
 end
+
+--- Checks whether a given path exists and is a file.
+--@param path (string) path to check
+--@returns (bool)
+function M.is_file(path)
+  local stat = uv.fs_stat(path)
+  return stat and stat.type == "file" or false
+end
+
+--- Checks whether a given path exists and is a directory
+--@param path (string) path to check
+--@returns (bool)
+function M.is_directory(path)
+  local stat = uv.fs_stat(path)
+  return stat and stat.type == "directory" or false
+end
+
+
+local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+
+---Join path segments that were passed as input
+---@return string
+function M.join_paths(...)
+  local result = table.concat({ ... }, path_sep)
+  return result
+end
+
 
 return M
