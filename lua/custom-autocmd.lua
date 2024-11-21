@@ -157,6 +157,10 @@ api.nvim_create_autocmd("FileType", {
       return
     end
 
+    if buf_filetype == "neo-tree" then
+      return
+    end
+
     -- Only resume last cursor position when there is no go-to-line command (something like '+23').
     if vim.fn.match(vim.v.argv, [[\v^\+(\d){1,}$]]) ~= -1 then
       return

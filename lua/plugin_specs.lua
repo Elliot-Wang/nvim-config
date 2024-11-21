@@ -288,6 +288,15 @@ local function helperPlugs()
     --     require("config.nvim_hop")
     --   end,
     -- },
+    {
+      "phaazon/hop.nvim",
+      event = "BufRead",
+      config = function()
+        require("hop").setup()
+        vim.api.nvim_set_keymap("n", "f", ":HopChar2<cr>", { silent = true })
+        vim.api.nvim_set_keymap("n", "F", ":HopWord<cr>", { silent = true })
+      end,
+    },
 
     -- show global result while edit command
     {
@@ -331,7 +340,6 @@ local function helperPlugs()
         })
       end,
     },
-
   })
 end
 
@@ -367,6 +375,7 @@ local function sidebarPlugs()
     -- file explorer
     {
       "nvim-tree/nvim-tree.lua",
+      enabled = false,
       event = "VeryLazy",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
@@ -388,6 +397,54 @@ local function sidebarPlugs()
       end,
     },
 
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      },
+      config = function()
+        require("neo-tree").setup({
+          close_if_last_window = true,
+          window = {
+            width = 30,
+          },
+          buffers = {
+            follow_current_file = true,
+          },
+          filesystem = {
+            follow_current_file = true,
+            filtered_items = {
+              hide_dotfiles = false,
+              hide_gitignored = false,
+              hide_by_name = {
+                "node_modules"
+              },
+              never_show = {
+                ".DS_Store",
+                "thumbs.db"
+              },
+            },
+          },
+        })
+
+        vim.keymap.set("n", "tt", "<cmd>Neotree<cr>", {
+          silent = true,
+          desc = "open Neotree",
+        })
+        vim.keymap.set("n", "tg", "<cmd>Neotree git_status<cr>", {
+          silent = true,
+          desc = "open Neotree of git staus",
+        })
+        vim.keymap.set("n", "tb", "<cmd>Neotree buffers<cr>", {
+          silent = true,
+          desc = "open Neotree of buffers",
+        })
+      end
+    },
+
     -- Only install these plugins if ctags are installed on the system
     -- show file tags in vim window
     {
@@ -407,9 +464,29 @@ local function sidebarPlugs()
 
     {
       "kevinhwang91/nvim-bqf",
+      event = { "BufRead", "BufNew" },
       ft = "qf",
       config = function()
-        require("config.bqf")
+        require("bqf").setup({
+          auto_enable = true,
+          preview = {
+            win_height = 12,
+            win_vheight = 12,
+            delay_syntax = 80,
+            border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+          },
+          func_map = {
+            vsplit = "",
+            ptogglemode = "z,",
+            stoggleup = "",
+          },
+          filter = {
+            fzf = {
+              action_for = { ["ctrl-s"] = "split" },
+              extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+            },
+          },
+        })
       end,
     },
 
