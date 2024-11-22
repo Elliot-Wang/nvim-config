@@ -410,6 +410,11 @@ local function sidebarPlugs()
           close_if_last_window = true,
           window = {
             width = 30,
+            mappings = {
+              ["S"] = "",
+              ["s"] = "",
+              ["t"] = "",
+            },
           },
           buffers = {
             follow_current_file = true,
@@ -420,7 +425,9 @@ local function sidebarPlugs()
               hide_dotfiles = false,
               hide_gitignored = false,
               hide_by_name = {
-                "node_modules"
+                "node_modules",
+                ".git",
+                ".idea",
               },
               never_show = {
                 ".DS_Store",
