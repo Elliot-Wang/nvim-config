@@ -27,10 +27,12 @@
     *pyright* not support it, *coc-pyright* is the only option.
   - show document, Why it not work when *cursor hold*.
     *coc-pyright* is better!
-  - [ ] research **fidget**: *Fidget is an unintrusive window in the corner of your editor that manages its own lifetime.*
+  - [x] research **fidget**: *Fidget is an unintrusive window in the corner of your editor that manages its own lifetime.*
+      just use `nvim-notify` only
 - code action `<leader>+ca` - kosayoda/nvim-lightbulb
   - code action list ***providers*** is various!
-- [ ] hop.nvim like sneaker, *comment it*, config later [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
+- [x] hop.nvim like sneaker, ~*comment it*, config later~ [Commands · smoka7/hop.nvim Wiki](https://github.com/smoka7/hop.nvim/wiki/Commands)
+    just help me to jump lines
 - organize snippets
   - [ ] ultisnips **problem**
     - trigger key, simple text or regexp
@@ -44,15 +46,17 @@
   - [ ] debuger, [mfussenegger/nvim-dap: Debug Adapter Protocol client implementation for Neovim](https://github.com/mfussenegger/nvim-dap)
 - [ ] obsidian repo
   - coc-marksman, with *coc lsp*, it could preview doc(`[[doc-name]]`)
-- [ ] tags (like this `#vim`) search for markdown files
+  - obsidian.vim
+- [ ] tags (like `#vim`) search for markdown files
 - [?] move *qf* windows to new window or even float window.
   - if only I want to read it and keep it for a while,
     otherwise I will close it immediately.
 - [x] input method switcher
-- [ ] yazi plugin colorschema is bad, highlight is not effect
+- [ ] refresh vista, **autocmd**
+- [ ] workspace manages
 
 ## beatufier
-- colorful indent line "lukas-reineke/indent-blankline.nvim"
+- colorful indent line `"lukas-reineke/indent-blankline.nvim"`
 - IMPROVE IT: highlight line is hard to recognized
   - **yazi**, highlight color is to closed to background
 - research it [akinsho/bufferline.nvim: A snazzy bufferline for Neovim](https://github.com/akinsho/bufferline.nvim)
@@ -64,4 +68,5 @@
 - minimap [wfxr/minimap.vim: 📡 Blazing fast minimap / scrollbar for vim, powered by code-minimap written in Rust.](https://github.com/wfxr/minimap.vim?tab=readme-ov-file)
 - [x] vista colorschema
   - rainbow for every level; use `Toch` at markdown instead.
-
+- [ ] yazi plugin colorschema is bad, highlight is not effect
+    change highlight
