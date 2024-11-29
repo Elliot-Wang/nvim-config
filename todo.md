@@ -47,7 +47,16 @@
 - [ ] obsidian repo
   - coc-marksman, with *coc lsp*, it could preview doc(`[[doc-name]]`)
   - obsidian.vim
-- [ ] tags (like `#vim`) search for markdown files
+    - [ ] *config the mappings*
+    - [ ] create custom Commands selector by telescope
+    - Useful Commands
+      - `:ObsidianTags [TAG ...]` for getting a picker list of all occurrences of the given tags.
+      - `:ObsidianFollowLink` `:ObsidianBacklinks`
+      - `:ObsidianToday [OFFSET]` to open/create a new daily note.
+      - `:ObsidianDailies [OFFSET ...]` to open a picker list of daily notes.
+        For example, `:ObsidianDailies -2 1` to list daily notes from 2 days ago until tomorrow.
+      - `:ObsidianWorkspace [NAME]` open workspace
+- [x] tags (like `#vim`) search for markdown files, it works perfect in Obsidian vault.
 - [?] move *qf* windows to new window or even float window.
   - if only I want to read it and keep it for a while,
     otherwise I will close it immediately.

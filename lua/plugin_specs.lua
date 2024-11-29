@@ -640,9 +640,9 @@ local function markdownPlugs()
     {
       "rhysd/vim-grammarous",
       enabled = function()
-        if vim.g.is_mac then
-          return true
-        end
+        -- if vim.g.is_mac then
+        --   return true
+        -- end
         return false
       end,
       ft = { "markdown" },
@@ -650,6 +650,9 @@ local function markdownPlugs()
     {
       "epwalsh/obsidian.nvim",
       version = "*",  -- recommended, use latest release instead of latest commit
+      config = function()
+        require("config.obsidian")
+      end,
       ft = "markdown",
       -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
       -- event = {
@@ -661,14 +664,6 @@ local function markdownPlugs()
         -- },
         dependencies = {
           "nvim-lua/plenary.nvim",
-        },
-        opts = {
-          workspaces = _G.obsidian_opt_workspace,
-          -- Optional, configure additional syntax highlighting / extmarks.
-          -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
-          ui = {
-            enable = false,
-          },
         },
       },
     })
