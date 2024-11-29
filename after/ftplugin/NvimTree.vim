@@ -1,1 +1,1 @@
-nnoremap <buffer> q :bdelete<CR>
+nnoremap <buffer> q :close<CR>
