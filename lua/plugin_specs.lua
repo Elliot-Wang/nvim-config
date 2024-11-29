@@ -366,6 +366,13 @@ local function stringManipulatePlugs()
     },
 
     "terryma/vim-multiple-cursors",
+
+    {
+      "junegunn/vim-easy-align",
+      config = function ()
+        vim.keymap.set({"n", "x"}, "ga", "<Plug>(EasyAlign)")
+      end
+    }
   })
 end
 
