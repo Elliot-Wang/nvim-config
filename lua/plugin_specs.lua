@@ -647,7 +647,31 @@ local function markdownPlugs()
       end,
       ft = { "markdown" },
     },
-  })
+    {
+      "epwalsh/obsidian.nvim",
+      version = "*",  -- recommended, use latest release instead of latest commit
+      ft = "markdown",
+      -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+      -- event = {
+        --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+        --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+        --   -- refer to `:h file-pattern` for more examples
+        --   "BufReadPre Obsidian/*.md",
+        --   "BufNewFile Obsidian/*.md",
+        -- },
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+        opts = {
+          workspaces = _G.obsidian_opt_workspace,
+          -- Optional, configure additional syntax highlighting / extmarks.
+          -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
+          ui = {
+            enable = false,
+          },
+        },
+      },
+    })
 end
 
 local function ungroupPlugs()
@@ -743,19 +767,20 @@ local function uiPlugs()
     },
 
     -- Extensible UI for Neovim notifications and LSP progress messages.
-    -- {
-    --   "j-hui/fidget.nvim",
-    --   event = "VeryLazy",
-    --   tag = "legacy",
-    --   config = function()
-    --     require("config.fidget-nvim")
-    --   end,
-    -- },
+    {
+      "j-hui/fidget.nvim",
+      enabled = false,
+      event = "VeryLazy",
+      tag = "legacy",
+      config = function()
+        require("config.fidget-nvim")
+      end,
+    },
 
     -- notification plugin
     {
       "rcarriga/nvim-notify",
-      event = "VeryLazy",
+      -- event = "VeryLazy",
       config = function()
         require("config.nvim-notify")
       end,

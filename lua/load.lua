@@ -29,3 +29,7 @@ if not ok then
     end)
   end
 end
+
+if not _G.obsidian_opt_workspace then
+  _G.obsidian_opt_workspace = {}
+end
