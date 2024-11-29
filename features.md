@@ -2,7 +2,9 @@
 
 - input method switch: 'im-select'
 
-## LeaderF
+## fuzzy searcher
+
+### LeaderF
 - gf `:<C-U>Leaderf file --popup<CR>`
 - <Leader>se `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>`
 - <C-f> `:<C-U>Leaderf line --popup<CR>`
@@ -10,22 +12,53 @@
 - ge `:<C-U>Leaderf buffer --popup<CR>`
 - go `:<C-U>Leaderf mru --popup --absolute-path<CR>`
 
+### telescope
+required by other plugin
+
+### fzf
+none
+
 ## file browser - yazi
 - `gy` open at file
 - open at cwd
 - resume
 
-## surround
-Visual mode, select and press `S`.
+## string manipulate
+
+### surround
+
+1. Normal mode
+  - change
+    - `cs"'`
+  - delete
+    - `ds"`
+  - add
+    - `ysiw"`
+    - `yss[`
+2. Visual mode, select and press `S`.
+3. surround type
+- char `"'[{$(*` etc
+- alias `bBra->({[<`
+- tag `<a>` `t`
+- custom `let g:surround_{char2nr("x")} = "x"`, but it seems don't work
+
 
 ## sidebar
 - nvim-tree
 - vista
   - preview
   - [options](https://github.com/liuchengxu/vista.vim?tab=readme-ov-file#options)
-- vim-mundo
-- nvim-bqf
+- undo history: vim-mundo
+- quickfix: nvim-bqf
 - minimap
+
+### undo history
+- `simnalamburt/vim-mundo` (vim)
+- `mbbill/undotree` (vim)
+
+
+### minimap
+- `wfxr/minimap.vim` (vim)
 
 ### explorer
 - nvim-tree
@@ -34,6 +67,7 @@ Visual mode, select and press `S`.
   - filter/searcher
   - git status
   - buffers
+- nerdtree (vim)
 
 ## status line
 - a: mode
@@ -334,3 +368,27 @@ end,
 - json
 - javascript/typescript
 - go
+
+## buffers and tabs
+
+learn buffers `:ls[!] [flags]`
+flags/indicator
+- `u` an unlisted buffer (only displayed when \[!] is used)
+  |unlisted-buffer|
+- `%` the buffer in the current window
+- `#` the alternate buffer for ":e #" and CTRL-^
+- `a` an active buffer: it is loaded and visible
+- `h` a hidden buffer: It is loaded, but currently not
+  displayed in a window |hidden-buffer|
+- `-` a buffer with 'modifiable' off
+- `=` a readonly buffer
+- `R` a terminal buffer with a running job
+- `F` a terminal buffer with a finished job
+- `?`    a terminal buffer without a job: `:terminal NONE`
+- `+` a modified buffer
+- `x`   a buffer with read errors
+
+## mappings
+
+- `q` to `:close` sidebar
+- move window between tabs
