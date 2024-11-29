@@ -743,14 +743,14 @@ local function uiPlugs()
     },
 
     -- Extensible UI for Neovim notifications and LSP progress messages.
-    {
-      "j-hui/fidget.nvim",
-      event = "VeryLazy",
-      tag = "legacy",
-      config = function()
-        require("config.fidget-nvim")
-      end,
-    },
+    -- {
+    --   "j-hui/fidget.nvim",
+    --   event = "VeryLazy",
+    --   tag = "legacy",
+    --   config = function()
+    --     require("config.fidget-nvim")
+    --   end,
+    -- },
 
     -- notification plugin
     {
