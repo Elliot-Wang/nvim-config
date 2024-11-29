@@ -44,6 +44,9 @@ vim.g.vimsyn_embed = 'l'
 -- Use English as main language
 vim.cmd [[language en_US.UTF-8]]
 
+-- highlighting cursor line
+vim.cmd [[set cursorline]]
+
 -- Disable loading certain plugins
 
 -- Whether to load netrw by default, see https://github.com/bling/dotvim/issues/4
