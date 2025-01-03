@@ -690,7 +690,7 @@ local function ungroupPlugs()
     },
 
     -- show and trim trailing whitespaces
-    { "jdhao/whitespace.nvim", event = "VeryLazy" },
+    { "jdhao/whitespace.nvim", enabled = false, event = "VeryLazy" },
 
     -- Handy unix command inside Vim (Rename, Move etc.)
     { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
@@ -727,7 +727,7 @@ local function searchPlugs()
     },
     {
       "nvim-telescope/telescope.nvim",
-      cmd = "Telescope",
+      -- cmd = "Telescope",
       dependencies = {
         "nvim-telescope/telescope-symbols.nvim",
         "nvim-lua/plenary.nvim",
@@ -736,6 +736,54 @@ local function searchPlugs()
         require("config.telescope")
       end,
     },
+    {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require("telescope").load_extension(  "frecency" )
+      end,
+    },
+    {
+      'nvim-telescope/telescope-project.nvim',
+      dependencies = {
+        'nvim-telescope/telescope.nvim',
+      },
+      config = function ()
+        require("config.telescope-project")
+      end
+    },
+    {
+      -- :Telescope media_files
+      'nvim-telescope/telescope-media-files.nvim',
+      enabled = false,
+      config = function ()
+        require('telescope').load_extension('media_files')
+      end
+    },
+    {
+      'dhruvmanila/browser-bookmarks.nvim',
+      version = '*',
+      -- Only required to override the default options
+      opts = {
+        -- Override default configuration values
+        selected_browser = 'arc'
+      },
+    },
+    'crispgm/telescope-heading.nvim',
+    {
+      {
+        "FeiyouG/commander.nvim",
+        config = function ()
+          require('config.commander')
+        end
+      },
+      -- dependencies = {
+        --   -- Only if your selected browser is Firefox, Waterfox or buku
+        --   'kkharji/sqlite.lua',
+        --
+        --   -- Only if you're using the Telescope extension
+        --   'nvim-telescope/telescope.nvim',
+        -- }
+      },
     -- {
     --   "ibhagwan/fzf-lua",
     --   -- optional for icon support

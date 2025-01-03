@@ -4,6 +4,16 @@
 
 ## fuzzy searcher
 
+| mapping | effect | LeaderF action | telescope action |
+| --- | --- | --- | --- |
+| gf | find file | `:<C-U>Leaderf file --popup<CR>` | `builtin.find_files` |
+| <Leader>se | search through files | `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>` | `builtin.live_grep` |
+| <C-f> | search at current buffer | `:<C-U>Leaderf line --popup<CR>` | `builtin.current_buffer_fuzzy_find` |
+| gm | buffer tags | `:<C-U>Leaderf bufTag --popup<CR>` | *tags file not found* |
+| ge | find buffer | `:<C-U>Leaderf buffer --popup<CR>` | `builtin.buffers` |
+| go | currently opened files | `:<C-U>Leaderf mru --popup --absolute-path<CR>` | `builtin.oldfiles` |
+| <C-p> | show commands | | *show projects* |
+
 ### LeaderF
 - gf `:<C-U>Leaderf file --popup<CR>`
 - <Leader>se `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>`
@@ -13,7 +23,11 @@
 - go `:<C-U>Leaderf mru --popup --absolute-path<CR>`
 
 ### telescope
-required by other plugin
+required by other plugin, such as
+- obsidian.vim
+
+- additional
+  - `FeiyouG/commander.nvim`
 
 ### fzf
 none

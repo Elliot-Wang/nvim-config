@@ -16,6 +16,7 @@
     - liuchengxu/vista.vim - tags error
     - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
     - [ ] leaderF jump by `rg` is not correct.
+        ? use telescope to avoid it ?
     - [ ] python lsp is not perfect
       [用 vim/nvim 写 Python 用什么插件？ - V2EX](https://www.v2ex.com/t/998262)
       [vim/nvim 中是否有能匹敌 pylance 的 Python LSP - V2EX](https://www.v2ex.com/t/916463)
@@ -48,7 +49,8 @@
   - coc-marksman, with *coc lsp*, it could preview doc(`[[doc-name]]`)
   - obsidian.vim
     - [ ] *config the mappings*
-    - [ ] create custom Commands selector by telescope
+    - [x] create custom Commands selector by telescope
+        let's use *FeiyouG/commander.nvim*
     - Useful Commands
       - `:ObsidianTags [TAG ...]` for getting a picker list of all occurrences of the given tags.
       - `:ObsidianFollowLink` `:ObsidianBacklinks`
