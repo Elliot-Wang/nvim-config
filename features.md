@@ -284,6 +284,13 @@ completion = {
 - snippet
   - `<Tab>` trigger or jump forwards
   - `<S-Tab>` jump backwards
+- copilot
+  - `<C-j>` text queued for insertion
+  - `<M-]>` cycle to the next suggestion
+  - `<M-[>` cycle to the previous suggestion
+  - `<M-\>` Explicitly request a suggestion, even if Copilot `<Plug>(copilot-suggest)` is disabled.
+  - `<M-Right>` Accept the next **word** of the current suggestion.
+  - `<M-C-Right>` Accept the next **line** of the current suggestion.
 
 ```lua
 ["<C-n>"] = function(fallback)
