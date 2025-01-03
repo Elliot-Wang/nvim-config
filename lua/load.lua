@@ -32,4 +32,5 @@ end
 
 if not _G.obsidian_opt_workspace then
   _G.obsidian_opt_workspace = {}
+  _G.enable_obsidian = false
 end

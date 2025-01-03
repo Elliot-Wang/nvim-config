@@ -626,6 +626,9 @@ local function lspPlugs()
 
   {
       "ray-x/go.nvim",
+      enabled = function ()
+        require("utils").executable("go")
+      end,
       dependencies = {  -- optional packages
         "ray-x/guihua.lua",
         "neovim/nvim-lspconfig",
@@ -680,6 +683,9 @@ local function markdownPlugs()
     {
       "epwalsh/obsidian.nvim",
       version = "*",  -- recommended, use latest release instead of latest commit
+      enabled = function()
+        return _G.enable_obsidian
+      end,
       config = function()
         require("config.obsidian")
       end,
