@@ -55,7 +55,7 @@ cmp.setup {
       mode = "symbol_text",
       menu = {
         nvim_lsp = "[LSP]",
-        ultisnips = "[US]",
+        ultisnips = "[USnip]",
         path = "[Path]",
         buffer = "[Buf]",
         emoji = "[Emoji]",

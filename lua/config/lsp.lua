@@ -179,7 +179,7 @@ else
 end
 
 if utils.executable("ruff") then
-  require('lspconfig').ruff.setup({
+  lspconfig.ruff.setup({
     on_attach = custom_attach,
     capabilities = capabilities,
     init_options = {
@@ -190,6 +190,25 @@ if utils.executable("ruff") then
       }
     }
   })
+end
+
+if utils.executable("gopls") then
+  lspconfig.gopls.setup({
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    on_attach = custom_attach,
+    capabilities = capabilities,
+  })
+
+  local format_sync_grp = api.nvim_create_augroup("GoFormat", {})
+  api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+      require('go.format').goimports()
+    end,
+    group = format_sync_grp,
+  })
+
 end
 
 -- Disable ruff hover feature in favor of Pyright
