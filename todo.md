@@ -15,8 +15,8 @@
 - [x] fix bugs
     - liuchengxu/vista.vim - tags error
     - wilder waring. `:UpdateRemotePlugins` may be useful [Unknown function: _wilder_python_search · Issue #203 · gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim/issues/203)
-    - [ ] leaderF jump by `rg` is not correct.
-        ? use telescope to avoid it ?
+    - [x] leaderF jump by `rg` is not correct.
+        use telescope to avoid it
     - [ ] python lsp is not perfect
       [用 vim/nvim 写 Python 用什么插件？ - V2EX](https://www.v2ex.com/t/998262)
       [vim/nvim 中是否有能匹敌 pylance 的 Python LSP - V2EX](https://www.v2ex.com/t/916463)
@@ -65,6 +65,8 @@
 - [x] input method switcher
 - [ ] refresh vista, **autocmd**
 - [ ] workspace manages
+  - `nvim-telescope/telescope-project.nvim`, quick search in project files.
+  - what features should be included?
 
 ## beatufier
 - colorful indent line `"lukas-reineke/indent-blankline.nvim"`
@@ -80,4 +82,4 @@
 - [x] vista colorschema
   - rainbow for every level; use `Toch` at markdown instead.
 - [ ] yazi plugin colorschema is bad, highlight is not effect
-    change highlight
+    change highlight, have no idea.
