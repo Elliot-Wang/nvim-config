@@ -136,6 +136,7 @@ local get_active_lsp = function()
   return msg
 end
 
+-- [nvim-lualine/lualine.nvim: A blazing fast and easy to configure neovim statusline plugin written in pure lua.](https://github.com/nvim-lualine/lualine.nvim)
 require("lualine").setup {
   options = {
     icons_enabled = true,
@@ -146,6 +147,8 @@ require("lualine").setup {
       statusline = {
         'qf',
         'minimap',
+        'neo-tree',
+        'vista',
       },
     },
     always_divide_middle = true,
