@@ -21,13 +21,20 @@ require('telescope').setup{
   },
   pickers = {
     find_files = {
+      theme = "ivy",
+    },
+    current_buffer_fuzzy_find = {
       theme = "dropdown",
     },
     live_grep = {
-      theme = "ivy",
+      theme = "dropdown",
     },
     buffers = {
       theme = "cursor",
+      preview = {
+        hide_on_startup = true,
+      },
+      -- layout_strategy = "vertical",
     },
     oldfiles = {
       theme = "dropdown",
@@ -44,7 +51,9 @@ require('telescope').setup{
 
 local builtin = require('telescope.builtin')
 
-vim.keymap.set('n', 'gf', builtin.find_files, { desc = 'Telescope find files' })
+-- vim.keymap.set('n', 'gf', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', 'gf', ':Telescope frecency workspace=CWD path_display={"shorten"} theme=ivy<CR>', { desc = 'Telescope recently files', noremap = true })
+
 
 vim.keymap.set('n', '<space>se', builtin.live_grep, { desc = 'Telescope live grep' })
 
@@ -54,11 +63,9 @@ vim.keymap.set('n', '<C-f>', builtin.current_buffer_fuzzy_find, { desc = 'Telesc
 
 vim.keymap.set('n', 'ge', builtin.buffers, { desc = 'Telescope buffers' })
 
-vim.keymap.set('n', 'go', ':Telescope frecency workspace=CWD path_display={"shorten"} theme=ivy<CR>', { desc = 'Telescope recently files', noremap = true })
-
--- vim.keymap.set('n', '<C-p>', builtin.commands, { desc = 'Telescope commands' })
+vim.keymap.set('n', '<C-p>', builtin.commands, { desc = 'Telescope commands' })
 
 -- addition
-vim.keymap.set('n', '<C-p>', ":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>", { desc = 'Telescope projects', noremap = true })
+-- vim.keymap.set('n', '<C-p>', ":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>", { desc = 'Telescope projects', noremap = true })
 
-vim.keymap.set('n', 'gz', ":Telescope z<CR>", { desc = 'Telescope z command', noremap = true })
+-- vim.keymap.set('n', 'gz', ":Telescope z<CR>", { desc = 'Telescope z command', noremap = true })
