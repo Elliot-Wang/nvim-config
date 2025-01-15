@@ -28,7 +28,14 @@ require("bufferline").setup {
             separator = true -- use a "true" to enable the default, or set your own character
         },
         {
-            filetype = "Vista",
+            filetype = "neo-tree",
+            text = "File Explorer",
+            highlight = "Directory",
+            text_align = "left",
+            separator = true -- use a "true" to enable the default, or set your own character
+        },
+        {
+            filetype = "vista",
             text = "Vista",
             highlight = "Vista",
             text_align = "left",
@@ -77,6 +84,37 @@ require("bufferline").setup {
     sort_by = "id",
   },
 }
+
+vim.keymap.set("n", "t1", "<cmd>tabn 1<CR>", {
+  desc = "go to tab 1",
+})
+vim.keymap.set("n", "t2", "<cmd>tabn 2<CR>", {
+  desc = "go to tab 2",
+})
+vim.keymap.set("n", "t3", "<cmd>tabn 3<CR>", {
+  desc = "go to tab 3",
+})
+vim.keymap.set("n", "t4", "<cmd>tabn 4<CR>", {
+  desc = "go to tab 4",
+})
+vim.keymap.set("n", "t5", "<cmd>tabn 5<CR>", {
+  desc = "go to tab 5",
+})
+vim.keymap.set("n", "t6", "<cmd>tabn 6<CR>", {
+  desc = "go to tab 6",
+})
+vim.keymap.set("n", "t7", "<cmd>tabn 7<CR>", {
+  desc = "go to tab 7",
+})
+vim.keymap.set("n", "t8", "<cmd>tabn 8<CR>", {
+  desc = "go to tab 8",
+})
+vim.keymap.set("n", "t9", "<cmd>tabn 9<CR>", {
+  desc = "go to tab 9",
+})
+vim.keymap.set("n", "t0", "<cmd>tabn 10<CR>", {
+  desc = "go to tab 10",
+})
 
 vim.keymap.set("n", "gt", "<cmd>BufferLinePick<CR>", {
   desc = "pick a buffer",
