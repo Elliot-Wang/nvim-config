@@ -877,6 +877,7 @@ local function uiPlugs()
       end,
     },
 
+    "tribela/vim-transparent",
   })
 end
 
