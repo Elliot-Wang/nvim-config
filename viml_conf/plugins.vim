@@ -100,17 +100,6 @@ map <Plug> <Plug>Markdown_OpenUrlUnderCursor
 " disable ge
 map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
-"""""""""""""""""""""""""markdown-preview settings"""""""""""""""""""
-" Only setting this for suitable platforms
-if g:is_win || g:is_mac
-  " Do not close the preview tab when switching to other buffers
-  let g:mkdp_auto_close = 0
-
-  " Shortcuts to start and stop markdown previewing
-  nnoremap <silent> <M-m> :<C-U>MarkdownPreview<CR>
-  nnoremap <silent> <M-S-m> :<C-U>MarkdownPreviewStop<CR>
-endif
-
 """"""""""""""""""""""""""""vim-sandwich settings"""""""""""""""""""""""""""""
 " Map s to nop since s in used by vim-sandwich. Use cl instead of s.
 nmap S <Nop>

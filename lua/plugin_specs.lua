@@ -668,6 +668,17 @@ local function markdownPlugs()
         return false
       end,
       build = "cd app && npm install",
+      config = function ()
+        vim.cmd [[
+          let g:mkdp_browser = '/Applications/Safari.app'
+
+          " Do not close the preview tab when switching to other buffers
+          let g:mkdp_auto_close = 0
+
+          " Shortcuts to start and stop markdown previewing
+          nnoremap <silent> <M-m> :<C-U>MarkdownPreview<CR>
+        ]]
+      end,
       ft = { "markdown" },
     },
     {
