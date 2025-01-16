@@ -38,3 +38,7 @@ end
 if not _G.enable_transparent then
   _G.enable_transparent = false
 end
+
+if not _G.colorschema then
+  _G.colorschema = 'onedark'
+end

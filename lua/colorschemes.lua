@@ -88,7 +88,9 @@ M.rand_colorscheme = function()
   end
 end
 
--- Load a random colorscheme
--- M.rand_colorscheme()
-
-M.colorscheme_conf['onedarkpro']()
+if _G.colorschema == 'random' then
+  -- Load a random colorscheme
+  M.rand_colorscheme()
+else
+  M.colorscheme_conf[_G.colorschema]()
+end
