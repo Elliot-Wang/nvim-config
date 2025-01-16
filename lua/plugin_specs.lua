@@ -30,18 +30,6 @@ local function syntaxPlugs()
     { "nathangrigg/vim-beancount", ft = { "beancount" } },
     -- toml
     { "cespare/vim-toml", ft = { "toml" }, branch = "main" },
-    -- tex
-    {
-      "lervag/vimtex",
-      -- Only use these plugin on Windows and Mac and when LaTeX is installed
-      enabled = function()
-        if utils.executable("latex") then
-          return true
-        end
-        return false
-      end,
-      ft = { "tex" },
-    },
     {
       "romgrk/nvim-treesitter-context",
       config = function()
