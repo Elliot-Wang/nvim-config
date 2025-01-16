@@ -54,13 +54,6 @@ let g:mundo_width = 80
 
 nnoremap <silent> tu :MundoToggle<CR>
 
-""""""""""""""""""""""""""""minimap settings"""""""""""""""""""""""""
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-
-""""""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
-let g:XkbSwitchEnabled = 1
-
 """""""""""""""""""""""""""""" neoformat settings """""""""""""""""""""""
 let g:neoformat_enabled_python = ['black', 'yapf']
 let g:neoformat_cpp_clangformat = {
@@ -178,3 +171,6 @@ endfunction
 
 """"""""""""""""""""""""""""""vim-auto-save settings""""""""""""""""""""""""""""""
 let g:auto_save = 1  " enable AutoSave on Vim startup
+
+""""""""""""""""""""""""""""vim-xkbswitch settings"""""""""""""""""""""""""
+let g:XkbSwitchEnabled = 1 " enable xkbswitch on Vim startup

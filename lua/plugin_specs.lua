@@ -327,6 +327,18 @@ local function helperPlugs()
         })
       end,
     },
+
+    {
+      "lyokha/vim-xkbswitch",
+      enabled = function()
+        if vim.g.is_mac and utils.executable("xkbswitch") then
+          return true
+        end
+        return false
+      end,
+      event = { "InsertEnter" },
+    },
+
   })
 end
 
@@ -502,9 +514,11 @@ local function sidebarPlugs()
         end
       end,
       config = function ()
-        vim.cmd ("let g:minimap_width = 10")
-        vim.cmd ("let g:minimap_auto_start = 1")
-        vim.cmd ("let g:minimap_auto_start_win_enter = 1")
+        vim.cmd [[
+          let g:minimap_width = 10
+          let g:minimap_auto_start = 1
+          let g:minimap_auto_start_win_enter = 1
+        ]]
       end,
     },
 
@@ -706,17 +720,6 @@ end
 
 local function ungroupPlugs()
   addPlugins({
-    {
-      "lyokha/vim-xkbswitch",
-      enabled = function()
-        if vim.g.is_mac and utils.executable("xkbswitch") then
-          return true
-        end
-        return false
-      end,
-      event = { "InsertEnter" },
-    },
-
     -- show and trim trailing whitespaces
     { "jdhao/whitespace.nvim", enabled = false, event = "VeryLazy" },
 
