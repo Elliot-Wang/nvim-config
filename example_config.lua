@@ -5,3 +5,6 @@ _G.obsidian_opt_workspace = {
     path = "~/Obsidian",
   }
 }
+
+_G.colorschema = 'onedark'
+_G.enable_transparent = false
