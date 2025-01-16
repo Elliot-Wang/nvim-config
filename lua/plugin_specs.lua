@@ -879,7 +879,10 @@ local function uiPlugs()
       end,
     },
 
-    "tribela/vim-transparent",
+    {
+      "tribela/transparent.nvim",
+      enabled = _G.enable_transparent,
+    },
   })
 end
 

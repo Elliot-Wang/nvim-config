@@ -34,3 +34,7 @@ if not _G.obsidian_opt_workspace then
   _G.obsidian_opt_workspace = {}
   _G.enable_obsidian = false
 end
+
+if not _G.enable_transparent then
+  _G.enable_transparent = false
+end
