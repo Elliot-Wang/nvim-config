@@ -58,6 +58,8 @@ local function syntaxPlugs()
         if vim.g.is_mac then
           return true
         end
+        -- Windows support 
+        -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support
         return false
       end,
       event = "VeryLazy",
