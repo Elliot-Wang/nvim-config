@@ -168,6 +168,7 @@ keymap.set("c", "<C-A>", "<HOME>")
 -- Delete the character to the right of the cursor
 keymap.set("i", "<C-D>", "<DEL>")
 
+-- 闪烁光标
 keymap.set("n", "<leader>cb", function()
   local cnt = 0
   local blink_times = 7
