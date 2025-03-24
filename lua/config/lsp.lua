@@ -16,7 +16,7 @@ local set_qflist = function(buf_num, severity)
   vim.fn.setqflist({}, ' ', { title = 'Diagnostics', items = qf_items })
 
   -- open quickfix by default
-  vim.cmd[[copen]]
+  vim.cmd [[copen]]
 end
 
 local custom_attach = function(client, bufnr)
@@ -28,18 +28,21 @@ local custom_attach = function(client, bufnr)
     keymap.set(mode, l, r, opts)
   end
 
-  map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
   map("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
+  map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
   map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
+
+  -- diagnostics
   map("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
   map("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
   -- this puts diagnostics from opened files to quickfix
   -- map("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
   -- this puts diagnostics from current buffer to quickfix
   map("n", "<space>qf", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
-  map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+
   -- document
   map("n", "<C-q>", vim.lsp.buf.signature_help, { desc = "Displays signature information about the symbol" })
+  map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
 
   -- workspace
   map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
@@ -49,11 +52,11 @@ local custom_attach = function(client, bufnr)
   end, { desc = "list workspace folder" })
 
   -- Set some key bindings conditional on server capabilities
-  map({"n", "x"}, "<space>fm", vim.lsp.buf.format, { desc = "format code" })
+  map({ "n", "x" }, "<space>fm", vim.lsp.buf.format, { desc = "format code" })
 
   -- Uncomment code below to enable inlay hint from language server, some LSP server supports inlay hint,
   -- but disable this feature by default, so you may need to enable inlay hint in the LSP server config.
-  vim.lsp.inlay_hint.enable(true, {buffer=bufnr})
+  vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
 
   -- display diagnostic at cursor position
   api.nvim_create_autocmd("CursorHold", {
@@ -91,18 +94,18 @@ local custom_attach = function(client, bufnr)
     ]])
 
     local gid = api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    api.nvim_create_autocmd("CursorHold" , {
+    api.nvim_create_autocmd("CursorHold", {
       group = gid,
       buffer = bufnr,
-      callback = function ()
+      callback = function()
         lsp.buf.document_highlight()
       end
     })
 
-    api.nvim_create_autocmd("CursorMoved" , {
+    api.nvim_create_autocmd("CursorMoved", {
       group = gid,
       buffer = bufnr,
-      callback = function ()
+      callback = function()
         lsp.buf.clear_references()
       end
     })
@@ -114,20 +117,49 @@ local custom_attach = function(client, bufnr)
   end
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Change diagnostic signs.
+fn.sign_define("DiagnosticSignError", { text = '🆇', texthl = "DiagnosticSignError" })
+fn.sign_define("DiagnosticSignWarn", { text = '⚠️', texthl = "DiagnosticSignWarn" })
+fn.sign_define("DiagnosticSignInfo", { text = 'ℹ️', texthl = "DiagnosticSignInfo" })
+fn.sign_define("DiagnosticSignHint", { text = '', texthl = "DiagnosticSignHint" })
 
--- required by nvim-ufo
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
+-- global config for diagnostic
+diagnostic.config {
+  underline = false,
+  virtual_text = false,
+  signs = true,
+  severity_sort = true,
 }
 
--- For what diagnostic is enabled in which type checking mode, check doc:
--- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#diagnostic-settings-defaults
--- Currently, the pyright also has some issues displaying hover documentation:
--- https://www.reddit.com/r/neovim/comments/1gdv1rc/what_is_causeing_the_lsp_hover_docs_to_looks_like/
+lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+  underline = false,
+  virtual_text = false,
+  signs = true,
+  update_in_insert = false,
+})
+
+-- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
+lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
+
+-- required by nvim-ufo
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
+
+-- ==================== LSP Servers ====================
+-- @link https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.mdx
+-- @see :help lspconfig-all
+-- =====================================================
 
 if utils.executable('pyright') then
+  -- For what diagnostic is enabled in which type checking mode, check doc:
+  -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#diagnostic-settings-defaults
+  -- Currently, the pyright also has some issues displaying hover documentation:
+  -- https://www.reddit.com/r/neovim/comments/1gdv1rc/what_is_causeing_the_lsp_hover_docs_to_looks_like/
   local new_capability = {
     -- this will remove some of the diagnostics that duplicates those from ruff, idea taken and adapted from
     -- here: https://github.com/astral-sh/ruff-lsp/issues/384#issuecomment-1989619482
@@ -190,6 +222,23 @@ if utils.executable("ruff") then
       }
     }
   })
+
+  -- Disable ruff hover feature in favor of Pyright
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      -- vim.print(client.name, client.server_capabilities)
+
+      if client == nil then
+        return
+      end
+      if client.name == 'ruff' then
+        client.server_capabilities.hoverProvider = false
+      end
+    end,
+    desc = 'LSP: Disable hover capability from Ruff',
+  })
 end
 
 if utils.executable("gopls") then
@@ -200,33 +249,17 @@ if utils.executable("gopls") then
     capabilities = capabilities,
   })
 
+  -- go.format not found
   local format_sync_grp = api.nvim_create_augroup("GoFormat", {})
   api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
-      require('go.format').goimports()
+      -- require('go.format').goimports()
+      vim.cmd[[retab]]
     end,
     group = format_sync_grp,
   })
-
 end
-
--- Disable ruff hover feature in favor of Pyright
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    -- vim.print(client.name, client.server_capabilities)
-
-    if client == nil then
-      return
-    end
-    if client.name == 'ruff' then
-      client.server_capabilities.hoverProvider = false
-    end
-  end,
-  desc = 'LSP: Disable hover capability from Ruff',
-})
 
 if utils.executable("ltex-ls") then
   lspconfig.ltex.setup {
@@ -296,28 +329,3 @@ if utils.executable("lua-language-server") then
   }
 end
 
--- Change diagnostic signs.
-fn.sign_define("DiagnosticSignError", { text = '🆇', texthl = "DiagnosticSignError" })
-fn.sign_define("DiagnosticSignWarn", { text = '⚠️', texthl = "DiagnosticSignWarn" })
-fn.sign_define("DiagnosticSignInfo", { text = 'ℹ️', texthl = "DiagnosticSignInfo" })
-fn.sign_define("DiagnosticSignHint", { text = '', texthl = "DiagnosticSignHint" })
-
--- global config for diagnostic
-diagnostic.config {
-  underline = false,
-  virtual_text = false,
-  signs = true,
-  severity_sort = true,
-}
-
-lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-  underline = false,
-  virtual_text = false,
-  signs = true,
-  update_in_insert = false,
-})
-
--- Change border of documentation hover window, See https://github.com/neovim/neovim/pull/13998.
-lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
