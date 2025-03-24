@@ -412,49 +412,7 @@ local function sidebarPlugs()
         "MunifTanjim/nui.nvim",
       },
       config = function()
-        require("neo-tree").setup({
-          close_if_last_window = true,
-          window = {
-            width = 30,
-            mappings = {
-              ["S"] = "",
-              ["s"] = "",
-              ["t"] = "",
-            },
-          },
-          buffers = {
-            follow_current_file = true,
-          },
-          filesystem = {
-            follow_current_file = true,
-            filtered_items = {
-              hide_dotfiles = false,
-              hide_gitignored = false,
-              hide_by_name = {
-                "node_modules",
-                ".git",
-                ".idea",
-              },
-              never_show = {
-                ".DS_Store",
-                "thumbs.db"
-              },
-            },
-          },
-        })
-
-        vim.keymap.set("n", "tt", "<cmd>Neotree<cr>", {
-          silent = true,
-          desc = "open Neotree",
-        })
-        vim.keymap.set("n", "tg", "<cmd>Neotree git_status<cr>", {
-          silent = true,
-          desc = "open Neotree of git staus",
-        })
-        vim.keymap.set("n", "tb", "<cmd>Neotree buffers<cr>", {
-          silent = true,
-          desc = "open Neotree of buffers",
-        })
+        require("config.neotree")
       end
     },
 
