@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugin_specs = {}
 
 local function addPlugins(plugs)
-  for k,v in pairs(plugs) do
+  for k, v in pairs(plugs) do
     table.insert(plugin_specs, v)
   end
 end
@@ -29,15 +29,15 @@ local function syntaxPlugs()
     -- beancount
     { "nathangrigg/vim-beancount", ft = { "beancount" } },
     -- toml
-    { "cespare/vim-toml", ft = { "toml" }, branch = "main" },
+    { "cespare/vim-toml",          ft = { "toml" },     branch = "main" },
     {
       "romgrk/nvim-treesitter-context",
       config = function()
-        require("treesitter-context").setup{
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        require("treesitter-context").setup {
+          enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
           throttle = true, -- Throttles plugin updates (may improve performance)
-          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-          patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+          patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
             -- For all filetypes
             -- Note that setting an entry here replaces all other patterns for this entry.
             -- By setting the 'default' entry below, you can control which nodes you want to
@@ -72,16 +72,16 @@ end
 local function colorschemePlugs()
   addPlugins({
     -- A list of colorscheme plugin you may want to try. Find what suits you.
-    { "navarasu/onedark.nvim", lazy = true },
-    { "sainnhe/edge", lazy = true },
-    { "sainnhe/sonokai", lazy = true },
-    { "sainnhe/gruvbox-material", lazy = true },
-    { "sainnhe/everforest", lazy = true },
-    { "EdenEast/nightfox.nvim", lazy = true },
-    { "catppuccin/nvim", name = "catppuccin", lazy = true },
-    { "olimorris/onedarkpro.nvim", lazy = true },
+    { "navarasu/onedark.nvim",       lazy = true },
+    { "sainnhe/edge",                lazy = true },
+    { "sainnhe/sonokai",             lazy = true },
+    { "sainnhe/gruvbox-material",    lazy = true },
+    { "sainnhe/everforest",          lazy = true },
+    { "EdenEast/nightfox.nvim",      lazy = true },
+    { "catppuccin/nvim",             name = "catppuccin", lazy = true },
+    { "olimorris/onedarkpro.nvim",   lazy = true },
     { "marko-cerovac/material.nvim", lazy = true },
-    { "dracula/vim", name = "dracula", lazy = true },
+    { "dracula/vim",                 name = "dracula",    lazy = true },
     {
       "rockyzhang24/arctic.nvim",
       dependencies = { "rktjmp/lush.nvim" },
@@ -104,8 +104,8 @@ local function gitPlugs()
     },
 
     -- Better git log display
-    { "rbong/vim-flog", cmd = { "Flog" } },
-    { "akinsho/git-conflict.nvim", version = "*", config = true },
+    { "rbong/vim-flog",            cmd = { "Flog" } },
+    { "akinsho/git-conflict.nvim", version = "*",   config = true },
     {
       "ruifm/gitlinker.nvim",
       event = "User InGitRepo",
@@ -151,7 +151,7 @@ end
 local function textObjectPlugs()
   addPlugins({
     -- Python-related text object
-    { "jeetsukumaran/vim-pythonsense", ft = { "python" } },
+    { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
 
     -- Add indent object for vim (useful for languages like Python)
     { "michaeljsmith/vim-indent-object", event = "VeryLazy" },
@@ -180,7 +180,7 @@ local function linkPlugs()
         end
       end,
       dependencies = { "nvim-lua/plenary.nvim" },
-      config = true, -- default settings
+      config = true,      -- default settings
       submodules = false, -- not needed, submodules are required only for tests
     },
 
@@ -205,7 +205,7 @@ local function helperPlugs()
       opts = {},
       init = function()
         vim.o.foldcolumn = "1" -- '0' is not bad
-        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+        vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
       end,
@@ -312,10 +312,10 @@ local function helperPlugs()
       config = function()
         require("im_select").setup({
           -- IM will be set to `default_im_select` in `normal` mode
-          default_im_select  = "com.apple.keylayout.ABC",
+          default_im_select   = "com.apple.keylayout.ABC",
 
           -- Restore the default input method state when the following events are triggered
-          set_default_events = { "VimEnter", "FocusGained", "InsertLeave", "CmdlineLeave" },
+          set_default_events  = { "VimEnter", "FocusGained", "InsertLeave", "CmdlineLeave" },
 
           -- Restore the previous used input method state when the following events
           -- are triggered, if you don't want to restore previous used im in Insert mode,
@@ -323,7 +323,7 @@ local function helperPlugs()
           set_previous_events = { "InsertEnter" },
 
           -- Async run `default_command` to switch IM or not
-          async_switch_im = true,
+          async_switch_im     = true,
         })
       end,
     },
@@ -351,10 +351,10 @@ local function stringManipulatePlugs()
     -- 'mg979/vim-visual-multi'
 
     -- Repeat vim motions
-    { "tpope/vim-repeat", event = "VeryLazy" },
+    { "tpope/vim-repeat",     event = "VeryLazy" },
 
     -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-    { "godlygeek/tabular", cmd = { "Tabularize" } },
+    { "godlygeek/tabular",    cmd = { "Tabularize" } },
 
     "tpope/vim-surround",
 
@@ -369,8 +369,8 @@ local function stringManipulatePlugs()
 
     {
       "junegunn/vim-easy-align",
-      config = function ()
-        vim.keymap.set({"n", "x"}, "ga", "<Plug>(EasyAlign)")
+      config = function()
+        vim.keymap.set({ "n", "x" }, "ga", "<Plug>(EasyAlign)")
       end
     }
   })
@@ -387,7 +387,7 @@ local function sidebarPlugs()
       config = function()
         require("config.nvim-tree")
       end,
-      attach = function (bufnr)
+      attach = function(bufnr)
         local api = require "nvim-tree.api"
 
         local function opts(desc)
@@ -399,7 +399,7 @@ local function sidebarPlugs()
 
         -- custom mappings
         -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-        vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
       end,
     },
 
@@ -471,7 +471,7 @@ local function sidebarPlugs()
           return false
         end
       end,
-      config = function ()
+      config = function()
         vim.cmd [[
           let g:minimap_width = 10
           let g:minimap_auto_start = 1
@@ -487,18 +487,19 @@ end
 local function snippetPlugs()
   addPlugins({
     -- Snippet engine and snippet template
-    { "SirVer/ultisnips",
+    {
+      "SirVer/ultisnips",
       dependencies = {
         "honza/vim-snippets",
       },
       event = "InsertEnter",
       ft = "snippets",
-      config = function ()
+      config = function()
         vim.api.nvim_create_autocmd("BufWritePost", {
           pattern = "*.snippets",
           group = vim.api.nvim_create_augroup("ultisnips", { clear = true }),
           desc = "autoresize windows on resizing operation",
-          callback = function ()
+          callback = function()
             vim.cmd("CmpUltisnipsReloadSnippets")
             vim.notify("Ultisnips reloaded.", vim.log.levels.INFO, { title = "nvim-config" })
           end
@@ -559,7 +560,7 @@ local function lspPlugs()
     -- copilot
     {
       "github/copilot.vim",
-      config = function ()
+      config = function()
         require("config.copilot")
       end,
     },
@@ -584,12 +585,12 @@ local function lspPlugs()
       opts = {},
     },
 
-  {
+    {
       "ray-x/go.nvim",
-      enabled = function ()
+      enabled = function()
         require("utils").executable("go")
       end,
-      dependencies = {  -- optional packages
+      dependencies = { -- optional packages
         "ray-x/guihua.lua",
         "neovim/nvim-lspconfig",
         "nvim-treesitter/nvim-treesitter",
@@ -597,8 +598,8 @@ local function lspPlugs()
       config = function()
         require("go").setup()
       end,
-      event = {"CmdlineEnter"},
-      ft = {"go", 'gomod'},
+      event = { "CmdlineEnter" },
+      ft = { "go", 'gomod' },
       build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     }
   })
@@ -628,7 +629,7 @@ local function markdownPlugs()
         return false
       end,
       build = "cd app && npm install",
-      config = function ()
+      config = function()
         vim.cmd [[
           let g:mkdp_browser = '/Applications/Safari.app'
 
@@ -653,7 +654,7 @@ local function markdownPlugs()
     },
     {
       "epwalsh/obsidian.nvim",
-      version = "*",  -- recommended, use latest release instead of latest commit
+      version = "*", -- recommended, use latest release instead of latest commit
       enabled = function()
         return _G.enable_obsidian
       end,
@@ -663,29 +664,29 @@ local function markdownPlugs()
       ft = "markdown",
       -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
       -- event = {
-        --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-        --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-        --   -- refer to `:h file-pattern` for more examples
-        --   "BufReadPre Obsidian/*.md",
-        --   "BufNewFile Obsidian/*.md",
-        -- },
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-        },
+      --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+      --   -- refer to `:h file-pattern` for more examples
+      --   "BufReadPre Obsidian/*.md",
+      --   "BufNewFile Obsidian/*.md",
+      -- },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
       },
-    })
+    },
+  })
 end
 
 local function ungroupPlugs()
   addPlugins({
     -- show and trim trailing whitespaces
-    { "jdhao/whitespace.nvim", enabled = false, event = "VeryLazy" },
+    { "jdhao/whitespace.nvim", enabled = false,                               event = "VeryLazy" },
 
     -- Handy unix command inside Vim (Rename, Move etc.)
-    { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
+    { "tpope/vim-eunuch",      cmd = { "Rename", "Delete" } },
 
     -- a Vim plugin for making Vim plugins
-    { "tpope/vim-scriptease", cmd = { "Scriptnames", "Messages", "Verbose" } },
+    { "tpope/vim-scriptease",  cmd = { "Scriptnames", "Messages", "Verbose" } },
 
   })
 end
@@ -700,6 +701,10 @@ local function searchPlugs()
       config = function()
         require("config.hlslens")
       end,
+    },
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
       "Yggdroot/LeaderF",
@@ -721,14 +726,14 @@ local function searchPlugs()
         "nvim-telescope/telescope-symbols.nvim",
         "nvim-lua/plenary.nvim",
       },
-      config = function ()
+      config = function()
         require("config.telescope")
       end,
     },
     {
       "nvim-telescope/telescope-frecency.nvim",
       config = function()
-        require("telescope").load_extension(  "frecency" )
+        require("telescope").load_extension("frecency")
       end,
     },
     {
@@ -736,7 +741,7 @@ local function searchPlugs()
       dependencies = {
         'nvim-telescope/telescope.nvim',
       },
-      config = function ()
+      config = function()
         require("config.telescope-project")
       end
     },
@@ -744,7 +749,7 @@ local function searchPlugs()
       -- :Telescope media_files
       'nvim-telescope/telescope-media-files.nvim',
       enabled = false,
-      config = function ()
+      config = function()
         require('telescope').load_extension('media_files')
       end
     },
@@ -761,18 +766,18 @@ local function searchPlugs()
     {
       {
         "FeiyouG/commander.nvim",
-        config = function ()
+        config = function()
           require('config.commander')
         end
       },
       -- dependencies = {
-        --   -- Only if your selected browser is Firefox, Waterfox or buku
-        --   'kkharji/sqlite.lua',
-        --
-        --   -- Only if you're using the Telescope extension
-        --   'nvim-telescope/telescope.nvim',
-        -- }
-      },
+      --   -- Only if your selected browser is Firefox, Waterfox or buku
+      --   'kkharji/sqlite.lua',
+      --
+      --   -- Only if you're using the Telescope extension
+      --   'nvim-telescope/telescope.nvim',
+      -- }
+    },
     -- {
     --   "ibhagwan/fzf-lua",
     --   -- optional for icon support
@@ -862,7 +867,7 @@ local function fileBrowserPlugs()
           -- Open in the current working directory
           "<leader>cw",
           "<cmd>Yazi cwd<cr>",
-          desc = "Open the file manager in nvim's working directory" ,
+          desc = "Open the file manager in nvim's working directory",
         },
       },
       opts = {
