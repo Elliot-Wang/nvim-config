@@ -23,6 +23,9 @@ require('telescope').setup{
     find_files = {
       theme = "ivy",
     },
+    -- lsp_references = {
+    --   theme = "cursor",
+    -- },
     current_buffer_fuzzy_find = {
       theme = "dropdown",
     },
@@ -62,6 +65,8 @@ vim.keymap.set('n', '<C-f>', builtin.current_buffer_fuzzy_find, { desc = 'Telesc
 -- vim.keymap.set('n', 'gm', builtin.help_tags, { desc = 'Telescope help tags' })
 
 vim.keymap.set('n', 'ge', builtin.buffers, { desc = 'Telescope buffers' })
+
+vim.keymap.set('n', 'gd', builtin.lsp_references, { desc = 'Telescope LSP references' })
 
 vim.keymap.set('n', '<C-p>', builtin.commands, { desc = 'Telescope commands' })
 

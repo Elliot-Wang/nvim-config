@@ -28,21 +28,24 @@ local custom_attach = function(client, bufnr)
     keymap.set(mode, l, r, opts)
   end
 
-  map("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
-  map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
+  -- telescope instead
+  --map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+  -- map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
 
   -- diagnostics
+  -- TODO use telescope instead
   map("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
   map("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
   -- this puts diagnostics from opened files to quickfix
-  -- map("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
+  map("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
   -- this puts diagnostics from current buffer to quickfix
   map("n", "<space>qf", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
 
   -- document
   map("n", "<C-q>", vim.lsp.buf.signature_help, { desc = "Displays signature information about the symbol" })
+  -- refactor
   map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+  map("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
 
   -- workspace
   map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
@@ -52,7 +55,10 @@ local custom_attach = function(client, bufnr)
   end, { desc = "list workspace folder" })
 
   -- Set some key bindings conditional on server capabilities
-  map({ "n", "x" }, "<space>fm", vim.lsp.buf.format, { desc = "format code" })
+  map({ "n", "x" }, "<space>fm", function ()
+    vim.lsp.buf.format()
+    vim.notify("Code format", vim.log.levels.INFO, { title = 'Nvim-config' })
+  end, { desc = "format code" })
 
   -- Uncomment code below to enable inlay hint from language server, some LSP server supports inlay hint,
   -- but disable this feature by default, so you may need to enable inlay hint in the LSP server config.
