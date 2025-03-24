@@ -267,21 +267,11 @@ local function helperPlugs()
         require("config.which-key")
       end,
     },
-
-    -- Super fast buffer jump
-    -- {
-    --   "smoka7/hop.nvim",
-    --   event = "VeryLazy",
-    --   config = function()
-    --     require("config.nvim_hop")
-    --   end,
-    -- },
     {
-      "phaazon/hop.nvim",
+      "smoka7/hop.nvim",
       event = "BufRead",
       config = function()
-        require("hop").setup()
-        vim.api.nvim_set_keymap("n", "F", ":HopLine<cr>", { silent = true })
+        require("config.nvim_hop")
       end,
     },
 

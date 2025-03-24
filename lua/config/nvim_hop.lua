@@ -7,7 +7,7 @@ hop.setup {
   match_mappings = { "zh_sc" }
 }
 
-keymap.set({ "n", "v", "o" }, "f", "", {
+keymap.set({ "n", "v", "o" }, "to", "", {
   silent = true,
   noremap = true,
   callback = function()
@@ -15,6 +15,8 @@ keymap.set({ "n", "v", "o" }, "f", "", {
   end,
   desc = "nvim-hop char2",
 })
+
+vim.api.nvim_set_keymap("n", "tr", ":HopLine<cr>", { silent = true })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
