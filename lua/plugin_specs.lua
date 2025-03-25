@@ -559,6 +559,20 @@ local function lspPlugs()
         require("config.dap.nvim-dap-go")
       end
     },
+{
+      "mfussenegger/nvim-dap-python",
+      dependencies = { "mfussenegger/nvim-dap" },
+      enabled = function()
+        if utils.executable('debugpy') then
+          return true
+        else
+          return false
+        end
+      end,
+      config = function()
+        require("config.dap.nvim-dap-python")
+      end
+    },
 
     -- lsp config
     {
