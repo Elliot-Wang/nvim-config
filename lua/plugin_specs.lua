@@ -58,7 +58,7 @@ local function syntaxPlugs()
         if vim.g.is_mac then
           return true
         end
-        -- Windows support 
+        -- Windows support
         -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support
         return false
       end,
@@ -371,29 +371,29 @@ end
 local function sidebarPlugs()
   addPlugins({
     -- file explorer
-    {
-      "nvim-tree/nvim-tree.lua",
-      enabled = false,
-      event = "VeryLazy",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      config = function()
-        require("config.nvim-tree")
-      end,
-      attach = function(bufnr)
-        local api = require "nvim-tree.api"
+    -- {
+    --   "nvim-tree/nvim-tree.lua",
+    --   enabled = false,
+    --   event = "VeryLazy",
+    --   dependencies = { "nvim-tree/nvim-web-devicons" },
+    --   config = function()
+    --     require("config.nvim-tree")
+    --   end,
+    --   attach = function(bufnr)
+    --     local api = require "nvim-tree.api"
 
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
+    --     local function opts(desc)
+    --       return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    --     end
 
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
+    --     -- default mappings
+    --     api.config.mappings.default_on_attach(bufnr)
 
-        -- custom mappings
-        -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
-      end,
-    },
+    --     -- custom mappings
+    --     -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+    --     vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+    --   end,
+    -- },
 
     {
       "nvim-neo-tree/neo-tree.nvim",
@@ -531,6 +531,35 @@ end
 
 local function lspPlugs()
   addPlugins({
+    -- debugger
+    {
+      'mfussenegger/nvim-dap',
+      config = function()
+        require("config.nvim-dap")
+      end
+    },
+    {
+      "rcarriga/nvim-dap-ui",
+      dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+      config = function()
+        require("config.nvim-dap-ui")
+      end
+    },
+    {
+      "leoluz/nvim-dap-go",
+      dependencies = { "mfussenegger/nvim-dap" },
+      enabled = function()
+        if utils.executable('go') then
+          return true
+        else
+          return false
+        end
+      end,
+      config = function()
+        require("config.dap.nvim-dap-go")
+      end
+    },
+
     -- lsp config
     {
       "neovim/nvim-lspconfig",
@@ -580,7 +609,11 @@ local function lspPlugs()
     {
       "ray-x/go.nvim",
       enabled = function()
-        require("utils").executable("go")
+        if utils.executable('go') then
+          return true
+        else
+          return false
+        end
       end,
       dependencies = { -- optional packages
         "ray-x/guihua.lua",

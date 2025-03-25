@@ -83,3 +83,16 @@
   - rainbow for every level; use `Toch` at markdown instead.
 - [ ] yazi plugin colorschema is bad, highlight is not effect
     change highlight, have no idea.
+
+## debugger
+depende on nvim's DAP (Debug Adapter Protocol)
+- [ ] debuger, [mfussenegger/nvim-dap: Debug Adapter Protocol client implementation for Neovim](https://github.com/mfussenegger/nvim-dap?tab=readme-ov-file)
+
+A typical debug flow consists of:
+
+> Setting breakpoints via :lua require'dap'.toggle_breakpoint().
+> Launching debug sessions and resuming execution via :lua require'dap'.continue().
+> Stepping through code via :lua require'dap'.step_over() and :lua require'dap'.step_into().
+> Inspecting the state via the built-in REPL: :lua require'dap'.repl.open() or using the widget UI (:help dap-widgets)
+
+
