@@ -362,9 +362,9 @@ local function stringManipulatePlugs()
 
     {
       "junegunn/vim-easy-align",
-      config = function()
-        vim.keymap.set({ "n", "x" }, "ga", "<Plug>(EasyAlign)")
-      end
+      keys = {
+        { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" } }
+      },
     }
   })
 end
@@ -560,7 +560,7 @@ local function lspPlugs()
         require("config.dap.nvim-dap-go")
       end
     },
-{
+    {
       "mfussenegger/nvim-dap-python",
       dependencies = { "mfussenegger/nvim-dap" },
       enabled = function()
