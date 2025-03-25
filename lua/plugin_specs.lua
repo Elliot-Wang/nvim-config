@@ -264,6 +264,7 @@ local function helperPlugs()
     -- showing keybindings
     {
       "folke/which-key.nvim",
+      enabled = false,
       event = "VeryLazy",
       config = function()
         require("config.which-key")
