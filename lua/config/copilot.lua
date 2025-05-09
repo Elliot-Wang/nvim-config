@@ -4,18 +4,21 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
-vim.g.copilot_filetypes = {
-  'javascript',
-  'json',
-  'lua',
-  'python',
-  'go',
-  'java',
-  'ruby',
-  'shell',
-  'sql',
-  'vim',
-}
+vim.cmd [[
+let g:copilot_filetypes = {
+  \ '*': v:false,
+  \ 'javascript': v:true,
+  \ 'json': v:true,
+  \ 'lua': v:true,
+  \ 'python': v:true,
+  \ 'go': v:true,
+  \ 'java': v:true,
+  \ 'ruby': v:true,
+  \ 'shell': v:true,
+  \ 'sql': v:true,
+  \ 'vim': v:true,
+  \ }
+]]
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'solarized',
