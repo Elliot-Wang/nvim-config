@@ -4,19 +4,6 @@ local uv = vim.uv
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap.set({ "n", "x" }, ";", ":")
 
--- Navigation in the location and quickfix list
-keymap.set("n", "[l", "<cmd>lprevious<cr>zv", { silent = true, desc = "previous location item" })
-keymap.set("n", "]l", "<cmd>lnext<cr>zv", { silent = true, desc = "next location item" })
-
-keymap.set("n", "[L", "<cmd>lfirst<cr>zv", { silent = true, desc = "first location item" })
-keymap.set("n", "]L", "<cmd>llast<cr>zv", { silent = true, desc = "last location item" })
-
-keymap.set("n", "[q", "<cmd>cprevious<cr>zv", { silent = true, desc = "previous qf item" })
-keymap.set("n", "]q", "<cmd>cnext<cr>zv", { silent = true, desc = "next qf item" })
-
-keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "first qf item" })
-keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "last qf item" })
-
 -- Close location list or quickfix list if they are present, see https://superuser.com/q/355325/736190
 -- keymap.set("n", [[\x]], "<cmd>windo lclose <bar> cclose <cr>", {
 --   silent = true,
@@ -71,7 +58,7 @@ keymap.set("x", "<", "<gv")
 keymap.set("x", ">", ">gv")
 
 -- Edit and reload nvim config file quickly
-keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
+keymap.set("n", "<leader>ec", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
   silent = true,
   desc = "open init.lua",
 })
@@ -101,10 +88,6 @@ keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "change
 -- conflict with lazygit windows
 -- keymap.set("t", "<Esc>", [[<c-\><c-n>]])
 
--- Toggle spell checking
-keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })
-keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
-
 -- Change text without putting it into the vim register,
 -- see https://stackoverflow.com/q/54255/6064933
 keymap.set("n", "c", '"_c')
@@ -112,13 +95,10 @@ keymap.set("n", "C", '"_C')
 keymap.set("x", "c", '"_c')
 
 -- Remove trailing whitespace characters
-keymap.set("n", [[ \<space> ]], "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
+-- keymap.set("n", [[ \<space> ]], "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
 
 -- check the syntax group of current cursor position
 keymap.set("n", "<leader>st", "<cmd>call utils#SynGroup()<cr>", { desc = "check syntax group" })
-
--- Toggle cursor column
-keymap.set("n", "<leader>cl", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "toggle cursor column" })
 
 -- Move current line up and down
 keymap.set("n", "<A-k>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { desc = "move line up" })
@@ -148,6 +128,19 @@ keymap.set("n", "sH", ":set splitright<CR>:vsplit<CR>", {desc = "左分屏"})
 
 keymap.set("n", "sc", "<C-w>c", {desc = "关闭当前分屏"})
 
+-- Navigation in the location and quickfix list
+keymap.set("n", "[l", "<cmd>lprevious<cr>zv", { silent = true, desc = "previous location item" })
+keymap.set("n", "]l", "<cmd>lnext<cr>zv", { silent = true, desc = "next location item" })
+
+keymap.set("n", "[L", "<cmd>lfirst<cr>zv", { silent = true, desc = "first location item" })
+keymap.set("n", "]L", "<cmd>llast<cr>zv", { silent = true, desc = "last location item" })
+
+keymap.set("n", "[q", "<cmd>cprevious<cr>zv", { silent = true, desc = "previous qf item" })
+keymap.set("n", "]q", "<cmd>cnext<cr>zv", { silent = true, desc = "next qf item" })
+
+keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "first qf item" })
+keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "last qf item" })
+
 -- cmdline abbrev
 -- vim.fn["utils#Cabbrev"]("git", "Git")
 -- vim.fn["utils#Cabbrev"]("snip", "call UltiSnips#RefreshSnippets()")
@@ -168,7 +161,10 @@ keymap.set("c", "<C-A>", "<HOME>")
 -- Delete the character to the right of the cursor
 keymap.set("i", "<C-D>", "<DEL>")
 
--- 闪烁光标
+-- Toggle cursor column, cool!
+keymap.set("n", "<leader>cl", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "toggle cursor column" })
+
+-- Blink cursor line and cursor column
 keymap.set("n", "<leader>cb", function()
   local cnt = 0
   local blink_times = 7
@@ -193,4 +189,4 @@ keymap.set("n", "<leader>cb", function()
       cnt = cnt + 1
     end)
   )
-end, { desc = "show cursor" })
+end, { desc = "blink cursor" })
