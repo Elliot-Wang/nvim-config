@@ -141,6 +141,13 @@ local function gitPlugs()
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
+      build = function()
+        -- 判断是否为 macOS 且未安装 lazygit
+        if vim.fn.has("mac") == 1 and vim.fn.executable("lazygit") == 0 then
+          print("正在通过 Homebrew 安装 lazygit...")
+          vim.fn.system({ "brew", "install", "lazygit" })
+        end
+      end,
       -- setting the keybinding for LazyGit with 'keys' is recommended in
       -- order to load the plugin when the command is run for the first time
       keys = {
