@@ -17,7 +17,7 @@ if utils.executable('java') then
   table.insert(ensure_installed_lang, 'java')
 end
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter").setup {
   ensure_installed = ensure_installed_lang,
   ignore_install = {}, -- List of parsers to ignore installing
   highlight = {

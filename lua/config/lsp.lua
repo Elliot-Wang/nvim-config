@@ -287,14 +287,14 @@ if utils.executable("lemminx") then
 end
 
 if utils.executable("clangd") then
-  lspconfig.clangd.setup {
+  lsp.config("clangd", {
     on_attach = custom_attach,
     capabilities = capabilities,
     filetypes = { "c", "cpp", "cc" },
     flags = {
       debounce_text_changes = 500,
     },
-  }
+  })
 end
 
 -- set up vim-language-server
