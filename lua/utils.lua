@@ -62,7 +62,7 @@ function M.is_compatible_version(expected_version)
 
   if expect_ver == nil then
     local msg = string.format("Unsupported version string: %s", expected_version)
-    vim.api.nvim_err_writeln(msg)
+    vim.notify(msg, vim.log.levels.WARN, { title = 'Nvim-config' })
     return false
   end
 
@@ -74,7 +74,7 @@ function M.is_compatible_version(expected_version)
       expected_version,
       _ver
     )
-    vim.api.nvim_err_writeln(msg)
+    vim.notify(msg, vim.log.levels.WARN, { title = 'Nvim-config' })
   end
 
   return true
