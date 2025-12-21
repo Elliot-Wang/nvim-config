@@ -190,3 +190,16 @@ keymap.set("n", "<leader>cb", function()
     end)
   )
 end, { desc = "blink cursor" })
+
+-- Save and exit (migrated from custom.vim)
+keymap.set("n", "S", "<cmd>w<CR>", { desc = "保存文件" })
+keymap.set("n", "ZS", "<cmd>xa!<CR>", { desc = "保存所有并退出" })
+-- vim default: ZZ -> :x
+
+-- Quit (migrated from custom.vim)
+keymap.set("n", "Q", "<cmd>bp <bar> bd #<CR>", { desc = "关闭当前 buffer" })
+keymap.set("n", "ZQ", "<cmd>qa!<CR>", { desc = "强制退出所有" })
+
+-- Fast move with J/K (migrated from custom.vim)
+keymap.set({ "n", "x" }, "J", "15jzz", { desc = "向下移动15行" })
+keymap.set({ "n", "x" }, "K", "15kzz", { desc = "向上移动15行" })

@@ -106,5 +106,17 @@ function M.join_paths(...)
   return result
 end
 
+--- Check if running inside VSCode with vscode-neovim extension
+---@return boolean
+function M.is_vscode()
+  return vim.g.vscode ~= nil
+end
+
+--- Check if running in standalone Neovim (not VSCode)
+---@return boolean
+function M.not_vscode()
+  return vim.g.vscode == nil
+end
+
 
 return M

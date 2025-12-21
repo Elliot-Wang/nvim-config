@@ -1,5 +1,8 @@
 local utils = require("utils")
 
+-- Helper variable for conditional plugin loading
+local not_vscode = not vim.g.vscode
+
 local plugin_dir = vim.fn.stdpath("data") .. "/lazy"
 local lazypath = plugin_dir .. "/lazy.nvim"
 
@@ -32,6 +35,7 @@ local function syntaxPlugs()
     { "cespare/vim-toml",          ft = { "toml" },     branch = "main" },
     {
       "romgrk/nvim-treesitter-context",
+      cond = not_vscode,
       config = function()
         require("treesitter-context").setup {
           enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -54,6 +58,7 @@ local function syntaxPlugs()
     -- common
     {
       "nvim-treesitter/nvim-treesitter",
+      cond = not_vscode,
       enabled = function()
         if vim.g.is_mac then
           return true
@@ -74,29 +79,30 @@ end
 local function colorschemePlugs()
   addPlugins({
     -- A list of colorscheme plugin you may want to try. Find what suits you.
-    { "navarasu/onedark.nvim",       lazy = true },
-    { "sainnhe/edge",                lazy = true },
-    { "sainnhe/sonokai",             lazy = true },
-    { "sainnhe/gruvbox-material",    lazy = true },
-    { "sainnhe/everforest",          lazy = true },
-    { "EdenEast/nightfox.nvim",      lazy = true },
-    { "catppuccin/nvim",             name = "catppuccin", lazy = true },
-    { "olimorris/onedarkpro.nvim",   lazy = true },
-    { "marko-cerovac/material.nvim", lazy = true },
-    { "dracula/vim",                 name = "dracula",    lazy = true },
+    { "navarasu/onedark.nvim",       lazy = true, cond = not_vscode },
+    { "sainnhe/edge",                lazy = true, cond = not_vscode },
+    { "sainnhe/sonokai",             lazy = true, cond = not_vscode },
+    { "sainnhe/gruvbox-material",    lazy = true, cond = not_vscode },
+    { "sainnhe/everforest",          lazy = true, cond = not_vscode },
+    { "EdenEast/nightfox.nvim",      lazy = true, cond = not_vscode },
+    { "catppuccin/nvim",             name = "catppuccin", lazy = true, cond = not_vscode },
+    { "olimorris/onedarkpro.nvim",   lazy = true, cond = not_vscode },
+    { "marko-cerovac/material.nvim", lazy = true, cond = not_vscode },
+    { "dracula/vim",                 name = "dracula",    lazy = true, cond = not_vscode },
     {
       "rockyzhang24/arctic.nvim",
+      cond = not_vscode,
       dependencies = { "rktjmp/lush.nvim" },
       name = "arctic",
       branch = "v2",
     },
-    { "rebelot/kanagawa.nvim", lazy = true },
+    { "rebelot/kanagawa.nvim", lazy = true, cond = not_vscode },
   })
 end
 
 local function gitPlugs()
   addPlugins({
-    -- Git command inside vim
+    -- Git command inside vim (keep for VSCode)
     {
       "tpope/vim-fugitive",
       event = "User InGitRepo",
@@ -106,17 +112,18 @@ local function gitPlugs()
     },
 
     -- Better git log display
-    { "rbong/vim-flog",            cmd = { "Flog" } },
+    { "rbong/vim-flog",            cmd = { "Flog" }, cond = not_vscode },
     { "akinsho/git-conflict.nvim", version = "*",   config = true },
     {
       "ruifm/gitlinker.nvim",
+      cond = not_vscode,
       event = "User InGitRepo",
       config = function()
         require("config.git-linker")
       end,
     },
 
-    -- Show git change (change, delete, add) signs in vim sign column
+    -- Show git change (change, delete, add) signs in vim sign column (keep for VSCode)
     {
       "lewis6991/gitsigns.nvim",
       config = function()
@@ -126,9 +133,11 @@ local function gitPlugs()
 
     {
       "sindrets/diffview.nvim",
+      cond = not_vscode,
     },
     {
       "kdheepak/lazygit.nvim",
+      cond = not_vscode,
       lazy = true,
       cmd = {
         "LazyGit",
@@ -176,6 +185,7 @@ local function linkPlugs()
     -- not be possible since we maybe in a server which disables GUI.
     {
       "chrishrb/gx.nvim",
+      cond = not_vscode,
       keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
       cmd = { "Browse" },
       init = function()
@@ -201,6 +211,7 @@ local function helperPlugs()
     -- fancy start screen
     {
       "nvimdev/dashboard-nvim",
+      cond = not_vscode,
       config = function()
         require("config.dashboard-nvim")
       end,
@@ -209,6 +220,7 @@ local function helperPlugs()
     -- fold
     {
       "kevinhwang91/nvim-ufo",
+      cond = not_vscode,
       dependencies = "kevinhwang91/promise-async",
       event = "VeryLazy",
       opts = {},
@@ -226,13 +238,14 @@ local function helperPlugs()
     -- fold sign is clickable
     {
       "luukvbaal/statuscol.nvim",
+      cond = not_vscode,
       opts = {},
       config = function()
         require("config.nvim-statuscol")
       end,
     },
 
-    -- Modern matchit implementation
+    -- Modern matchit implementation (keep for VSCode)
     {
       "andymass/vim-matchup",
       event = "CursorMoved",
@@ -241,10 +254,10 @@ local function helperPlugs()
       end,
     },
 
-    -- Autosave files on certain events
+    -- Autosave files on certain events (keep for VSCode)
     { "907th/vim-auto-save", event = "InsertEnter" },
 
-    -- Manage your yank history
+    -- Manage your yank history (keep for VSCode)
     {
       "gbprod/yanky.nvim",
       config = function()
@@ -254,11 +267,12 @@ local function helperPlugs()
     },
 
     -- Session management plugin
-    { "tpope/vim-obsession", cmd = "Obsession" },
+    { "tpope/vim-obsession", cmd = "Obsession", cond = not_vscode },
 
     -- yank history manager for linux
     {
       "ojroques/vim-oscyank",
+      cond = not_vscode,
       enabled = function()
         if vim.g.is_linux then
           return true
@@ -271,12 +285,14 @@ local function helperPlugs()
     -- showing keybindings
     {
       "folke/which-key.nvim",
+      cond = not_vscode,
       enabled = false,
       event = "VeryLazy",
       config = function()
         require("config.which-key")
       end,
     },
+    -- hop for quick navigation (keep for VSCode)
     {
       "smoka7/hop.nvim",
       event = "BufRead",
@@ -288,6 +304,7 @@ local function helperPlugs()
     -- show global result while edit command
     {
       "smjonas/live-command.nvim",
+      cond = not_vscode,
       -- live-command supports semantic versioning via Git tags
       -- tag = "2.*",
       cmd = "Preview",
@@ -298,10 +315,11 @@ local function helperPlugs()
     },
 
     -- Asynchronous command execution
-    { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
+    { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" }, cond = not_vscode },
 
     {
       "keaising/im-select.nvim",
+      cond = not_vscode,
       enabled = function()
         if utils.executable('im-select') then
           return true
@@ -330,6 +348,7 @@ local function helperPlugs()
 
     {
       "lyokha/vim-xkbswitch",
+      cond = not_vscode,
       enabled = function()
         if vim.g.is_mac and utils.executable("xkbswitch") then
           return true
@@ -405,6 +424,7 @@ local function sidebarPlugs()
 
     {
       "nvim-neo-tree/neo-tree.nvim",
+      cond = not_vscode,
       branch = "v2.x",
       dependencies = {
         "nvim-lua/plenary.nvim",
@@ -420,6 +440,7 @@ local function sidebarPlugs()
     -- show file tags in vim window
     {
       "liuchengxu/vista.vim",
+      cond = not_vscode,
       enabled = function()
         if utils.executable("ctags") then
           return true
@@ -431,10 +452,11 @@ local function sidebarPlugs()
     },
 
     -- Show undo history visually
-    { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
+    { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" }, cond = not_vscode },
 
     {
       "kevinhwang91/nvim-bqf",
+      cond = not_vscode,
       event = { "BufRead", "BufNew" },
       ft = "qf",
       config = function()
@@ -464,6 +486,7 @@ local function sidebarPlugs()
     -- minimap
     {
       "wfxr/minimap.vim",
+      cond = not_vscode,
       enabled = function()
         if utils.executable("code-minimap") then
           return true
@@ -489,6 +512,7 @@ local function snippetPlugs()
     -- Snippet engine and snippet template
     {
       "SirVer/ultisnips",
+      cond = not_vscode,
       dependencies = {
         "honza/vim-snippets",
       },
@@ -514,6 +538,7 @@ local function completionPlugs()
     -- auto-completion engine
     {
       "iguanacucumber/magazine.nvim",
+      cond = not_vscode,
       name = "nvim-cmp",
       -- event = 'InsertEnter',
       event = "VeryLazy",
@@ -532,6 +557,7 @@ local function completionPlugs()
     -- The missing auto-completion for cmdline!
     {
       "gelguy/wilder.nvim",
+      cond = not_vscode,
       build = ":UpdateRemotePlugins",
     },
   })
@@ -542,12 +568,14 @@ local function lspPlugs()
     -- debugger
     {
       'mfussenegger/nvim-dap',
+      cond = not_vscode,
       config = function()
         require("config.nvim-dap")
       end
     },
     {
       "rcarriga/nvim-dap-ui",
+      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
       config = function()
         require("config.nvim-dap-ui")
@@ -555,6 +583,7 @@ local function lspPlugs()
     },
     {
       "leoluz/nvim-dap-go",
+      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap" },
       enabled = function()
         if utils.executable('go') then
@@ -569,6 +598,7 @@ local function lspPlugs()
     },
     {
       "mfussenegger/nvim-dap-python",
+      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap" },
       enabled = function()
         if utils.executable('debugpy') then
@@ -585,6 +615,7 @@ local function lspPlugs()
     -- lsp config
     {
       "neovim/nvim-lspconfig",
+      cond = not_vscode,
       event = { "BufRead", "BufNewFile" },
       config = function()
         require("config.lsp")
@@ -603,6 +634,7 @@ local function lspPlugs()
     -- copilot
     {
       "github/copilot.vim",
+      cond = not_vscode,
       config = function()
         require("config.copilot")
       end,
@@ -610,12 +642,13 @@ local function lspPlugs()
 
     -- Auto format tools
     -- supports https://github.com/sbdchd/neoformat?tab=readme-ov-file#supported-filetypes
-    { "sbdchd/neoformat", cmd = { "Neoformat" } },
+    { "sbdchd/neoformat", cmd = { "Neoformat" }, cond = not_vscode },
 
     {
       -- show hint for code actions, the user can also implement code actions themselves,
       -- see discussion here: https://github.com/neovim/neovim/issues/14869
       "kosayoda/nvim-lightbulb",
+      cond = not_vscode,
       config = function()
         require("nvim-lightbulb").setup { autocmd = { enabled = true } }
       end,
@@ -624,12 +657,14 @@ local function lspPlugs()
     -- lsp servers --
     {
       "folke/lazydev.nvim",
+      cond = not_vscode,
       ft = "lua", -- only load on lua files
       opts = {},
     },
 
     {
       "ray-x/go.nvim",
+      cond = not_vscode,
       enabled = function()
         if utils.executable('go') then
           return true
@@ -656,12 +691,13 @@ local function markdownPlugs()
   addPlugins({
     {
       "MeanderingProgrammer/markdown.nvim",
+      cond = not_vscode,
       main = "render-markdown",
       opts = {},
       dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     },
     -- Another markdown plugin
-    { "preservim/vim-markdown", ft = { "markdown" } },
+    { "preservim/vim-markdown", ft = { "markdown" }, cond = not_vscode },
 
     -- Faster footnote generation
     -- { "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } },
@@ -669,6 +705,7 @@ local function markdownPlugs()
     -- Markdown previewing (only for Mac and Windows)
     {
       "iamcco/markdown-preview.nvim",
+      cond = not_vscode,
       enabled = function()
         if vim.g.is_win or vim.g.is_mac then
           return true
@@ -691,6 +728,7 @@ local function markdownPlugs()
     },
     {
       "rhysd/vim-grammarous",
+      cond = not_vscode,
       enabled = function()
         -- if vim.g.is_mac then
         --   return true
@@ -701,6 +739,7 @@ local function markdownPlugs()
     },
     {
       "epwalsh/obsidian.nvim",
+      cond = not_vscode,
       version = "*", -- recommended, use latest release instead of latest commit
       enabled = function()
         return _G.enable_obsidian
@@ -740,7 +779,7 @@ end
 
 local function searchPlugs()
   addPlugins({
-    -- Show match number and index for searching
+    -- Show match number and index for searching (keep for VSCode)
     {
       "kevinhwang91/nvim-hlslens",
       branch = "main",
@@ -751,10 +790,12 @@ local function searchPlugs()
     },
     {
       "folke/todo-comments.nvim",
+      cond = not_vscode,
       dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
       "Yggdroot/LeaderF",
+      cond = not_vscode,
       cmd = "Leaderf",
       build = function()
         local leaderf_path = plugin_dir .. "/LeaderF"
@@ -768,6 +809,7 @@ local function searchPlugs()
     },
     {
       "nvim-telescope/telescope.nvim",
+      cond = not_vscode,
       -- cmd = "Telescope",
       dependencies = {
         "nvim-telescope/telescope-symbols.nvim",
@@ -779,12 +821,14 @@ local function searchPlugs()
     },
     {
       "nvim-telescope/telescope-frecency.nvim",
+      cond = not_vscode,
       config = function()
         require("telescope").load_extension("frecency")
       end,
     },
     {
       'nvim-telescope/telescope-project.nvim',
+      cond = not_vscode,
       dependencies = {
         'nvim-telescope/telescope.nvim',
       },
@@ -795,6 +839,7 @@ local function searchPlugs()
     {
       -- :Telescope media_files
       'nvim-telescope/telescope-media-files.nvim',
+      cond = not_vscode,
       enabled = false,
       config = function()
         require('telescope').load_extension('media_files')
@@ -802,6 +847,7 @@ local function searchPlugs()
     },
     {
       'dhruvmanila/browser-bookmarks.nvim',
+      cond = not_vscode,
       version = '*',
       -- Only required to override the default options
       opts = {
@@ -809,10 +855,11 @@ local function searchPlugs()
         selected_browser = 'arc'
       },
     },
-    'crispgm/telescope-heading.nvim',
+    { 'crispgm/telescope-heading.nvim', cond = not_vscode },
     {
       {
         "FeiyouG/commander.nvim",
+        cond = not_vscode,
         config = function()
           require('config.commander')
         end
@@ -839,10 +886,11 @@ end
 
 local function uiPlugs()
   addPlugins({
-    { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+    { "nvim-tree/nvim-web-devicons", event = "VeryLazy", cond = not_vscode },
 
     {
       "nvim-lualine/lualine.nvim",
+      cond = not_vscode,
       event = "VeryLazy",
       config = function()
         require("config.lualine")
@@ -851,6 +899,7 @@ local function uiPlugs()
 
     {
       "akinsho/bufferline.nvim",
+      cond = not_vscode,
       event = { "BufEnter" },
       config = function()
         require("config.bufferline")
@@ -860,6 +909,7 @@ local function uiPlugs()
     -- Extensible UI for Neovim notifications and LSP progress messages.
     {
       "j-hui/fidget.nvim",
+      cond = not_vscode,
       enabled = false,
       event = "VeryLazy",
       tag = "legacy",
@@ -871,6 +921,7 @@ local function uiPlugs()
     -- notification plugin
     {
       "rcarriga/nvim-notify",
+      cond = not_vscode,
       -- event = "VeryLazy",
       config = function()
         require("config.nvim-notify")
@@ -878,10 +929,11 @@ local function uiPlugs()
     },
 
     -- better UI for some nvim actions
-    { "stevearc/dressing.nvim" },
+    { "stevearc/dressing.nvim", cond = not_vscode },
 
     {
       "lukas-reineke/indent-blankline.nvim",
+      cond = not_vscode,
       event = "VeryLazy",
       main = "ibl",
       config = function()
@@ -891,6 +943,7 @@ local function uiPlugs()
 
     {
       "tribela/transparent.nvim",
+      cond = not_vscode,
       enabled = _G.enable_transparent,
     },
   })
@@ -901,6 +954,7 @@ local function fileBrowserPlugs()
     -- yazi <C-c> to close
     {
       "mikavilpas/yazi.nvim",
+      cond = not_vscode,
       event = "VeryLazy",
       keys = {
         {
