@@ -3,9 +3,29 @@ local api = vim.api
 local keymap = vim.keymap
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
-local lspconfig = require("lspconfig")
 
 local utils = require("utils")
+
+-- Version detection and compatibility layer
+local nvim_version = vim.version()
+local is_nvim_011 = nvim_version.major == 0 and nvim_version.minor >= 11
+
+-- For Neovim 0.10, we need lspconfig
+local lspconfig = nil
+if not is_nvim_011 then
+  lspconfig = require("lspconfig")
+end
+
+-- Unified LSP setup function for both 0.10 and 0.11
+local function setup_lsp(server_name, config)
+  if is_nvim_011 then
+    -- Neovim 0.11+ uses vim.lsp.config
+    vim.lsp.config(server_name, config)
+  else
+    -- Neovim 0.10 uses lspconfig
+    lspconfig[server_name].setup(config)
+  end
+end
 
 -- set quickfix list from diagnostics in a certain buffer, not the whole workspace
 local set_qflist = function(buf_num, severity)
@@ -179,7 +199,7 @@ if utils.executable('pyright') then
   }
   local merged_capability = vim.tbl_deep_extend("force", capabilities, new_capability)
 
-  lspconfig.pyright.setup {
+  setup_lsp("pyright", {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
     on_attach = custom_attach,
@@ -211,13 +231,13 @@ if utils.executable('pyright') then
         },
       },
     },
-  }
+  })
 else
   vim.notify("pyright not found!", vim.log.levels.WARN, { title = 'Nvim-config' })
 end
 
 if utils.executable("ruff") then
-  lspconfig.ruff.setup({
+  setup_lsp("ruff", {
     on_attach = custom_attach,
     capabilities = capabilities,
     init_options = {
@@ -248,7 +268,7 @@ if utils.executable("ruff") then
 end
 
 if utils.executable("gopls") then
-  lspconfig.gopls.setup({
+  setup_lsp("gopls", {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
     on_attach = custom_attach,
@@ -268,7 +288,7 @@ if utils.executable("gopls") then
 end
 
 if utils.executable("ltex-ls") then
-  lspconfig.ltex.setup {
+  setup_lsp("ltex", {
     on_attach = custom_attach,
     cmd = { "ltex-ls" },
     filetypes = { "text", "plaintex", "tex", "markdown" },
@@ -278,16 +298,16 @@ if utils.executable("ltex-ls") then
       },
     },
     flags = { debounce_text_changes = 300 },
-  }
+  })
 end
 
 
 if utils.executable("lemminx") then
-  lspconfig.lemminx.setup {}
+  setup_lsp("lemminx", {})
 end
 
 if utils.executable("clangd") then
-  lsp.config("clangd", {
+  setup_lsp("clangd", {
     on_attach = custom_attach,
     capabilities = capabilities,
     filetypes = { "c", "cpp", "cc" },
@@ -299,26 +319,26 @@ end
 
 -- set up vim-language-server
 if utils.executable("vim-language-server") then
-  lspconfig.vimls.setup {
+  setup_lsp("vimls", {
     on_attach = custom_attach,
     flags = {
       debounce_text_changes = 500,
     },
     capabilities = capabilities,
-  }
+  })
 end
 
 -- set up bash-language-server
 if utils.executable("bash-language-server") then
-  lspconfig.bashls.setup {
+  setup_lsp("bashls", {
     on_attach = custom_attach,
     capabilities = capabilities,
-  }
+  })
 end
 
 -- settings for lua-language-server can be found on https://luals.github.io/wiki/settings/
 if utils.executable("lua-language-server") then
-  lspconfig.lua_ls.setup {
+  setup_lsp("lua_ls", {
     on_attach = custom_attach,
     settings = {
       Lua = {
@@ -332,6 +352,6 @@ if utils.executable("lua-language-server") then
       },
     },
     capabilities = capabilities,
-  }
+  })
 end
 
