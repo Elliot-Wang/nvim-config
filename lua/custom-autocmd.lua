@@ -141,10 +141,15 @@ api.nvim_create_autocmd("TermOpen", {
 -- Return to last cursor position when opening a file, note that here we cannot use BufReadPost
 -- as event. It seems that when BufReadPost is triggered, FileType event is still not run.
 -- So the filetype for this buffer is empty string.
+-- Skip in VSCode as it handles cursor restoration natively and can cause "Cursor position outside buffer" errors.
 api.nvim_create_autocmd("FileType", {
   group = api.nvim_create_augroup("resume_cursor_position", { clear = true }),
   pattern = "*",
   callback = function(ev)
+    if vim.g.vscode then
+      return
+    end
+
     local mark_pos = api.nvim_buf_get_mark(ev.buf, '"')
     local last_cursor_line = mark_pos[1]
 
