@@ -4,33 +4,21 @@
 
 ## fuzzy searcher
 
-| mapping | effect | LeaderF action | telescope action |
-| --- | --- | --- | --- |
-| gf | find file | `:<C-U>Leaderf file --popup<CR>` | `builtin.find_files` |
-| <Leader>se | search through files | `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>` | `builtin.live_grep` |
-| <C-f> | search at current buffer | `:<C-U>Leaderf line --popup<CR>` | `builtin.current_buffer_fuzzy_find` |
-| gm | buffer tags | `:<C-U>Leaderf bufTag --popup<CR>` | *tags file not found* |
-| ge | find buffer | `:<C-U>Leaderf buffer --popup<CR>` | `builtin.buffers` |
-| go | currently opened files | `:<C-U>Leaderf mru --popup --absolute-path<CR>` | `builtin.oldfiles` |
-| <C-p> | show commands | | *show projects* |
+Primary: **Telescope**, LeaderF partially used.
 
-### LeaderF
-- gf `:<C-U>Leaderf file --popup<CR>`
-- <Leader>se `:<C-U>Leaderf rg --no-messages --popup  --nameOnly<CR>`
-- <C-f> `:<C-U>Leaderf line --popup<CR>`
-- gm `:<C-U>Leaderf bufTag --popup<CR>`
-- ge `:<C-U>Leaderf buffer --popup<CR>`
-- go `:<C-U>Leaderf mru --popup --absolute-path<CR>`
+| mapping | effect | action |
+| --- | --- | --- |
+| gf | find file (frecency) | `Telescope frecency` |
+| <space>se | search through files | `builtin.live_grep` |
+| <C-f> | search at current buffer | `builtin.current_buffer_fuzzy_find` |
+| gm | buffer tags | `:<C-U>Leaderf bufTag --popup<CR>` (LeaderF) |
+| ge | find buffer | `builtin.buffers` |
+| gd | LSP references | `builtin.lsp_references` |
+| <C-p> | show commands | `builtin.commands` |
 
 ### telescope
-required by other plugin, such as
-- obsidian.vim
-
-- additional
-  - `FeiyouG/commander.nvim`
-
-### fzf
-none
+- extensions: frecency, project, heading, browser-bookmarks
+- used by: obsidian.nvim, commander.nvim
 
 ## file browser - yazi
 - `gy` open at file
@@ -58,30 +46,16 @@ none
 
 
 ## sidebar
-- nvim-tree
-- vista
-  - preview
-  - [options](https://github.com/liuchengxu/vista.vim?tab=readme-ov-file#options)
+- neo-tree (primary explorer)
+  - `tt` toggle neo-tree
+  - `tg` git status view
+  - `tb` buffer view
+- vista (conditional on ctags)
+  - `tm` show tags
 - undo history: vim-mundo
+  - `tu` toggle undo tree
 - quickfix: nvim-bqf
-- minimap
-
-### undo history
-- `simnalamburt/vim-mundo` (vim)
-- `mbbill/undotree` (vim)
-
-
-### minimap
-- `wfxr/minimap.vim` (vim)
-
-### explorer
-- nvim-tree
-- neo-tree
-  - preview
-  - filter/searcher
-  - git status
-  - buffers
-- nerdtree (vim)
+- minimap (conditional on code-minimap)
 
 ## status line
 - a: mode
@@ -133,115 +107,52 @@ none
 
 ## colorscheme
 
-colorschema, because of lazy load. colorschema implement not work for not loaded colorschema.
-
-- "navarasu/onedark.nvim"
-    ```vim
-    " Vim
-let g:onedark_config = {
-    \ 'style': 'darker',
-\}
-" Options: dark, darker, cool, deep, warm, warmer, light
-colorscheme onedark
-    ```
-- "sainnhe/edge"
-- "sainnhe/sonokai"
-- "sainnhe/gruvbox-material"
-- "sainnhe/everforest"
-- "EdenEast/nightfox.nvim"
-- "catppuccin/nvim"
-  > colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-- "olimorris/onedarkpro.nvim"
-- "marko-cerovac/material.nvim"
-- "rockyzhang24/arctic.nvim"
-- "rebelot/kanagawa.nvim"
-- "dracula/vim"
+Available (lazy loaded):
+- onedark.nvim (dark, darker, cool, deep, warm, warmer, light)
+- edge
+- sonokai
+- gruvbox-material
+- everforest
+- nightfox.nvim
+- catppuccin (latte, frappe, macchiato, mocha)
+- onedarkpro.nvim
+- material.nvim
+- arctic.nvim
+- kanagawa.nvim
+- dracula
 
 ## git
 
 ### external tool - lazygit
-
-```lua
-{
-    "kdheepak/lazygit.nvim",
-    lazy = true,
-    cmd = {
-        "LazyGit",
-        "LazyGitConfig",
-        "LazyGitCurrentFile",
-        "LazyGitFilter",
-        "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-        { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
-}
-```
+- `gl` open LazyGit
+- auto-installs via Homebrew on macOS
 
 
 ### git plugin group
 
 plugins
 - fugitive, git common cmd
-    - `leader+gs` git show status
-    - `leader+ga` git add file
-    - `leader+gc` git commit
-    - `leader+gl` git pull
-    - `leader+gp` git push
-    - `leader+gbl` git blame
-    - `leader+gbn` git checkout or craete new branch
-    - `leader+gbd` git delete branch
-    - `:Git` fugitive-summary, there are a bunch of keys.
-- vim-flog, display log, one feature, it's optional
+    - `<leader>gs` git show status
+    - `<leader>ga` git add file
+    - `<leader>gc` git commit
+    - `<leader>gl` git pull
+    - `<leader>gp` git push
+    - `<leader>gf` git fetch
+    - `<leader>gbl` git blame
+    - `<leader>gbn` git create new branch
+    - `<leader>gbd` git delete branch
+    - `:Git` fugitive-summary
+- vim-flog, display log
     - `:Flog`
-- git-conflict, for resolving conflict, effective at some condition
-- git-linker, browser repo
-    - `leader+gk` Git permlink for commited line.
-    - `leader+grp` Git open repo link in browser
-- gitsigns, show sign on side column. navigate between hunk
+- git-conflict, for resolving conflict
+- gitlinker, browser repo
+    - `<leader>gk` Git permlink for commited line
+    - `<leader>grp` Git open repo link in browser
+- gitsigns, show sign on side column, navigate between hunk
     - `[c`, `]c` navigate between hunks
-    - `leader+hp` preview hunk, use `[c`, `]c` to switch between hunks
-    - `leader+hb` blame line, dont known how to scroll, and only last commit?
+    - `<leader>hp` preview hunk
+    - `<leader>hb` blame line
 - diffview, powerful diff tools
-- todo
-    - discard staged
-
-```lua
--- Git command inside vim
-{
-    "tpope/vim-fugitive",
-    event = "User InGitRepo",
-    config = function()
-        require("config.fugitive")
-    end,
-},
--- Better git log display
-{ "rbong/vim-flog", cmd = { "Flog" } },
-{ "akinsho/git-conflict.nvim", version = "*", config = true },
-{
-    "ruifm/gitlinker.nvim",
-    event = "User InGitRepo",
-    config = function()
-        require("config.git-linker")
-    end,
-},
--- Show git change (change, delete, add) signs in vim sign column
-{
-    "lewis6991/gitsigns.nvim",
-    config = function()
-        require("config.gitsigns")
-    end,
-},
-{
-    "sindrets/diffview.nvim",
-},
-```
 
 ## ft config
 
@@ -262,133 +173,51 @@ indent = 2
 
 ## completion
 
-*completion condition*
-
-```lua
-sources = {
-  { name = "nvim_lsp" }, -- For nvim-lsp
-  { name = "ultisnips" }, -- For ultisnips user.
-  { name = "path" }, -- for path completion
-  { name = "buffer", keyword_length = 2 }, -- for buffer word completion
-},
-completion = {
-  keyword_length = 2,
-  completeopt = "menu,noselect",
-},
-```
+sources: nvim_lsp, ultisnips, path, buffer
 
 ### completion hotkeys
 - `<C-n>/<C-p>` select next and previous
-- `CR` confirm, not auto select
-- `<C-d>\<C-f>` scroll doc
+- `<CR>` confirm
+- `<C-d>/<C-f>` scroll doc
+- `<C-e>` abort
 - snippet
   - `<Tab>` trigger or jump forwards
   - `<S-Tab>` jump backwards
 - copilot
-  - `<C-j>` text queued for insertion
-  - `<M-]>` cycle to the next suggestion
-  - `<M-[>` cycle to the previous suggestion
-  - `<M-\>` Explicitly request a suggestion, even if Copilot `<Plug>(copilot-suggest)` is disabled.
-  - `<M-Right>` Accept the next **word** of the current suggestion.
-  - `<M-C-Right>` Accept the next **line** of the current suggestion.
-
-```lua
-["<C-n>"] = function(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
-  else
-    fallback()
-  end
-end,
-["<C-p>"] = function(fallback)
-  if cmp.visible() then
-    cmp.select_prev_item()
-  else
-    fallback()
-  end
-end,
-["<Tab>"] = function(fallback)
-  cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-end,
-["<S-Tab>"] = function(fallback)
-  cmp_ultisnips_mappings.jump_backwards(fallback)
-end,
-["<CR>"] = cmp.mapping.confirm { select = true },
-
-["<C-e>"] = cmp.mapping.abort(),
-["<Esc>"] = cmp.mapping.close(),
-["<C-d>"] = cmp.mapping.scroll_docs(-4),
-["<C-f>"] = cmp.mapping.scroll_docs(4),
-```
+  - `<C-j>` accept suggestion
+  - `<M-]>/<M-[>` cycle suggestions
+  - `<M-Right>` accept next word
+  - `<M-C-Right>` accept next line
 
 ## LSP
-```lua
--- auto-completion engine
-{
-    "iguanacucumber/magazine.nvim",
-    name = "nvim-cmp",
-    -- event = 'InsertEnter',
-    event = "VeryLazy",
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "onsails/lspkind-nvim",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-omni",
-        "quangnguyen30192/cmp-nvim-ultisnips",
-    },
-    config = function()
-        require("config.nvim-cmp")
-    end,
-},
-{
-    "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-        require("config.lsp")
-    end,
-},
-
--- Extensible UI for Neovim notifications and LSP progress messages.
-{
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    tag = "legacy",
-    config = function()
-        require("config.fidget-nvim")
-    end,
-},
-```
 
 ### lsp hotkeys
 - navigate
-  - `gd`: go to definition
-  - `gr`: go to references
+  - `gd`: go to references (via telescope)
   - `[d`, `]d`: navigate diagnostic
 - code
-  - `<space>+rn`: rename variable
-  - `<space>+ca`: code action
-  - `<space>+fm`: code format
+  - `<space>rn`: rename variable
+  - `<space>ca`: code action
+  - `<space>fm`: code format
 - workspace
-  - `<space>+wl`: list workspace folders
-  - `<space>+wa`: add workspace folder
-  - `<space>+wd`: delete workspace folder
+  - `<space>wl`: list workspace folders
+  - `<space>wa`: add workspace folder
+  - `<space>wd`: delete workspace folder
 - quickfix
-  - `<space>+qf`: put diagnostics from current files to quickfix
-- `<c-q>` show document, **symbol help**
-- show function info?
+  - `<space>qf`: put diagnostics from current files to quickfix
+- `<C-q>` show signature help
 
 ### lsp languages
-[nvim-lspconfig 配置文档](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md)
-
-- ~~java~~, idea is much better than any lsp, forget it!
-- lua
-- vim
-- python, pyright
-- bash
-- json
-- javascript/typescript
-- go
+Configured (conditional on executable):
+- lua (lua_ls)
+- vim (vimls)
+- python (pyright + ruff)
+- bash (bashls)
+- go (gopls)
+- C/C++ (clangd)
+- xml (lemminx)
+- latex/markdown (ltex)
+- java (nvim-java)
 
 ## buffers and tabs
 
