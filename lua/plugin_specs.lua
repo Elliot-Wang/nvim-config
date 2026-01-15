@@ -278,7 +278,7 @@ local function helperPlugs()
     },
 
     -- Autosave files on certain events (keep for VSCode)
-    { "907th/vim-auto-save", event = "InsertEnter" },
+    { "907th/vim-auto-save", event = "InsertEnter", enabled = false },
 
     -- Manage your yank history (keep for VSCode)
     {
@@ -309,7 +309,7 @@ local function helperPlugs()
     {
       "folke/which-key.nvim",
       cond = not_vscode,
-      enabled = false,
+      enabled = true,
       event = "VeryLazy",
       config = function()
         require("config.which-key")
@@ -656,23 +656,20 @@ local function lspPlugs()
       config = true,
       keys = {
         { "<leader>a", nil, desc = "AI/Claude Code" },
-        -- { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-        { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-        { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
         { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
         -- focus management
-        { "<C-]>", "<cmd>ClaudeCodeFocus<cr>", mode="n", desc = "Focus Claude" },
+        { "<C-]>", "<cmd>ClaudeCode --resume<cr>", mode="n", desc = "Focus Claude" },
         { "<C-]>", [[<c-\><c-n><cmd>ClaudeCodeFocus<cr>]], mode="t", desc = "Close Claude" },
         -- send to claude
-        --{ "<leader>as", "<cmd>ClaudeCodeAdd %<cr><cmd>ClaudeCodeFocus<cr>", mode="n", desc = "Add current buffer and chat" },
-        { "<leader>as", "<cmd>ClaudeCodeAdd %<cr>", mode="n", desc = "Add current buffer" },
-        --{ "<leader>as", "<cmd>ClaudeCodeSend<cr><cmd>ClaudeCodeFocus<cr>", mode = "v", desc = "Send to Claude and chat" },
-        { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-        { "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file",
+        { "<leader>aa", "<cmd>ClaudeCodeAdd %<cr>", mode="n", desc = "Add current buffer" },
+        { "<leader>aa", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+        { "<leader>aa", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file",
           ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
         },
         -- Diff management
-        { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+        -- :w Accep diff
+        -- :q Deny diff
+        { "<leader>ac", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
         { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
       }
     },

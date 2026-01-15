@@ -241,16 +241,14 @@ Integration with [Claude Code](https://github.com/anthropics/claude-code) via [c
 
 | Shortcut     | Mode          | Description                                      |
 |--------------|---------------|--------------------------------------------------|
-| `<leader>ar` | Normal        | Resume Claude (previous conversation)            |
-| `<leader>aC` | Normal        | Continue Claude                                  |
 | `<leader>am` | Normal        | Select Claude model                              |
-| `<C-]>`      | Normal        | Focus Claude terminal                            |
+| `<C-]>`      | Normal        | Resume Claude (previous conversation)            |
 | `<C-]>`      | Terminal      | Close/unfocus Claude terminal                    |
-| `<leader>as` | Normal        | Add current buffer to Claude context             |
-| `<leader>as` | Visual        | Send selection to Claude                         |
-| `<leader>as` | File Explorer | Add file to Claude context (NvimTree, neo-tree, oil, minifiles, netrw) |
-| `<leader>aa` | Normal        | Accept diff from Claude                          |
-| `<leader>ad` | Normal        | Deny diff from Claude                            |
+| `<leader>aa` | Normal        | Add current buffer to Claude context             |
+| `<leader>aa` | Visual        | Send selection to Claude                         |
+| `<leader>aa` | File Explorer | Add file to Claude context (NvimTree, neo-tree, oil, minifiles, netrw) |
+| `<leader>ac` or `:w` | Normal        | Accept diff from Claude                          |
+| `<leader>ad` or `:q` | Normal        | Deny diff from Claude                            |
 
 # Custom commands
 
