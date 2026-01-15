@@ -86,7 +86,7 @@ keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "change
 
 -- Use Esc to quit builtin terminal
 -- conflict with lazygit windows
--- keymap.set("t", "<Esc>", [[<c-\><c-n>]])
+keymap.set("t", "<C-]>", [[<c-\><c-n><C-w>p]], { desc = "exit terminal mode and go to last panel"})
 
 -- Change text without putting it into the vim register,
 -- see https://stackoverflow.com/q/54255/6064933

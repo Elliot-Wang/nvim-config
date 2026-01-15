@@ -208,6 +208,29 @@ end
 
 local function helperPlugs()
   addPlugins({
+    {
+      "folke/snacks.nvim",
+      priority = 1000,
+      lazy = false,
+      ---@type snacks.Config
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        bigfile = { enabled = true },
+        dashboard = { enabled = true },
+        explorer = { enabled = true },
+        indent = { enabled = true },
+        input = { enabled = true },
+        picker = { enabled = true },
+        notifier = { enabled = true },
+        quickfile = { enabled = true },
+        scope = { enabled = true },
+        scroll = { enabled = true },
+        statuscolumn = { enabled = true },
+        words = { enabled = true },
+      },
+    },
     -- fancy start screen
     {
       "nvimdev/dashboard-nvim",
@@ -622,22 +645,36 @@ local function lspPlugs()
       end,
     },
 
-    -- coc
-    -- {
-    --   "neoclide/coc.nvim",
-    --   branch = "release",
-    --   config = function()
-    --     require("config.coc")
-    --   end,
-    -- },
-
-    -- copilot
     {
-      "github/copilot.vim",
-      cond = not_vscode,
-      config = function()
-        require("config.copilot")
-      end,
+      "coder/claudecode.nvim",
+      cond = vim.g.is_mac,
+      dependencies = { "folke/snacks.nvim" },
+      cmd = { "ClaudeCode", "ClaudeCodeStart" },
+      opts = {
+        terminal_cmd = "/opt/homebrew/bin/claude", -- Point to local installation
+      },
+      config = true,
+      keys = {
+        { "<leader>a", nil, desc = "AI/Claude Code" },
+        -- { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+        { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+        { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+        { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+        -- focus management
+        { "<C-]>", "<cmd>ClaudeCodeFocus<cr>", mode="n", desc = "Focus Claude" },
+        { "<C-]>", [[<c-\><c-n><cmd>ClaudeCodeFocus<cr>]], mode="t", desc = "Close Claude" },
+        -- send to claude
+        --{ "<leader>as", "<cmd>ClaudeCodeAdd %<cr><cmd>ClaudeCodeFocus<cr>", mode="n", desc = "Add current buffer and chat" },
+        { "<leader>as", "<cmd>ClaudeCodeAdd %<cr>", mode="n", desc = "Add current buffer" },
+        --{ "<leader>as", "<cmd>ClaudeCodeSend<cr><cmd>ClaudeCodeFocus<cr>", mode = "v", desc = "Send to Claude and chat" },
+        { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+        { "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file",
+          ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+        },
+        -- Diff management
+        { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+        { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+      }
     },
 
     -- Auto format tools
@@ -655,6 +692,17 @@ local function lspPlugs()
     },
 
     -- lsp servers --
+    {
+      'nvim-java/nvim-java',
+      ft = {
+        "java", "groovy"
+      },
+      config = function()
+        require('java').setup()
+        vim.lsp.enable('jdtls')
+      end,
+    },
+
     {
       "folke/lazydev.nvim",
       cond = not_vscode,
