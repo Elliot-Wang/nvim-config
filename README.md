@@ -216,7 +216,7 @@ Some of the shortcuts I use frequently are listed here. In the following shortcu
 | `<leader>gbl`  | Normal | Git blame                                |
 | `<leader>gbn`  | Normal | Create new branch                        |
 | `<leader>gbd`  | Normal | Delete branch                            |
-| `<leader>gg`   | Normal | Open LazyGit                             |
+| `gl`           | Normal | Open LazyGit                             |
 
 ## Editing & Misc
 
