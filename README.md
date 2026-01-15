@@ -196,6 +196,23 @@ Some of the shortcuts I use frequently are listed here. In the following shortcu
 | `ctrl-t`          | Insert        | Linux/macOS/Win | Turn word under cursor to title case                                     |
 | `jk`              | Insert        | Linux/macOS/Win | Return to Normal mode without lagging                                    |
 
+## Claude Code (AI Assistant)
+
+Integration with [Claude Code](https://github.com/anthropics/claude-code) via [claudecode.nvim](https://github.com/anthropics/claude-code/tree/main/neovim).
+
+| Shortcut     | Mode          | Description                                      |
+|--------------|---------------|--------------------------------------------------|
+| `<leader>ar` | Normal        | Resume Claude (previous conversation)            |
+| `<leader>aC` | Normal        | Continue Claude                                  |
+| `<leader>am` | Normal        | Select Claude model                              |
+| `<C-]>`      | Normal        | Focus Claude terminal                            |
+| `<C-]>`      | Terminal      | Close/unfocus Claude terminal                    |
+| `<leader>as` | Normal        | Add current buffer to Claude context             |
+| `<leader>as` | Visual        | Send selection to Claude                         |
+| `<leader>as` | File Explorer | Add file to Claude context (NvimTree, neo-tree, oil, minifiles, netrw) |
+| `<leader>aa` | Normal        | Accept diff from Claude                          |
+| `<leader>ad` | Normal        | Deny diff from Claude                            |
+
 # Custom commands
 
 In addition to commands provided by various plugins, I have also created some custom commands for personal use.
