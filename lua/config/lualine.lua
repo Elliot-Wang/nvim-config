@@ -1,5 +1,34 @@
 local fn = vim.fn
 
+-- Set filetype for terminal buffers so lualine extension can match them
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.bo.filetype = "terminal"
+  end,
+})
+
+-- Terminal extension: only show mode indicator
+local terminal_extension = {
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  filetypes = { "terminal" },
+}
+
 local function spell()
   if vim.o.spell then
     return string.format("[SPELL]")
@@ -229,5 +258,5 @@ require("lualine").setup {
     lualine_z = {},
   },
   tabline = {},
-  extensions = { "quickfix", "fugitive", "nvim-tree", "nvim-dap-ui" },
+  extensions = { "quickfix", "fugitive", "nvim-tree", "nvim-dap-ui", terminal_extension },
 }
