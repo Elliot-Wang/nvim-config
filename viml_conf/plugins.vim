@@ -95,7 +95,7 @@ map <Plug> <Plug>Markdown_EditUrlUnderCursor
 
 """"""""""""""""""""""""""""vim-sandwich settings"""""""""""""""""""""""""""""
 " Map s to nop since s in used by vim-sandwich. Use cl instead of s.
-nmap S <Nop>
+nmap S :w<CR>
 omap S <Nop>
 nmap s <Nop>
 omap s <Nop>
