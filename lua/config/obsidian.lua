@@ -8,23 +8,13 @@ require("obsidian").setup {
   },
 
   daily_notes = {
-    -- Optional, if you keep daily notes in a separate directory.
-    folder = "000 Inbox/070 Daily Log",
-    -- Optional, if you want to change the date format for the ID of daily notes.
-    date_format = "%Y-%m-%d_%w",
-    -- Optional, if you want to change the date format of the default alias of daily notes.
-    alias_format = "%B %-d, %Y",
-    -- Optional, default tags to add to each new daily note created.
-    default_tags = {},
-    -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-    template = "000 Inbox/060 Template/Daily Log Template.md"
   },
 
   -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
   -- way then set 'mappings = {}'.
   mappings = {
-    -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-    ["gf"] = {
+    -- Overrides the 'gd' mapping to work on markdown/wiki links within your vault.
+    ["gd"] = {
       action = function()
         return require("obsidian").util.gf_passthrough()
       end,
@@ -48,10 +38,5 @@ require("obsidian").setup {
 
   -- Optional, for templates (see below).
   templates = {
-    folder = "000 Inbox/060 Template",
-    date_format = "%Y-%m-%d",
-    time_format = "%H:%M",
-    -- A map for custom variables, the key should be the variable and the value a function
-    substitutions = {},
   },
 }
