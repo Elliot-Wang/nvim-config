@@ -201,5 +201,5 @@ keymap.set("n", "Q", "<cmd>bp <bar> bd #<CR>", { desc = "关闭当前 buffer" })
 keymap.set("n", "ZQ", "<cmd>qa!<CR>", { desc = "强制退出所有" })
 
 -- Fast move with J/K (migrated from custom.vim)
-keymap.set({ "n", "x" }, "J", "15jzz", { desc = "向下移动15行" })
-keymap.set({ "n", "x" }, "K", "15kzz", { desc = "向上移动15行" })
+keymap.set({ "n", "x" }, "J", "20j20<C-e>", { desc = "向下移动20行" })
+keymap.set({ "n", "x" }, "K", "20k20<C-y>", { desc = "向上移动20行" })
