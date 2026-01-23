@@ -84,6 +84,9 @@ local custom_attach = function(client, bufnr)
   -- but disable this feature by default, so you may need to enable inlay hint in the LSP server config.
   vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
 
+  -- Delete default K mapping (hover) to preserve custom K mapping in mappings.lua
+  vim.keymap.del("n", "K", { buffer = bufnr })
+
   -- display diagnostic at cursor position
   api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
