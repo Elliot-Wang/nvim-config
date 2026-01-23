@@ -8,3 +8,4 @@ _G.obsidian_opt_workspace = {
 
 _G.colorschema = 'onedark'
 _G.enable_transparent = false
+_G.claude_terminal_cmd = '/opt/homebrew/bin/claude'

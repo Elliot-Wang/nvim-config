@@ -648,7 +648,7 @@ local function lspPlugs()
       dependencies = { "folke/snacks.nvim" },
       cmd = { "ClaudeCode", "ClaudeCodeStart" },
       opts = {
-        terminal_cmd = "/opt/homebrew/bin/claude", -- Point to local installation
+        terminal_cmd = _G.claude_terminal_cmd or "claude",
       },
       config = true,
       keys = {
