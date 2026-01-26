@@ -420,6 +420,7 @@ local function stringManipulatePlugs()
 end
 
 local function sidebarPlugs()
+  if vim.g.vscode then return end
   addPlugins({
     -- file explorer
     -- {
@@ -448,7 +449,6 @@ local function sidebarPlugs()
 
     {
       "nvim-neo-tree/neo-tree.nvim",
-      cond = not_vscode,
       branch = "v2.x",
       dependencies = {
         "nvim-lua/plenary.nvim",
@@ -558,6 +558,7 @@ local function snippetPlugs()
 end
 
 local function completionPlugs()
+  if vim.g.vscode then return end
   addPlugins({
     -- auto-completion engine
     {
@@ -581,7 +582,6 @@ local function completionPlugs()
     -- The missing auto-completion for cmdline!
     {
       "gelguy/wilder.nvim",
-      cond = not_vscode,
       build = ":UpdateRemotePlugins",
     },
   })
