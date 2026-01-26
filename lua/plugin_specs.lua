@@ -588,18 +588,17 @@ local function completionPlugs()
 end
 
 local function lspPlugs()
+  if vim.g.vscode then return end
   addPlugins({
     -- debugger
     {
       'mfussenegger/nvim-dap',
-      cond = not_vscode,
       config = function()
         require("config.nvim-dap")
       end
     },
     {
       "rcarriga/nvim-dap-ui",
-      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
       config = function()
         require("config.nvim-dap-ui")
@@ -607,7 +606,6 @@ local function lspPlugs()
     },
     {
       "leoluz/nvim-dap-go",
-      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap" },
       enabled = function()
         if utils.executable('go') then
@@ -622,7 +620,6 @@ local function lspPlugs()
     },
     {
       "mfussenegger/nvim-dap-python",
-      cond = not_vscode,
       dependencies = { "mfussenegger/nvim-dap" },
       enabled = function()
         if utils.executable('debugpy') then
@@ -639,7 +636,6 @@ local function lspPlugs()
     -- lsp config
     {
       "neovim/nvim-lspconfig",
-      cond = not_vscode,
       event = { "BufRead", "BufNewFile" },
       config = function()
         require("config.lsp")
@@ -677,13 +673,12 @@ local function lspPlugs()
 
     -- Auto format tools
     -- supports https://github.com/sbdchd/neoformat?tab=readme-ov-file#supported-filetypes
-    { "sbdchd/neoformat", cmd = { "Neoformat" }, cond = not_vscode },
+    { "sbdchd/neoformat", cmd = { "Neoformat" } },
 
     {
       -- show hint for code actions, the user can also implement code actions themselves,
       -- see discussion here: https://github.com/neovim/neovim/issues/14869
       "kosayoda/nvim-lightbulb",
-      cond = not_vscode,
       config = function()
         require("nvim-lightbulb").setup { autocmd = { enabled = true } }
       end,
@@ -703,14 +698,12 @@ local function lspPlugs()
 
     {
       "folke/lazydev.nvim",
-      cond = not_vscode,
       ft = "lua", -- only load on lua files
       opts = {},
     },
 
     {
       "ray-x/go.nvim",
-      cond = not_vscode,
       enabled = function()
         if utils.executable('go') then
           return true
