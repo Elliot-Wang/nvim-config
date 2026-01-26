@@ -212,6 +212,7 @@ local function helperPlugs()
       "folke/snacks.nvim",
       priority = 1000,
       lazy = false,
+      cond = not_vscode,
       ---@type snacks.Config
       opts = {
         -- your configuration comes here
