@@ -1,6 +1,18 @@
 require("obsidian").setup {
   workspaces = _G.obsidian_opt_workspace,
 
+  -- Disable auto-generated id in frontmatter
+  note_frontmatter_func = function(note)
+    local out = {}
+    if note.tags ~= nil and not vim.tbl_isempty(note.tags) then
+      out.tags = note.tags
+    end
+    if note.aliases ~= nil and not vim.tbl_isempty(note.aliases) then
+      out.aliases = note.aliases
+    end
+    return out
+  end,
+
   -- Optional, configure additional syntax highlighting / extmarks.
   -- This requires you have `conceallevel` set to 1 or 2. See `:help conceallevel` for more details.
   ui = {
