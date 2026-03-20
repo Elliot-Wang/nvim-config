@@ -536,7 +536,7 @@ local function snippetPlugs()
     -- Snippet engine and snippet template
     {
       "SirVer/ultisnips",
-      cond = not_vscode,
+      cond = not_vscode and not vim.g.is_win,
       dependencies = {
         "honza/vim-snippets",
       },
@@ -574,6 +574,7 @@ local function completionPlugs()
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-omni",
         "quangnguyen30192/cmp-nvim-ultisnips",
+        cond = not vim.g.is_win,
       },
       config = function()
         require("config.nvim-cmp")
@@ -582,6 +583,7 @@ local function completionPlugs()
     -- The missing auto-completion for cmdline!
     {
       "gelguy/wilder.nvim",
+      cond = not_vscode,
       build = ":UpdateRemotePlugins",
     },
   })

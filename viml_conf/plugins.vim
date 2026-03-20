@@ -124,7 +124,9 @@ if g:is_win
 endif
 
 """"""""""""""""""""""""""""""wilder.nvim settings""""""""""""""""""""""""""""""
-call timer_start(250, { -> s:wilder_init() })
+if !exists('g:vscode')
+  call timer_start(250, { -> s:wilder_init() })
+endif
 
 function! s:wilder_init() abort
   try
@@ -139,7 +141,7 @@ function! s:wilder_init() abort
     call wilder#set_option('pipeline', [
           \   wilder#branch(
           \     wilder#cmdline_pipeline({
-          \       'fuzzy': 1,
+          \       'fuzzy': 2,
           \       'debounce': 30,
           \     }),
           \     wilder#vim_search_pipeline({
