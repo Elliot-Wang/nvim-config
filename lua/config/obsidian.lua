@@ -32,6 +32,20 @@ require("obsidian").setup {
       end,
       opts = { noremap = false, expr = true, buffer = true },
     },
+    -- Table of contents for the current note.
+    ["gt"] = {
+      action = function()
+        return vim.cmd("ObsidianTOC")
+      end,
+      opts = { buffer = true },
+    },
+    -- Quick switch to another note in the vault.
+    ["gf"] = {
+      action = function()
+        return vim.cmd("ObsidianQuickSwitch")
+      end,
+      opts = { buffer = true },
+    },
     -- Toggle check-boxes.
     ["<leader>ch"] = {
       action = function()
