@@ -29,7 +29,11 @@ require("obsidian").setup {
   },
 
   daily_notes = {
-    enable = false,
+    folder = "200 Journal/210 Daily",       -- 日记存放路径（相对 vault 根）
+    date_format = "%y-%m-%d_%a",       -- 文件名格式，如 26-05-08_Fri.md
+    alias_format = "%B %-d, %Y",    -- 别名格式，如 "May 8, 2026"
+    default_tags = { "daily" },     -- 新建日记自动加的 tag
+    template = "Daily Log Template.md",          -- 新建时自动套用的模板文件（从 templates.folder 读取）
   },
 
   -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
@@ -74,5 +78,10 @@ require("obsidian").setup {
 
   -- Optional, for templates (see below).
   templates = {
+    folder = "000 Meta/010 Template",
+    date_format = "%Y-%m-%d",
+    time_format = "%H:%M",
+    -- A map for custom variables, the key should be the variable and the value a function
+    substitutions = {},
   },
 }
