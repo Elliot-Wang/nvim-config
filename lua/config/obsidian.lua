@@ -1,15 +1,24 @@
 require("obsidian").setup {
   workspaces = _G.obsidian_opt_workspace,
 
-  -- Disable auto-generated id in frontmatter
+  -- Preserve all existing frontmatter fields, just skip auto-generated id
   note_frontmatter_func = function(note)
     local out = {}
+
+    -- Keep all existing metadata fields
+    if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+      for k, v in pairs(note.metadata) do
+        out[k] = v
+      end
+    end
+
     if note.tags ~= nil and not vim.tbl_isempty(note.tags) then
       out.tags = note.tags
     end
     if note.aliases ~= nil and not vim.tbl_isempty(note.aliases) then
       out.aliases = note.aliases
     end
+
     return out
   end,
 
@@ -20,6 +29,7 @@ require("obsidian").setup {
   },
 
   daily_notes = {
+    enable = false,
   },
 
   -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
