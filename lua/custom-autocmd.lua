@@ -26,6 +26,27 @@ api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
+-- Mirror successful yanks to the external clipboard without making it the
+-- backing store for normal y/p. If the provider is unavailable or fails, the
+-- text remains safe in Nvim's internal unnamed register.
+api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  group = yank_group,
+  callback = function()
+    local event = vim.v.event
+    if event.operator ~= "y" or event.regname == "+" or event.regname == "*" then
+      return
+    end
+
+    local provider_ok, provider = pcall(fn["provider#clipboard#Executable"])
+    if not provider_ok or provider == "" then
+      return
+    end
+
+    pcall(fn.setreg, "+", event.regcontents, event.regtype)
+  end,
+})
+
 api.nvim_create_autocmd({ "CursorMoved" }, {
   pattern = "*",
   group = yank_group,

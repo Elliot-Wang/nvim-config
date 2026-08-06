@@ -15,11 +15,11 @@ set timeoutlen=300
 
 set updatetime=300  " For CursorHold events
 
-" Clipboard settings, always use clipboard for all delete, yank, change, put
-" operation, see https://stackoverflow.com/q/30691466/6064933
-if !empty(provider#clipboard#Executable())
-  set clipboard+=unnamedplus
-endif
+" Keep normal y/p on Nvim's internal unnamed register. TextYankPost mirrors
+" successful yanks to the selected external clipboard provider separately, so
+" a provider failure cannot break native copy/paste.
+set clipboard-=unnamed
+set clipboard-=unnamedplus
 
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile

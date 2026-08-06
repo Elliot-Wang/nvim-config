@@ -36,6 +36,20 @@ else
   return
 end
 
+-- Select a clipboard provider for the current connection.  Inside tmux,
+-- delegate to tmux so `set-clipboard external` can safely forward copies to
+-- the outer terminal.  Over a direct SSH connection, use OSC 52.  For local
+-- sessions, leave the provider unset and let Nvim auto-detect the native one.
+local in_tmux = vim.env.TMUX ~= nil and vim.env.TMUX ~= ""
+local in_ssh = (vim.env.SSH_CONNECTION ~= nil and vim.env.SSH_CONNECTION ~= "")
+  or (vim.env.SSH_TTY ~= nil and vim.env.SSH_TTY ~= "")
+
+if in_tmux and utils.executable("tmux") then
+  vim.g.clipboard = "tmux"
+elseif in_ssh then
+  vim.g.clipboard = "osc52"
+end
+
 -- Custom mapping <leader> (see `:h mapleader` for more info)
 vim.g.mapleader = ' '
 
